@@ -1,0 +1,18 @@
+{
+  "name": "charlies-animal-sanctuary",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/check-contrast.mjs && astro build",
+    "preview": "astro preview",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource/fraunces": "^5.1.0",
+    "@fontsource/inter": "^5.1.0",
+    "astro": "^7.0.6"
+  }
+}

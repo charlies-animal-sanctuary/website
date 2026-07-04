@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+
+// Phase 1 scaffold page: a clearly-temporary stand-in plus a small style guide
+// so the owner can review tokens, type, and buttons at the phase gate.
+// The real home page (hero, featured animals, video, IG strip, donate band)
+// replaces all of this in Phase 2.
+const swatches = [
+  { cssVar: '--color-cream', name: 'Almond Cream', hex: '#EDE0D4', role: 'Page background / light surface' },
+  { cssVar: '--color-ebony', name: 'Ebony', hex: '#414833', role: 'Body text + dark sections / footer' },
+  { cssVar: '--color-coffee', name: 'Coffee Bean', hex: '#7F5539', role: 'Primary CTA (Apply, Donate)' },
+  { cssVar: '--color-olive', name: 'Dusty Olive', hex: '#656D4A', role: 'Secondary button / fills (white text)' },
+  { cssVar: '--color-camel', name: 'Camel', hex: '#A68A64', role: 'Accent only — tags, borders, hover' },
+];
+---
+
+<BaseLayout>
+  <section class="section">
+    <div class="container">
+      <p class="placeholder-chip">Placeholder — phase 1 scaffold</p>
+      <h1>{site.name}</h1>
+      <p>
+        This page is the phase 1 scaffold: layout, navigation, design tokens, and fonts. The real
+        home page — hero, featured animals, story video, Instagram strip, and donate band — is
+        built in phase 2. Below is a temporary style guide for reviewing the visual foundations.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <h2>Dark section sample</h2>
+      <p>
+        This is Almond Cream text on an Ebony section — the footer and donate-band treatment.
+        <a href="#placeholder-link">This is what a link looks like here.</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Color tokens</h2>
+      <ul class="swatches">
+        {
+          swatches.map(({ cssVar, name, hex, role }) => (
+            <li class="swatch">
+              <span class="swatch-color" style={`background: var(${cssVar})`} />
+              <strong>{name}</strong>
+              <span class="swatch-meta">{hex}</span>
+              <span class="swatch-meta">{role}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <h2>Type &amp; buttons</h2>
+      <p class="type-sample-display">Fraunces 600 — headings, warm and bookish</p>
+      <p>Inter 400 — body text, clean and quiet. <strong>Inter 600 for emphasis.</strong></p>
+      <div class="button-row">
+        <a class="btn btn--primary" href="#placeholder-apply">Apply to adopt Sample</a>
+        <a class="btn btn--secondary" href="#placeholder-donate">Can't adopt? Help feed Sample</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    gap: var(--space-3);
+    list-style: none;
+    margin: var(--space-3) 0 var(--space-5);
+    padding: 0;
+  }
+
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    font-size: 0.9rem;
+  }
+
+  .swatch-color {
+    display: block;
+    height: 4.5rem;
+    border-radius: var(--radius-card);
+    border: var(--border-hairline);
+  }
+
+  .swatch-meta {
+    font-size: 0.8rem;
+  }
+
+  .type-sample-display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+
+  .button-row {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: var(--space-3);
+  }
+</style>

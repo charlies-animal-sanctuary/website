@@ -1,0 +1,153 @@
+/* Base styles. Colors come ONLY from tokens.css variables. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background: var(--bg-page);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2.125rem);
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+p {
+  max-width: 65ch;
+}
+
+a {
+  color: var(--link);
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--text-body);
+}
+
+:focus-visible {
+  outline: 3px solid var(--cta-bg);
+  outline-offset: 2px;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+.section {
+  padding-block: var(--space-6);
+}
+
+.section--dark {
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+}
+
+.section--dark a {
+  color: var(--text-on-dark);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.65em 1.4em;
+  border: 0;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: var(--cta-bg);
+  color: var(--cta-text);
+}
+
+.btn--primary:hover {
+  background: var(--text-body);
+  color: var(--cta-text);
+}
+
+.btn--secondary {
+  background: var(--secondary-bg);
+  color: var(--secondary-text);
+}
+
+.btn--secondary:hover {
+  background: var(--text-body);
+  color: var(--secondary-text);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+  padding: var(--space-2) var(--space-3);
+  border-radius: 0 0 var(--radius-card) 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* §9: placeholder content must be unmistakable — this chip marks it */
+.placeholder-chip {
+  display: inline-block;
+  padding: 0.2em 0.9em;
+  border: 2px dashed var(--accent);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}

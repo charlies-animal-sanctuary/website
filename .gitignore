@@ -1,0 +1,21 @@
+# dependencies & build output
+node_modules/
+dist/
+.astro/
+
+# secrets — this repo will be public; real keys live only here
+.env
+.env.*
+!.env.example
+
+# owner's local source materials — personal photos stay out of the public repo
+# (the brief is the one tracked exception; used assets are copied into src/)
+Initial Files/*
+!Initial Files/BUILD_BRIEF - Animal Sanctuary.md
+
+# local tooling
+.claude/
+
+# OS noise
+Thumbs.db
+.DS_Store

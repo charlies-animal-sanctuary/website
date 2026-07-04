@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import logoWhite from '../assets/logo/logo-white.png';
+import { site } from '../config/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer section--dark">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <Image src={logoWhite} alt="" height={96} densities={[1, 2]} />
+      <p>{site.location}</p>
+    </div>
+    <div class="footer-actions">
+      <a class="btn btn--primary" href={site.donateUrl}>Donate</a>
+      <ul class="footer-social">
+        <li>
+          <a href={site.social.instagram}>Instagram <span class="pending">(link pending)</span></a>
+        </li>
+        <li><a href={site.social.youtube}>YouTube</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-legal">
+    <p>© {year} {site.name}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: var(--space-5);
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .footer-brand img {
+    height: 96px;
+    width: auto;
+  }
+
+  .footer-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .footer-social {
+    display: flex;
+    gap: var(--space-3);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pending {
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+
+  .footer-legal {
+    margin-top: var(--space-4);
+    font-size: 0.9rem;
+  }
+</style>
