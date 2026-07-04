@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+
+const { apply, formPrivacyNote } = site.copy;
+const formWired = !site.formEndpoint.startsWith('#');
+---
+
+<BaseLayout title={apply.title}>
+  <section class="section">
+    <div class="container">
+      <p class="placeholder-chip">Draft copy — final wording comes from the owner</p>
+      <h1>{apply.title}</h1>
+      <p class="intro">{apply.intro}</p>
+      {!formWired && (
+        <p class="placeholder-chip">Form not wired yet — submissions go nowhere until phase 4</p>
+      )}
+      <form class="form-grid" method="POST" action={site.formEndpoint}>
+        <input type="hidden" name="form_name" value="adoption-application" />
+        <div class="form-field">
+          <label for="ap-pet">Who are you applying for? *</label>
+          <input
+            id="ap-pet"
+            name="pet"
+            type="text"
+            required
+            placeholder="Animal's name"
+          />
+        </div>
+        <div class="form-field">
+          <label for="ap-name">Your name *</label>
+          <input id="ap-name" name="name" type="text" required autocomplete="name" />
+        </div>
+        <div class="form-field">
+          <label for="ap-email">Your email *</label>
+          <input id="ap-email" name="email" type="email" required autocomplete="email" />
+        </div>
+        <div class="form-field">
+          <label for="ap-phone">Phone (optional)</label>
+          <input id="ap-phone" name="phone" type="tel" autocomplete="tel" />
+        </div>
+        <div class="form-field">
+          <label for="ap-home">Tell us about your home *</label>
+          <textarea
+            id="ap-home"
+            name="home"
+            required
+            placeholder="Who lives with you (people and animals), your space, and what drew you to this animal."></textarea>
+        </div>
+        <div class="hp-field" aria-hidden="true">
+          <label for="ap-website">Leave this field empty</label>
+          <input id="ap-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <button class="btn btn--primary" type="submit">Send application</button>
+        <p class="form-note">{formPrivacyNote}</p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-block: var(--space-3) var(--space-4);
+    font-size: 1.15rem;
+  }
+</style>
+
+<script>
+  // §5: /apply?pet={slug} pre-fills which animal the application is for
+  const pet = new URLSearchParams(window.location.search).get('pet');
+  const input = document.getElementById('ap-pet') as HTMLInputElement | null;
+  if (pet && input && !input.value) input.value = pet;
+</script>

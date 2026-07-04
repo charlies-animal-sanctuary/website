@@ -1,0 +1,141 @@
+---
+import { Image } from 'astro:assets';
+import { site } from '../config/site';
+
+/**
+ * The §5 status mechanic lives here: the card's entire appearance is driven
+ * by `status`. Residents pass no status and get the same look minus
+ * pill/banner/actions.
+ */
+interface Props {
+  name: string;
+  href: string;
+  photo: ImageMetadata;
+  meta?: string;
+  status?: 'Available' | 'Pending' | 'Adopted';
+  slug?: string;
+  adoptedDate?: Date;
+}
+
+const { name, href, photo, meta, status, slug, adoptedDate } = Astro.props;
+const adopted = status === 'Adopted';
+const adoptedLabel = adoptedDate
+  ? `Found their home ${adoptedDate.toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })}`
+  : 'Found their home';
+---
+
+<article class="animal-card">
+  <a class="card-media" href={href} tabindex="-1" aria-hidden="true">
+    <Image src={photo} alt="" width={640} class:list={['card-photo', { dimmed: adopted }]} />
+    {adopted && <span class="adopted-banner">Adopted</span>}
+  </a>
+  <div class="card-body">
+    <h3><a href={href}>{name}</a></h3>
+    {meta && <p class="card-meta">{meta}</p>}
+    {status === 'Pending' && <p><span class="pill">Adoption pending</span></p>}
+    {adopted && <p class="card-meta">{adoptedLabel}</p>}
+    {
+      status === 'Available' && slug && (
+        <div class="card-actions">
+          <a class="btn btn--primary btn--small" href={`/apply?pet=${slug}`}>
+            Apply to adopt {name}
+          </a>
+          <a class="btn btn--secondary btn--small" href={site.donateUrl}>
+            Can't adopt? Help feed {name}
+          </a>
+        </div>
+      )
+    }
+    {
+      status === 'Pending' && (
+        <div class="card-actions">
+          <a class="btn btn--secondary btn--small" href={site.donateUrl}>
+            Help feed {name}
+          </a>
+        </div>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .animal-card {
+    border: var(--border-hairline);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .animal-card {
+      transition:
+        transform 200ms ease,
+        box-shadow 200ms ease;
+    }
+
+    .animal-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgb(0 0 0 / 0.08);
+    }
+  }
+
+  .card-media {
+    position: relative;
+    display: block;
+  }
+
+  .card-photo {
+    width: 100%;
+    aspect-ratio: 4 / 5; /* locked card ratio (§6d, owner-approved) */
+    object-fit: cover;
+    display: block;
+  }
+
+  .card-photo.dimmed {
+    filter: grayscale(35%) opacity(0.75);
+  }
+
+  .adopted-banner {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    background: color-mix(in srgb, var(--bg-dark) 88%, transparent);
+    color: var(--text-on-dark);
+    text-align: center;
+    font-weight: 600;
+    padding: var(--space-1) 0;
+  }
+
+  .card-body {
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  /* inherit so names stay readable on both cream and dark (Happy Tails) sections */
+  .card-body h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .card-body h3 a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+  }
+
+  .card-meta {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-top: var(--space-1);
+  }
+</style>

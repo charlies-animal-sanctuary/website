@@ -114,6 +114,11 @@ a:hover {
   color: var(--cta-text);
 }
 
+.btn--small {
+  font-size: 0.9rem;
+  padding: 0.5em 1.1em;
+}
+
 .btn--secondary {
   background: var(--secondary-bg);
   color: var(--secondary-text);
@@ -188,6 +193,42 @@ a:hover {
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+/* status pill (Pending) + temperament tags — Camel is decorative only */
+.pill {
+  display: inline-block;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  padding: 0.15em 0.8em;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tag-row li {
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 0.1em 0.75em;
+  font-size: 0.85rem;
+}
+
+/* shared animal-card grid used on Adopt, Happy Tails, and Our Family */
+.animal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: var(--space-4);
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
 }
 
 /* §9: placeholder content must be unmistakable — this chip marks it */

@@ -6,23 +6,24 @@ than none. **Last updated: 2026-07-04.**
 
 ## Where we are
 
-- **Current phase:** 2 — Static pages — **built, at the phase gate.**
-- **Done (phase 2):** Home rebuilt as the real §3 structure (hero still slot + CTAs,
-  featured section with sample cards at the agreed 4:5, "Watch our story" video slot,
-  Instagram strip with 6 sample tiles + real follow link, donate band); About; Intake
-  with the full surrender form; Contact with form + location + real social links. Both
-  forms have honeypots, required-field marking, and the §10 privacy note; they post to
-  a placeholder endpoint and say so on-page until phase 4. All copy is [DRAFT]-marked
-  and chip-labelled per §9; all four pages verified at desktop + mobile widths.
-- **Done (phase 1):** Astro 7 static scaffold, tokens + WCAG gate, fonts, layout,
-  logo/favicon assets, git repo. Gate passed by owner 2026-07-04.
-- **Next:** owner (and the sanctuary owner — his girlfriend) review the formed pages →
-  Phase 3 (Content + CMS: collections, AnimalCard, Adopt/Happy Tails, detail pages,
-  Our Family, 404).
-- **Blocked / awaiting owner:** phase 2 gate review. Needed for phase 3: the Our Family
-  roster (which pets, correct names/species). Broader content feedback + real images
-  expected later from the sanctuary owner — everything placeholder is swappable via
-  `src/config/site.ts` and the tracker below.
+- **Current phase:** 3 — Content + CMS — **built, at the phase gate.**
+- **Done (phase 3):** content collections (`src/content.config.ts`, Astro content-layer
+  API, `image()`-optimized photos); Sveltia admin at `/admin` (config.yml in §4c sync,
+  backend placeholders until phase 5); `AnimalCard` with the full §5 status mechanic
+  (verified: Available = apply + feed buttons; Pending = pill, no apply; Adopted =
+  dimmed + banner + "Found their home {Month Year}"); Adopt page (Available grid +
+  dark Happy Tails band + teaser of latest 3 + count link); paginated `/happy-tails`
+  (24/page); detail pages `/adopt/{slug}` + `/family/{slug}` with galleries; Our Family
+  (Ash + Midna, real photos, draft stories); `/apply` with working `?pet=` prefill
+  (verified); §5 empty states; custom 404 (verified). Seeds: 3 obviously-fake sample
+  animals covering all three statuses. Home featured section now CMS-driven with the
+  §5 fallback chain. Header got a wordmark (logo lettering illegible at 64px).
+- **Done (phases 1–2):** scaffold + static pages; gates passed by owner 2026-07-04.
+- **Next:** owner reviews → Phase 4 (Integrations: Behold, YouTube embed, Web3Forms
+  wiring, donate URL). Phase 5 needs the GitHub push decision.
+- **Blocked / awaiting owner:** phase 3 gate review. Later: her content feedback +
+  real images; remaining Our Family pets (only Ash + Midna for now, per owner
+  2026-07-04); config values (§11 table below).
 
 ## Phase log (brief §8)
 
@@ -30,7 +31,7 @@ than none. **Last updated: 2026-07-04.**
 |---|---|---|---|
 | 1 | Scaffold | Astro project; base layout/nav/footer; tokens; fonts; global styles; logo variants + favicon; git init + .gitignore | **done 2026-07-04 — at gate** |
 | 2 | Static pages | Home (hero still, featured, story video slot, IG strip slot, donate band), About, Intake + surrender form, Contact + form | **done 2026-07-04 — at gate** |
-| 3 | Content + CMS | content schema; Sveltia `config.yml`; `AnimalCard` (§5 logic); Adopt (Available + Happy Tails); detail pages; Our Family; empty states + 404; fake seed animals | not started |
+| 3 | Content + CMS | content schema; Sveltia `config.yml`; `AnimalCard` (§5 logic); Adopt (Available + Happy Tails); detail pages; Our Family; empty states + 404; fake seed animals | **done 2026-07-04 — at gate** |
 | 4 | Integrations | Behold gallery; YouTube embeds; form service + apply prefill; donate URL; form privacy note | not started |
 | 5 | Auth + deploy | **NEEDS REMOTE** — Cloudflare Pages, Sveltia auth worker, domain, analytics, owner end-to-end publish test | not started |
 | 6 | Polish | motion (reduced-motion safe); image sizing/lazyload; WCAG AA audit; Lighthouse; a11y pass; SEO/OG incl. per-animal share images | not started |
@@ -100,10 +101,28 @@ Each phase ends at a gate: owner reviews before the next phase starts.
   that could quietly become final; this shape gives the sanctuary owner something
   concrete to react to AND a checklist of what to write.
 
+- **2026-07-04 — Our Family roster (phase 3): Ash + Midna only**, confirmed by owner —
+  photos of her other pets don't exist yet; they'll be added later (via CMS or a
+  follow-up). Both are cats; best shots picked from `Temporary Photos/` (Ash in the
+  lampshade, Midna in the window), resized to 1600px/q85 on import, EXIF-corrected.
+- **2026-07-04 — §9 boundary set for microcopy:** structural system text (empty
+  states, Adopted banner, 404, pagination) is dev-owned and final; page intros and
+  anything in "her voice" stays [DRAFT] until she writes it. Why: the §5/§9 empty-state
+  wording comes from the brief itself; her voice is only the storytelling copy.
+- **2026-07-04 — `/apply` built in phase 3** (brief leaves its phase implicit):
+  Available cards link to it, so shipping the grid without it meant dead links. The
+  `?pet={slug}` prefill works now; only the endpoint wiring remains (phase 4).
+- **2026-07-04 — Sample photos made distinct** (KITTEN/PUP/SENIOR labels): identical
+  striped placeholders got content-hash-deduplicated by Astro into one image, making
+  sample cards indistinguishable at review.
+- **2026-07-04 — Card names inherit section color:** on the dark Happy Tails band the
+  card title was ebony-on-ebony (invisible). Fixed via `color: inherit` + underline
+  hover. Caught by visual verification — exactly why every phase gets eyes on it.
+
 ## Open questions (awaiting owner)
 
-None currently open. Still due later: **Our Family roster** — which pets and correct
-names/species (needed at phase 3; will use `Initial Files/Temporary Photos/`).
+None currently open. Due later: the rest of the Our Family roster (photos don't
+exist yet); her copy + final images (tracker below); §11 config values.
 
 ## Placeholder tracker (§9)
 
@@ -125,10 +144,16 @@ Format: `- [ ] <where> — <what's fake> — <what the final needs to be>`
 - [ ] `site.ts` → `copy.intake` — intro + 3 steps, all [DRAFT]
 - [ ] `site.ts` → `copy.contact` — intro, [DRAFT]
 - [ ] Home hero media — striped `PlaceholderBlock` — owner's chosen still (4:3-ish)
-- [ ] Home featured section — 2 hardcoded sample cards — real `featured: true`
-  adoptables via CMS in phase 3
+- [x] Home featured section — ~~hardcoded cards~~ — **CMS-driven since 2026-07-04**
+  (shows sample animals until real ones exist; §5 fallback chain in place)
 - [ ] Home Instagram strip — 6 striped sample tiles — live Behold feed in phase 4
 - [ ] About page media — striped `PlaceholderBlock` — a photo of the sanctuary/owner
+- [ ] `src/content/adoptables/` — 3 sample animals (sample-kitten, sample-pup,
+  sample-senior) + striped sample photos — DELETE once real animals are in the CMS
+- [ ] `src/content/residents/ash.md` + `midna.md` — [DRAFT] stories — her words;
+  photos are temp picks she may swap; `arrived` dates unknown
+- [ ] `site.ts` → `copy.adopt.intro`, `copy.family.intro`, `copy.apply.intro` —
+  [DRAFT] — final wording from owner
 
 ## Config values (brief §11) — all currently unfilled
 

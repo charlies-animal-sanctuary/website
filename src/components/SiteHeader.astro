@@ -9,7 +9,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="/">
-      <Image src={logoEbony} alt={`${site.name} — home`} height={64} densities={[1, 2]} />
+      <Image src={logoEbony} alt="" height={64} densities={[1, 2]} />
+      <span class="brand-name">{site.name}</span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav id="site-nav" class="site-nav" aria-label="Main">
@@ -49,9 +50,25 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     padding-block: var(--space-2);
   }
 
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+  }
+
   .brand img {
-    height: 64px;
+    height: 60px;
     width: auto;
+  }
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1.15;
+    color: var(--text-body);
+    max-width: 9ch;
   }
 
   .site-nav ul {

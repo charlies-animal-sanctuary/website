@@ -1,0 +1,66 @@
+# Sveltia CMS config — the owner's editing UI (brief §4c).
+# RULE (CLAUDE.md): fields here MUST stay in sync with src/content.config.ts —
+# any field change updates both files in the same commit.
+#
+# PLACEHOLDERS — wired in phase 5, once the repo is on GitHub:
+#   backend.repo:     OWNER/REPO
+#   backend.base_url: the deployed Sveltia auth Cloudflare Worker URL
+# Until then, Sveltia's "Work with Local Repository" option (Chromium
+# browsers) can open this admin against the local clone for a preview.
+#
+# Media note (approved deviation from §4c's public/ paths): each collection
+# stores uploads entry-relative (an images/ folder beside the markdown), so
+# Astro's image pipeline optimizes every upload at build time. Verify the
+# upload → frontmatter path end-to-end during the phase 5 publish test.
+
+backend:
+  name: github
+  repo: OWNER/REPO # PLACEHOLDER — fill in at phase 5
+  branch: main
+  base_url: https://PLACEHOLDER-sveltia-auth.example.com # PLACEHOLDER — fill in at phase 5
+
+media_folder: "src/assets/uploads" # global fallback; collections override below
+public_folder: "/src/assets/uploads"
+
+collections:
+  - name: adoptables
+    label: "Adoptable animals"
+    label_singular: "Animal"
+    identifier_field: name
+    folder: "src/content/adoptables"
+    media_folder: "images"
+    public_folder: "./images"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: name, label: "Name", widget: string }
+      - { name: species, label: "Species", widget: select, options: ["Cat", "Dog", "Other"] }
+      - { name: sex, label: "Sex", widget: select, options: ["Male", "Female", "Unknown"] }
+      - { name: age, label: "Age", widget: string, hint: "e.g. 12 weeks, 2 years" }
+      - { name: size, label: "Size", widget: select, options: ["Small", "Medium", "Large"], required: false }
+      - { name: status, label: "Status", widget: select, options: ["Available", "Pending", "Adopted"], default: "Available" }
+      - { name: photo, label: "Main photo", widget: image }
+      - { name: gallery, label: "More photos", widget: list, required: false, field: { name: image, label: "Photo", widget: image } }
+      - { name: bio, label: "Bio (write in first person)", widget: text, hint: "Write as the animal: 'I'm a...'" }
+      - { name: temperament, label: "Temperament tags", widget: list, required: false, hint: "e.g. playful, cuddly, good with kids" }
+      - { name: adoption_fee, label: "Adoption fee note", widget: string, required: false }
+      - { name: adopted_date, label: "Adopted date", widget: datetime, required: false, hint: "Set when status becomes Adopted" }
+      - { name: featured, label: "Feature on homepage", widget: boolean, default: false, required: false }
+
+  - name: residents
+    label: "Our family (permanent residents)"
+    label_singular: "Resident"
+    identifier_field: name
+    folder: "src/content/residents"
+    media_folder: "images"
+    public_folder: "./images"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: name, label: "Name", widget: string }
+      - { name: species, label: "Species", widget: select, options: ["Cat", "Dog", "Horse", "Other"] }
+      - { name: photo, label: "Main photo", widget: image }
+      - { name: gallery, label: "More photos", widget: list, required: false, field: { name: image, label: "Photo", widget: image } }
+      - { name: story, label: "Their story (first person)", widget: text }
+      - { name: arrived, label: "Arrived", widget: datetime, required: false }
+      - { name: featured, label: "Feature on homepage", widget: boolean, default: false, required: false }

@@ -88,3 +88,95 @@ foreach ($spec in @(@{ n = 'favicon.png'; s = 48 }, @{ n = 'apple-touch-icon.png
 
 $paw.Dispose(); $ebony.Dispose(); $mark.Dispose(); $src.Dispose()
 Write-Output 'Assets written: src/assets/logo/logo-white.png, logo-ebony.png; public/favicon.png, apple-touch-icon.png'
+
+# ---------------------------------------------------------------------------
+# §9 sample photos: unmistakably-fake striped stand-ins for the seed
+# adoptables (real CMS uploads replace them). Cream bg + camel stripes +
+# label, 800x1000 (the site's 4:5 card ratio).
+# ---------------------------------------------------------------------------
+
+$adoptImgDir = Join-Path $root 'src\content\adoptables\images'
+New-Item -ItemType Directory -Force -Path $adoptImgDir | Out-Null
+
+function New-SamplePhoto($path, $title) {
+    $w = 800; $h = 1000
+    $bmp = New-Object System.Drawing.Bitmap($w, $h, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+    $g = [System.Drawing.Graphics]::FromImage($bmp)
+    $g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
+    $g.Clear([System.Drawing.Color]::FromArgb(255, 237, 224, 212))   # Almond Cream token
+
+    $stripePen = New-Object System.Drawing.Pen([System.Drawing.Color]::FromArgb(70, 166, 138, 100), 26)  # Camel token @ ~27%
+    for ($x = -$h; $x -lt $w + $h; $x += 64) {
+        $g.DrawLine($stripePen, $x, 0, ($x + $h), $h)
+    }
+    $stripePen.Dispose()
+
+    $borderPen = New-Object System.Drawing.Pen([System.Drawing.Color]::FromArgb(255, 166, 138, 100), 6)
+    $borderPen.DashStyle = [System.Drawing.Drawing2D.DashStyle]::Dash
+    $g.DrawRectangle($borderPen, 12, 12, ($w - 24), ($h - 24))
+    $borderPen.Dispose()
+
+    $ebonyBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(255, 65, 72, 51))
+    $fmt = New-Object System.Drawing.StringFormat
+    $fmt.Alignment = [System.Drawing.StringAlignment]::Center
+    $fmt.LineAlignment = [System.Drawing.StringAlignment]::Center
+    $fontBig = New-Object System.Drawing.Font('Segoe UI', 44, [System.Drawing.FontStyle]::Bold)
+    $fontSmall = New-Object System.Drawing.Font('Segoe UI', 22)
+    $g.DrawString($title, $fontBig, $ebonyBrush, (New-Object System.Drawing.RectangleF(40, 340, ($w - 80), 200)), $fmt)
+    $g.DrawString("Sample photo -- real animals`nget real photos via /admin", $fontSmall, $ebonyBrush, (New-Object System.Drawing.RectangleF(40, 540, ($w - 80), 160)), $fmt)
+    $fontBig.Dispose(); $fontSmall.Dispose(); $ebonyBrush.Dispose(); $fmt.Dispose()
+
+    $g.Dispose()
+    $bmp.Save($path, [System.Drawing.Imaging.ImageFormat]::Png)
+    $bmp.Dispose()
+}
+
+New-SamplePhoto (Join-Path $adoptImgDir 'sample-photo-1.png') 'SAMPLE KITTEN'
+New-SamplePhoto (Join-Path $adoptImgDir 'sample-photo-2.png') 'SAMPLE PUP'
+New-SamplePhoto (Join-Path $adoptImgDir 'sample-photo-3.png') 'SAMPLE SENIOR'
+Write-Output 'Sample adoptable photos written to src/content/adoptables/images/'
+
+# ---------------------------------------------------------------------------
+# Resident photo import: copy the owner's temp photos (Ash, Midna) into the
+# residents collection, EXIF-orientation corrected, resized to max 1600px,
+# JPEG q85 — keeps the public repo lean vs 4000px phone originals.
+# ---------------------------------------------------------------------------
+
+$resImgDir = Join-Path $root 'src\content\residents\images'
+New-Item -ItemType Directory -Force -Path $resImgDir | Out-Null
+$photoSrcDir = Join-Path $root 'Initial Files\Temporary Photos'
+
+$jpegCodec = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() |
+    Where-Object { $_.MimeType -eq 'image/jpeg' } | Select-Object -First 1
+$encParams = New-Object System.Drawing.Imaging.EncoderParameters(1)
+$encParams.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter([System.Drawing.Imaging.Encoder]::Quality, [long]85)
+
+function Import-Photo($srcName, $destName) {
+    $img = New-Object System.Drawing.Bitmap((Join-Path $photoSrcDir $srcName))
+    # apply EXIF orientation (id 274) so pixels match how phones display them
+    if ($img.PropertyIdList -contains 274) {
+        switch ($img.GetPropertyItem(274).Value[0]) {
+            3 { $img.RotateFlip([System.Drawing.RotateFlipType]::Rotate180FlipNone) }
+            6 { $img.RotateFlip([System.Drawing.RotateFlipType]::Rotate90FlipNone) }
+            8 { $img.RotateFlip([System.Drawing.RotateFlipType]::Rotate270FlipNone) }
+        }
+    }
+    $scale = [Math]::Min(1.0, 1600.0 / [Math]::Max($img.Width, $img.Height))
+    $w = [int]($img.Width * $scale); $h = [int]($img.Height * $scale)
+    $out = New-Object System.Drawing.Bitmap($w, $h)
+    $g = [System.Drawing.Graphics]::FromImage($out)
+    $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+    $g.DrawImage($img, 0, 0, $w, $h)
+    $g.Dispose()
+    $out.Save((Join-Path $resImgDir $destName), $jpegCodec, $encParams)
+    $out.Dispose(); $img.Dispose()
+    Write-Output ("  {0} -> {1} ({2}x{3})" -f $srcName, $destName, $w, $h)
+}
+
+Import-Photo 'Ash1.jpg' 'ash-1.jpg'
+Import-Photo 'Ash2.jpg' 'ash-2.jpg'
+Import-Photo 'Midna1.jpg' 'midna-1.jpg'
+Import-Photo 'Midna2.jpg' 'midna-2.jpg'
+Import-Photo 'AshMidna1.jpg' 'ash-midna-1.jpg'
+Import-Photo 'AshMidna2.jpg' 'ash-midna-2.jpg'
+Write-Output 'Resident photos imported to src/content/residents/images/'

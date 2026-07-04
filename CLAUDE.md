@@ -38,8 +38,12 @@ motion; it reads as untrustworthy when asking for donations.
 ## Architecture & folder conventions
 
 - `src/pages/` — Home, About, Adopt, Our Family (`/family`), Intake, Contact, `/apply`
-  (standalone, not in nav), detail routes `/adopt/[slug]` + `/family/[slug]`, 404.
+  (standalone, not in nav), `/happy-tails` (paginated, 24/page), detail routes
+  `/adopt/[slug]` + `/family/[slug]`, 404.
   Nav is exactly: Home · About · Adopt · Our Family · Intake · Contact (§3).
+- CMS media is entry-relative: uploads land in an `images/` folder beside each
+  collection's markdown (`./images/…` in frontmatter) so Astro's `image()` pipeline
+  optimizes them. Global fallback: `src/assets/uploads`.
 - `src/content/adoptables/` + `src/content/residents/` — CMS-owned markdown. The Astro
   content schema and `public/admin/config.yml` (§4) must stay field-for-field in sync;
   any field change updates both in the same commit.

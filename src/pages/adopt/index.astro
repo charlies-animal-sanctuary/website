@@ -1,0 +1,110 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AnimalCard from '../../components/AnimalCard.astro';
+import { site } from '../../config/site';
+
+const { adopt } = site.copy;
+
+const metaOf = (d: CollectionEntry<'adoptables'>['data']) =>
+  [d.species, d.sex, d.age, d.size].filter(Boolean).join(' · ');
+
+const all = await getCollection('adoptables');
+const byName = (a: CollectionEntry<'adoptables'>, b: CollectionEntry<'adoptables'>) =>
+  a.data.name.localeCompare(b.data.name);
+
+// §5: Available and Pending share the grid; Adopted moves to Happy Tails
+const current = [
+  ...all.filter((e) => e.data.status === 'Available').sort(byName),
+  ...all.filter((e) => e.data.status === 'Pending').sort(byName),
+];
+
+const adopted = all
+  .filter((e) => e.data.status === 'Adopted')
+  .sort(
+    (a, b) => (b.data.adopted_date?.getTime() ?? 0) - (a.data.adopted_date?.getTime() ?? 0)
+  );
+const recentTails = adopted.slice(0, 3);
+---
+
+<BaseLayout title={adopt.title}>
+  <section class="section">
+    <div class="container">
+      <h1>Looking for a home</h1>
+      <p class="intro">{adopt.intro}</p>
+      {
+        current.length > 0 ? (
+          <ul class="animal-grid">
+            {current.map((e) => (
+              <li>
+                <AnimalCard
+                  name={e.data.name}
+                  href={`/adopt/${e.id}`}
+                  photo={e.data.photo}
+                  meta={metaOf(e.data)}
+                  status={e.data.status}
+                  slug={e.id}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div class="empty-state">
+            <p>{adopt.emptyMessage}</p>
+            <a class="btn btn--secondary" href={site.social.instagram}>
+              Follow on Instagram
+            </a>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  {
+    adopted.length > 0 && (
+      <section class="section section--dark">
+        <div class="container">
+          <h2>{adopt.happyTailsHeading}</h2>
+          <p>{adopt.happyTailsBlurb}</p>
+          <ul class="animal-grid tails-grid">
+            {recentTails.map((e) => (
+              <li>
+                <AnimalCard
+                  name={e.data.name}
+                  href={`/adopt/${e.id}`}
+                  photo={e.data.photo}
+                  status="Adopted"
+                  adoptedDate={e.data.adopted_date}
+                />
+              </li>
+            ))}
+          </ul>
+          <a class="tails-link" href="/happy-tails">
+            See all {adopted.length} happy {adopted.length === 1 ? 'tail' : 'tails'} →
+          </a>
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-top: var(--space-3);
+    font-size: 1.15rem;
+  }
+
+  .empty-state {
+    margin-top: var(--space-4);
+    display: grid;
+    justify-items: start;
+    gap: var(--space-3);
+    font-size: 1.1rem;
+  }
+
+  .tails-link {
+    display: inline-block;
+    margin-top: var(--space-4);
+    font-weight: 600;
+  }
+</style>

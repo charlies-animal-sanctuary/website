@@ -79,6 +79,26 @@ export const site = {
         '[DRAFT] A friendly line inviting questions about adopting, donating, volunteering, or anything else.',
       formHeading: 'Send us a message',
     },
+    adopt: {
+      title: 'Adopt',
+      intro:
+        '[DRAFT] A line about how adopting works here — apply first, then a meet-and-greet. Final wording comes from the owner.',
+      // §5 empty-state microcopy (dev-owned system text, wording from the brief)
+      emptyMessage:
+        'No animals are looking for homes right now — follow along on Instagram, or check back soon.',
+      happyTailsHeading: 'Happy Tails',
+      happyTailsBlurb: 'The ones who made it home. This list only ever gets longer.',
+    },
+    family: {
+      title: 'Our family',
+      intro:
+        '[DRAFT] These are the permanent residents — the ones who are already home. Final wording comes from the owner.',
+    },
+    apply: {
+      title: 'Adoption application',
+      intro:
+        '[DRAFT] A warm note about what happens after you apply — we read everything and reply by email. Final wording comes from the owner.',
+    },
     // §10 form privacy note — shown under both forms
     formPrivacyNote:
       'Anything you submit goes straight to our inbox. It is never shared or sold.',

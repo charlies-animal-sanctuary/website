@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AnimalCard from '../../components/AnimalCard.astro';
+import { site } from '../../config/site';
+
+const { family } = site.copy;
+const residents = (await getCollection('residents')).sort((a, b) =>
+  a.data.name.localeCompare(b.data.name)
+);
+---
+
+<BaseLayout title={family.title}>
+  <section class="section">
+    <div class="container">
+      <h1>{family.title}</h1>
+      <p class="intro">{family.intro}</p>
+      {
+        residents.length > 0 ? (
+          <ul class="animal-grid">
+            {residents.map((e) => (
+              <li>
+                <AnimalCard
+                  name={e.data.name}
+                  href={`/family/${e.id}`}
+                  photo={e.data.photo}
+                  meta={e.data.species}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="intro">The family portraits are on their way.</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-top: var(--space-3);
+    font-size: 1.15rem;
+  }
+</style>

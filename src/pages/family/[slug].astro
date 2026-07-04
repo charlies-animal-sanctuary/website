@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('residents');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+const storyParagraphs = d.story.split(/\n{2,}/);
+const arrivedLabel = d.arrived
+  ? `Part of the family since ${d.arrived.toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })}`
+  : undefined;
+---
+
+<BaseLayout title={d.name} description={`${d.name} — permanent resident at Charlie's Animal Sanctuary`}>
+  <section class="section">
+    <div class="container">
+      <a class="back-link" href="/family">← Our family</a>
+      <div class="detail-grid">
+        <Image src={d.photo} alt={`Photo of ${d.name}`} width={1000} class="detail-photo" />
+        <div class="detail-info">
+          <h1>{d.name}</h1>
+          <p class="meta">{d.species} · Permanent resident</p>
+          {arrivedLabel && <p class="meta-soft">{arrivedLabel}</p>}
+          {storyParagraphs.map((p) => <p class="story">{p}</p>)}
+        </div>
+      </div>
+      {
+        d.gallery && d.gallery.length > 0 && (
+          <div class="gallery">
+            <h2>More photos</h2>
+            <ul class="gallery-grid">
+              {d.gallery.map((img, i) => (
+                <li>
+                  <Image src={img} alt={`Photo ${i + 2} of ${d.name}`} width={640} class="gallery-photo" />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .back-link {
+    display: inline-block;
+    margin-bottom: var(--space-4);
+    font-weight: 600;
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-5);
+    align-items: start;
+  }
+
+  @media (max-width: 800px) {
+    .detail-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .detail-photo {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    border: var(--border-hairline);
+  }
+
+  .detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .meta {
+    font-weight: 600;
+  }
+
+  .meta-soft {
+    font-size: 0.95rem;
+  }
+
+  .story {
+    margin: 0;
+  }
+
+  .gallery {
+    margin-top: var(--space-6);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: var(--space-3);
+    list-style: none;
+    margin: var(--space-3) 0 0;
+    padding: 0;
+  }
+
+  .gallery-photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius-card);
+    border: var(--border-hairline);
+  }
+</style>

@@ -1,16 +1,22 @@
 ---
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PlaceholderBlock from '../components/PlaceholderBlock.astro';
+import AnimalCard from '../components/AnimalCard.astro';
 import { site } from '../config/site';
 
 const { home } = site.copy;
 
-// §9: obviously-fake sample cards previewing the 4:5 card look. Replaced in
-// phase 3 by real `featured: true` adoptables from the CMS collection.
-const sampleFeatured = [
-  { name: 'Sample Kitten', meta: 'Cat · 12 weeks · Female' },
-  { name: 'Sample Pup', meta: 'Dog · 2 years · Male' },
-];
+// §5: feature `featured: true` Available animals; fall back to any Available;
+// hide the section entirely when there are none.
+const adoptables = await getCollection('adoptables');
+const availableAll = adoptables.filter((e) => e.data.status === 'Available');
+let featured = availableAll.filter((e) => e.data.featured);
+if (featured.length === 0) featured = availableAll;
+featured = featured.slice(0, 2);
+
+const metaOf = (d: CollectionEntry<'adoptables'>['data']) =>
+  [d.species, d.sex, d.age, d.size].filter(Boolean).join(' · ');
 ---
 
 <BaseLayout>
@@ -31,23 +37,33 @@ const sampleFeatured = [
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2>{home.featuredHeading}</h2>
-      <p class="placeholder-chip">Sample cards — real featured animals arrive with the CMS in phase 3</p>
-      <ul class="featured-grid">
-        {
-          sampleFeatured.map(({ name, meta }) => (
-            <li class="sample-card">
-              <PlaceholderBlock label={`${name} — photo`} ratio="4 / 5" />
-              <h3>{name}</h3>
-              <p>{meta}</p>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
+  {
+    featured.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <h2>{home.featuredHeading}</h2>
+          <p class="placeholder-chip">Sample animals — real ones replace them via /admin</p>
+          <ul class="featured-grid">
+            {featured.map((e) => (
+              <li>
+                <AnimalCard
+                  name={e.data.name}
+                  href={`/adopt/${e.id}`}
+                  photo={e.data.photo}
+                  meta={metaOf(e.data)}
+                  status={e.data.status}
+                  slug={e.id}
+                />
+              </li>
+            ))}
+          </ul>
+          <a class="featured-link" href="/adopt">
+            See everyone looking for a home →
+          </a>
+        </div>
+      </section>
+    )
+  }
 
   <section class="section">
     <div class="container video-block">
@@ -121,8 +137,10 @@ const sampleFeatured = [
     padding: 0;
   }
 
-  .sample-card h3 {
-    margin-top: var(--space-2);
+  .featured-link {
+    display: inline-block;
+    margin-top: var(--space-4);
+    font-weight: 600;
   }
 
   .video-block :global(.ph-block) {

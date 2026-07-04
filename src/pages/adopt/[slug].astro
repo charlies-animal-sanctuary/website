@@ -1,0 +1,179 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../config/site';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('adoptables');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+const meta = [d.species, d.sex, d.age, d.size].filter(Boolean).join(' · ');
+const bioParagraphs = d.bio.split(/\n{2,}/);
+const adoptedLabel = d.adopted_date
+  ? `Found their home ${d.adopted_date.toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })}`
+  : 'Found their home';
+---
+
+<BaseLayout title={d.name} description={`${d.name} — ${meta}`}>
+  <section class="section">
+    <div class="container">
+      <a class="back-link" href="/adopt">← All animals</a>
+      <div class="detail-grid">
+        <div class="detail-media">
+          <Image
+            src={d.photo}
+            alt={`Photo of ${d.name}`}
+            width={1000}
+            class:list={['detail-photo', { dimmed: d.status === 'Adopted' }]}
+          />
+          {d.status === 'Adopted' && <span class="adopted-note pill">Adopted — {adoptedLabel}</span>}
+        </div>
+        <div class="detail-info">
+          <h1>{d.name}</h1>
+          <p class="meta">{meta}</p>
+          {d.status === 'Pending' && <p><span class="pill">Adoption pending</span></p>}
+          {
+            d.temperament && d.temperament.length > 0 && (
+              <ul class="tag-row">
+                {d.temperament.map((t) => (
+                  <li>{t}</li>
+                ))}
+              </ul>
+            )
+          }
+          {bioParagraphs.map((p) => <p class="bio">{p}</p>)}
+          {d.adoption_fee && <p class="fee">Adoption fee: {d.adoption_fee}</p>}
+          {
+            d.status === 'Available' && (
+              <div class="cta-row">
+                <a class="btn btn--primary" href={`/apply?pet=${entry.id}`}>
+                  Apply to adopt {d.name}
+                </a>
+                <a class="btn btn--secondary" href={site.donateUrl}>
+                  Can't adopt? Help feed {d.name}
+                </a>
+              </div>
+            )
+          }
+          {
+            d.status === 'Pending' && (
+              <div class="cta-row">
+                <a class="btn btn--secondary" href={site.donateUrl}>Help feed {d.name}</a>
+              </div>
+            )
+          }
+          {
+            d.status === 'Adopted' && (
+              <p>
+                {d.name} is home now. <a href="/adopt">Meet the animals still looking →</a>
+              </p>
+            )
+          }
+        </div>
+      </div>
+      {
+        d.gallery && d.gallery.length > 0 && (
+          <div class="gallery">
+            <h2>More photos</h2>
+            <ul class="gallery-grid">
+              {d.gallery.map((img, i) => (
+                <li>
+                  <Image src={img} alt={`Photo ${i + 2} of ${d.name}`} width={640} class="gallery-photo" />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .back-link {
+    display: inline-block;
+    margin-bottom: var(--space-4);
+    font-weight: 600;
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-5);
+    align-items: start;
+  }
+
+  @media (max-width: 800px) {
+    .detail-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .detail-media {
+    display: grid;
+    gap: var(--space-3);
+    justify-items: start;
+  }
+
+  .detail-photo {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    border: var(--border-hairline);
+  }
+
+  .detail-photo.dimmed {
+    filter: grayscale(35%) opacity(0.8);
+  }
+
+  .detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .meta {
+    font-weight: 600;
+  }
+
+  .bio {
+    margin: 0;
+  }
+
+  .fee {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: var(--space-2);
+  }
+
+  .gallery {
+    margin-top: var(--space-6);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: var(--space-3);
+    list-style: none;
+    margin: var(--space-3) 0 0;
+    padding: 0;
+  }
+
+  .gallery-photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius-card);
+    border: var(--border-hairline);
+  }
+</style>
