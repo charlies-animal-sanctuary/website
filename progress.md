@@ -119,10 +119,29 @@ Each phase ends at a gate: owner reviews before the next phase starts.
   card title was ebony-on-ebony (invisible). Fixed via `color: inherit` + underline
   hover. Caught by visual verification — exactly why every phase gets eyes on it.
 
+- **2026-07-04 — Instagram strip: CMS-editable "Photo highlights" instead of Behold.**
+  Owner proposed making the curated grid editable in Sveltia; endorsed and adopted.
+  Design: a third small collection (image + Instagram post URL, ~12 tiles guidance),
+  managed exactly like animals. Why: solves freshness without any external account,
+  and makes Behold permanently unnecessary (still a 10-min add later if ever wanted).
+  Amends the "owner edits only two collections" rule — CLAUDE.md updates when built
+  (phase 4). Brief §2/§7's Behold plan is superseded.
+- **2026-07-04 — Web3Forms verified** (current sources, not memory): warning email at
+  100% of the free 250/month quota, then submissions pause until next month or a paid
+  tier (~$5–18/mo). ~10× realistic volume for a small rescue; honeypot guards the
+  quota; provider swap = one config value. Decision: forms get a visible failure
+  state with a "email us directly at …" fallback so no application ever dies silently.
+- **2026-07-04 — OWNER-CHECKLIST.md created** (repo root): everything needed from the
+  sanctuary owner across all phases — Web3Forms key steps, PayPal/YouTube links, story
+  doc prompts (incl. Charlie the horse, the namesake — hero-photo candidate and maybe
+  an Our Family page), photo requests, and quick confirmations. Phase 4 starts when
+  the owner gives the go (with or without her items — wiring is placeholder-first).
+
 ## Open questions (awaiting owner)
 
-None currently open. Due later: the rest of the Our Family roster (photos don't
-exist yet); her copy + final images (tracker below); §11 config values.
+Waiting on the OWNER-CHECKLIST.md items from the sanctuary owner: Web3Forms key,
+PayPal link, YouTube video, story doc, photos (hero/Charlie/pets/highlights), form
+email + domain confirmation. Phase 4 go-ahead pending.
 
 ## Placeholder tracker (§9)
 
