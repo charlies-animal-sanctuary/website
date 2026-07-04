@@ -108,3 +108,6 @@ motion; it reads as untrustworthy when asking for donations.
 - This repo will eventually be **public**: real keys/tokens only in gitignored `.env`;
   `Initial Files/` stays untracked (owner's personal photos) — copy needed assets into the
   site tree instead. Anything ever committed is in history forever.
+- Don't run `astro build` while the dev server is serving — it re-optimizes the shared
+  Vite dep cache and the dev server starts dropping scoped styles. Stop dev first (or
+  restart it after building).

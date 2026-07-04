@@ -6,24 +6,30 @@ than none. **Last updated: 2026-07-04.**
 
 ## Where we are
 
-- **Current phase:** 1 — Scaffold — **built, at the phase gate.**
-- **Done:** Astro 7 static project (no adapter); design tokens + build-time WCAG AA
-  contrast gate (all 5 approved pairings pass; measured values in decision log); Fraunces +
-  Inter self-hosted; base layout with header/nav (mobile toggle verified), footer; logo
-  variants + paw favicon generated from the white master; placeholder home with temporary
-  style guide; git repo initialized with .gitignore from first commit; `npm run build` and
-  dev server verified on desktop + mobile viewports.
-- **Next:** owner reviews the scaffold (run `npm run dev` → http://localhost:4321) →
-  Phase 2 (Static pages).
-- **Blocked / awaiting owner:** phase 1 gate review. Also needed by phase 3: the Our
-  Family roster (which pets, correct names).
+- **Current phase:** 2 — Static pages — **built, at the phase gate.**
+- **Done (phase 2):** Home rebuilt as the real §3 structure (hero still slot + CTAs,
+  featured section with sample cards at the agreed 4:5, "Watch our story" video slot,
+  Instagram strip with 6 sample tiles + real follow link, donate band); About; Intake
+  with the full surrender form; Contact with form + location + real social links. Both
+  forms have honeypots, required-field marking, and the §10 privacy note; they post to
+  a placeholder endpoint and say so on-page until phase 4. All copy is [DRAFT]-marked
+  and chip-labelled per §9; all four pages verified at desktop + mobile widths.
+- **Done (phase 1):** Astro 7 static scaffold, tokens + WCAG gate, fonts, layout,
+  logo/favicon assets, git repo. Gate passed by owner 2026-07-04.
+- **Next:** owner (and the sanctuary owner — his girlfriend) review the formed pages →
+  Phase 3 (Content + CMS: collections, AnimalCard, Adopt/Happy Tails, detail pages,
+  Our Family, 404).
+- **Blocked / awaiting owner:** phase 2 gate review. Needed for phase 3: the Our Family
+  roster (which pets, correct names/species). Broader content feedback + real images
+  expected later from the sanctuary owner — everything placeholder is swappable via
+  `src/config/site.ts` and the tracker below.
 
 ## Phase log (brief §8)
 
 | # | Phase | Scope | Status |
 |---|---|---|---|
 | 1 | Scaffold | Astro project; base layout/nav/footer; tokens; fonts; global styles; logo variants + favicon; git init + .gitignore | **done 2026-07-04 — at gate** |
-| 2 | Static pages | Home (hero still, featured, story video slot, IG strip slot, donate band), About, Intake + surrender form, Contact + form | not started |
+| 2 | Static pages | Home (hero still, featured, story video slot, IG strip slot, donate band), About, Intake + surrender form, Contact + form | **done 2026-07-04 — at gate** |
 | 3 | Content + CMS | content schema; Sveltia `config.yml`; `AnimalCard` (§5 logic); Adopt (Available + Happy Tails); detail pages; Our Family; empty states + 404; fake seed animals | not started |
 | 4 | Integrations | Behold gallery; YouTube embeds; form service + apply prefill; donate URL; form privacy note | not started |
 | 5 | Auth + deploy | **NEEDS REMOTE** — Cloudflare Pages, Sveltia auth worker, domain, analytics, owner end-to-end publish test | not started |
@@ -85,6 +91,15 @@ Each phase ends at a gate: owner reviews before the next phase starts.
   the white master PNG via ColorMatrix recolor (clean alpha). Outputs are committed;
   the script only reruns if the master logo changes.
 
+- **2026-07-04 — Real Instagram URL received from owner and wired** into `site.ts`
+  (footer, contact page, home follow button): 
+  https://www.instagram.com/charliesanimalsanctuary/ — first placeholder retired.
+- **2026-07-04 — Phase 2 copy strategy:** every static-copy block is short draft prose
+  prefixed `[DRAFT]` plus a section chip, and pages state what final content is needed
+  (e.g. "the real story comes from the owner, in her own words"). Why: §9 forbids copy
+  that could quietly become final; this shape gives the sanctuary owner something
+  concrete to react to AND a checklist of what to write.
+
 ## Open questions (awaiting owner)
 
 None currently open. Still due later: **Our Family roster** — which pets and correct
@@ -93,17 +108,27 @@ names/species (needed at phase 3; will use `Initial Files/Temporary Photos/`).
 ## Placeholder tracker (§9)
 
 Every placeholder asset and copy block gets a line here when created, and is checked
-off when the final replaces it. Format:
-`- [ ] <where> — <what's fake> — <what the final needs to be>`
+off when the final replaces it. All copy lives in `src/config/site.ts` → `copy`.
+Format: `- [ ] <where> — <what's fake> — <what the final needs to be>`
 
-- [ ] `src/pages/index.astro` — entire page is a phase-1 scaffold notice + temporary
-  style guide — replaced wholesale by the real home page in phase 2
-- [ ] `src/config/site.ts` → `description` — draft meta description — final wording
-  from owner
-- [ ] `src/config/site.ts` → `donateUrl` — `#placeholder-donate-url` — real PayPal link
-  (§11 DONATE_URL)
-- [ ] `src/config/site.ts` → `social.instagram` — `#placeholder-instagram-url` — real
-  Instagram profile URL (footer link shows "(link pending)")
+- [x] `site.ts` → `social.instagram` — ~~placeholder~~ — **real URL wired 2026-07-04:**
+  https://www.instagram.com/charliesanimalsanctuary/
+- [ ] `site.ts` → `description` — draft meta description — final wording from owner
+- [ ] `site.ts` → `donateUrl` — `#placeholder-donate-url` — real PayPal link (§11)
+- [ ] `site.ts` → `formEndpoint` — `#placeholder-form-endpoint` — Web3Forms endpoint
+  (phase 4); both forms show a "not wired yet" chip until then
+- [ ] `site.ts` → `youtubeStoryVideoId` — empty — featured video ID (§11); home shows
+  a placeholder panel; embed wired in phase 4
+- [ ] `site.ts` → `copy.home` — hero headline/sub + donate-band copy, all [DRAFT]
+- [ ] `site.ts` → `copy.about` — intro + 3 story paragraphs, all [DRAFT] — her story,
+  in her words
+- [ ] `site.ts` → `copy.intake` — intro + 3 steps, all [DRAFT]
+- [ ] `site.ts` → `copy.contact` — intro, [DRAFT]
+- [ ] Home hero media — striped `PlaceholderBlock` — owner's chosen still (4:3-ish)
+- [ ] Home featured section — 2 hardcoded sample cards — real `featured: true`
+  adoptables via CMS in phase 3
+- [ ] Home Instagram strip — 6 striped sample tiles — live Behold feed in phase 4
+- [ ] About page media — striped `PlaceholderBlock` — a photo of the sanctuary/owner
 
 ## Config values (brief §11) — all currently unfilled
 

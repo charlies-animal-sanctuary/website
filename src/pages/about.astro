@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PlaceholderBlock from '../components/PlaceholderBlock.astro';
+import { site } from '../config/site';
+
+const { about } = site.copy;
+---
+
+<BaseLayout title={about.title}>
+  <section class="section">
+    <div class="container about-inner">
+      <div class="about-text">
+        <p class="placeholder-chip">Draft copy — the real story comes from the owner</p>
+        <h1>{about.title}</h1>
+        <p class="about-intro">{about.intro}</p>
+        {about.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+      <div class="about-media">
+        <PlaceholderBlock label="A photo of the sanctuary / the owner with the animals — TBD" ratio="4 / 5" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-5);
+    align-items: start;
+  }
+
+  .about-text p {
+    margin-top: var(--space-3);
+  }
+
+  .about-intro {
+    font-size: 1.15rem;
+  }
+
+  @media (max-width: 800px) {
+    .about-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

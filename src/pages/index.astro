@@ -1,108 +1,148 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PlaceholderBlock from '../components/PlaceholderBlock.astro';
 import { site } from '../config/site';
 
-// Phase 1 scaffold page: a clearly-temporary stand-in plus a small style guide
-// so the owner can review tokens, type, and buttons at the phase gate.
-// The real home page (hero, featured animals, video, IG strip, donate band)
-// replaces all of this in Phase 2.
-const swatches = [
-  { cssVar: '--color-cream', name: 'Almond Cream', hex: '#EDE0D4', role: 'Page background / light surface' },
-  { cssVar: '--color-ebony', name: 'Ebony', hex: '#414833', role: 'Body text + dark sections / footer' },
-  { cssVar: '--color-coffee', name: 'Coffee Bean', hex: '#7F5539', role: 'Primary CTA (Apply, Donate)' },
-  { cssVar: '--color-olive', name: 'Dusty Olive', hex: '#656D4A', role: 'Secondary button / fills (white text)' },
-  { cssVar: '--color-camel', name: 'Camel', hex: '#A68A64', role: 'Accent only — tags, borders, hover' },
+const { home } = site.copy;
+
+// §9: obviously-fake sample cards previewing the 4:5 card look. Replaced in
+// phase 3 by real `featured: true` adoptables from the CMS collection.
+const sampleFeatured = [
+  { name: 'Sample Kitten', meta: 'Cat · 12 weeks · Female' },
+  { name: 'Sample Pup', meta: 'Dog · 2 years · Male' },
 ];
 ---
 
 <BaseLayout>
-  <section class="section">
-    <div class="container">
-      <p class="placeholder-chip">Placeholder — phase 1 scaffold</p>
-      <h1>{site.name}</h1>
-      <p>
-        This page is the phase 1 scaffold: layout, navigation, design tokens, and fonts. The real
-        home page — hero, featured animals, story video, Instagram strip, and donate band — is
-        built in phase 2. Below is a temporary style guide for reviewing the visual foundations.
-      </p>
-    </div>
-  </section>
-
-  <section class="section section--dark">
-    <div class="container">
-      <h2>Dark section sample</h2>
-      <p>
-        This is Almond Cream text on an Ebony section — the footer and donate-band treatment.
-        <a href="#placeholder-link">This is what a link looks like here.</a>
-      </p>
+  <section class="section hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <p class="placeholder-chip">Draft copy — final voice comes from the owner</p>
+        <h1>{home.heroHeadline}</h1>
+        <p>{home.heroSub}</p>
+        <div class="cta-row">
+          <a class="btn btn--primary" href="/adopt">Meet the animals</a>
+          <a class="btn btn--secondary" href={site.donateUrl}>Donate</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <PlaceholderBlock label="Hero photo — a strong still, chosen by the owner (v1 ships a still; looped clip is a fast-follow)" ratio="4 / 3" />
+      </div>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <h2>Color tokens</h2>
-      <ul class="swatches">
+      <h2>{home.featuredHeading}</h2>
+      <p class="placeholder-chip">Sample cards — real featured animals arrive with the CMS in phase 3</p>
+      <ul class="featured-grid">
         {
-          swatches.map(({ cssVar, name, hex, role }) => (
-            <li class="swatch">
-              <span class="swatch-color" style={`background: var(${cssVar})`} />
-              <strong>{name}</strong>
-              <span class="swatch-meta">{hex}</span>
-              <span class="swatch-meta">{role}</span>
+          sampleFeatured.map(({ name, meta }) => (
+            <li class="sample-card">
+              <PlaceholderBlock label={`${name} — photo`} ratio="4 / 5" />
+              <h3>{name}</h3>
+              <p>{meta}</p>
             </li>
           ))
         }
       </ul>
+    </div>
+  </section>
 
-      <h2>Type &amp; buttons</h2>
-      <p class="type-sample-display">Fraunces 600 — headings, warm and bookish</p>
-      <p>Inter 400 — body text, clean and quiet. <strong>Inter 600 for emphasis.</strong></p>
-      <div class="button-row">
-        <a class="btn btn--primary" href="#placeholder-apply">Apply to adopt Sample</a>
-        <a class="btn btn--secondary" href="#placeholder-donate">Can't adopt? Help feed Sample</a>
-      </div>
+  <section class="section">
+    <div class="container video-block">
+      <h2>{home.videoHeading}</h2>
+      {
+        site.youtubeStoryVideoId ? (
+          <p>Video embed renders here once wired (phase 4).</p>
+        ) : (
+          <PlaceholderBlock
+            label="YouTube embed — needs the featured video ID (§11); wired click-to-play in phase 4"
+            ratio="16 / 9"
+          />
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>{home.instagramHeading}</h2>
+      <p class="placeholder-chip">Sample tiles — the live Behold feed arrives in phase 4</p>
+      <ul class="ig-grid">
+        {[1, 2, 3, 4, 5, 6].map((n) => (
+          <li><PlaceholderBlock label={`Instagram post ${n}`} ratio="1 / 1" /></li>
+        ))}
+      </ul>
+      <a class="btn btn--secondary" href={site.social.instagram}>Follow on Instagram</a>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container donate-band">
+      <h2>{home.donateHeading}</h2>
+      <p>{home.donateSub}</p>
+      <a class="btn btn--primary" href={site.donateUrl}>Donate</a>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .swatches {
+  .hero-inner {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
-    gap: var(--space-3);
-    list-style: none;
-    margin: var(--space-3) 0 var(--space-5);
-    padding: 0;
+    grid-template-columns: 1.1fr 1fr;
+    gap: var(--space-5);
+    align-items: center;
   }
 
-  .swatch {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    font-size: 0.9rem;
-  }
-
-  .swatch-color {
-    display: block;
-    height: 4.5rem;
-    border-radius: var(--radius-card);
-    border: var(--border-hairline);
-  }
-
-  .swatch-meta {
-    font-size: 0.8rem;
-  }
-
-  .type-sample-display {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.5rem;
-  }
-
-  .button-row {
+  .cta-row {
     display: flex;
     gap: var(--space-3);
     flex-wrap: wrap;
+    margin-top: var(--space-4);
+  }
+
+  .hero-text p {
     margin-top: var(--space-3);
+  }
+
+  @media (max-width: 800px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 18rem));
+    gap: var(--space-4);
+    list-style: none;
+    margin: var(--space-4) 0 0;
+    padding: 0;
+  }
+
+  .sample-card h3 {
+    margin-top: var(--space-2);
+  }
+
+  .video-block :global(.ph-block) {
+    max-width: 46rem;
+    margin-top: var(--space-3);
+  }
+
+  .ig-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: var(--space-3);
+    list-style: none;
+    margin: var(--space-3) 0 var(--space-4);
+    padding: 0;
+  }
+
+  .donate-band {
+    text-align: center;
+    display: grid;
+    justify-items: center;
+    gap: var(--space-3);
   }
 </style>

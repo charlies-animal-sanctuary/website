@@ -15,9 +15,7 @@ const year = new Date().getFullYear();
     <div class="footer-actions">
       <a class="btn btn--primary" href={site.donateUrl}>Donate</a>
       <ul class="footer-social">
-        <li>
-          <a href={site.social.instagram}>Instagram <span class="pending">(link pending)</span></a>
-        </li>
+        <li><a href={site.social.instagram}>Instagram</a></li>
         <li><a href={site.social.youtube}>YouTube</a></li>
       </ul>
     </div>
@@ -58,11 +56,6 @@ const year = new Date().getFullYear();
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-
-  .pending {
-    font-size: 0.8rem;
-    opacity: 0.8;
   }
 
   .footer-legal {

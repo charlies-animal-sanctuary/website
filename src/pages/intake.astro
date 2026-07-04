@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+
+const { intake, formPrivacyNote } = site.copy;
+const formWired = !site.formEndpoint.startsWith('#');
+---
+
+<BaseLayout title={intake.title}>
+  <section class="section">
+    <div class="container">
+      <p class="placeholder-chip">Draft copy — final wording comes from the owner</p>
+      <h1>{intake.title}</h1>
+      <p class="intro">{intake.intro}</p>
+      <ol class="steps">
+        {intake.steps.map((step) => <li>{step}</li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section form-section">
+    <div class="container">
+      <h2>{intake.formHeading}</h2>
+      {!formWired && (
+        <p class="placeholder-chip">Form not wired yet — submissions go nowhere until phase 4</p>
+      )}
+      <form class="form-grid" method="POST" action={site.formEndpoint}>
+        <input type="hidden" name="form_name" value="intake-surrender" />
+        <div class="form-field">
+          <label for="in-name">Your name *</label>
+          <input id="in-name" name="name" type="text" required autocomplete="name" />
+        </div>
+        <div class="form-field">
+          <label for="in-email">Your email *</label>
+          <input id="in-email" name="email" type="email" required autocomplete="email" />
+        </div>
+        <div class="form-field">
+          <label for="in-phone">Phone (optional)</label>
+          <input id="in-phone" name="phone" type="tel" autocomplete="tel" />
+        </div>
+        <div class="form-field">
+          <label for="in-species">What kind of animal? *</label>
+          <select id="in-species" name="species" required>
+            <option value="">Choose one…</option>
+            <option>Cat</option>
+            <option>Dog</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="in-details">Tell us about the animal and the situation *</label>
+          <textarea
+            id="in-details"
+            name="details"
+            required
+            placeholder="Age if known, temperament, health, and why they need a new home — as much as you can share."></textarea>
+        </div>
+        <div class="hp-field" aria-hidden="true">
+          <label for="in-website">Leave this field empty</label>
+          <input id="in-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <button class="btn btn--primary" type="submit">Send</button>
+        <p class="form-note">{formPrivacyNote}</p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-top: var(--space-3);
+    font-size: 1.15rem;
+  }
+
+  .steps {
+    margin-top: var(--space-3);
+    padding-left: 1.2em;
+    max-width: 60ch;
+  }
+
+  .steps li {
+    margin-top: var(--space-2);
+  }
+
+  .form-section h2 {
+    margin-bottom: var(--space-3);
+  }
+</style>
