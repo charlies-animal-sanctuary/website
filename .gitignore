@@ -13,6 +13,10 @@ dist/
 Initial Files/*
 !Initial Files/BUILD_BRIEF - Animal Sanctuary.md
 
+# drop zone for unsorted file handoffs — processed into the site tree, never committed
+_incoming/*
+!_incoming/README.md
+
 # local tooling
 .claude/
 

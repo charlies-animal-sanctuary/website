@@ -2,6 +2,10 @@
 
 > Single, self-contained brief to hand to Claude Code. Fill in the placeholders in **§11 Config values** first (they're the only project-specific unknowns). Everything else is decided.
 
+> **Amendments log** — owner-approved changes since the original brief (full reasoning in `progress.md`'s decision log):
+> - **2026-07-04 (technical):** Astro current major (v7, content-layer API); no Cloudflare adapter (pure SSG). CMS images stored entry-relative under `src/content/` so Astro optimizes every upload (supersedes §4c's `public/` paths). Fonts self-hosted via Fontsource. Text links on light backgrounds use Coffee Bean — olive text on cream measures 4.22:1, below AA. `/apply` page built in phase 3.
+> - **2026-07-04 (Instagram):** Behold superseded — the homepage Instagram strip is an owner-curated third CMS collection, `highlights` (image + link to the matching post). §2, §3, §7, §11, §12 amended below. Guiding principle: the owner's entire editing world stays one tool (Sveltia at `/admin`) — nothing new to install or learn; simplicity over hard constraints.
+
 ---
 
 ## 1. Project overview
@@ -24,10 +28,10 @@ The site has three jobs, in priority order:
 ## 2. Tech stack (locked)
 
 - **Framework:** Astro (SSG, content collections, built-in image handling, islands only where interactivity is needed).
-- **CMS:** Sveltia CMS (git-based, Decap-compatible). Two collections only: `adoptables` and `residents`. Admin at `/admin`. Login = GitHub OAuth via the Sveltia auth Cloudflare Worker.
+- **CMS:** Sveltia CMS (git-based, Decap-compatible). Three collections: `adoptables`, `residents`, and `highlights` (the homepage photo strip — image + Instagram post link). *(Amended 2026-07-04; originally two.)* Admin at `/admin`. Login = GitHub OAuth via the Sveltia auth Cloudflare Worker.
 - **Hosting:** Cloudflare Pages (git-connected; auto-deploys on every commit, including Sveltia's). Domain already on Cloudflare — custom domain wires up in-account. (Workers Static Assets is an equivalent alternative; Pages is the simpler path for a content-first static site.)
 - **Forms:** a free form-to-email service (Web3Forms / Formspree / Basin). One-way: submission emails the owner, `reply-to` = the submitter's email. **No email server, no Resend for v1.**
-- **Instagram gallery:** Behold JSON feed, fetched at build time, rendered with the site's own design tokens.
+- **Instagram gallery:** owner-curated `highlights` CMS collection — each tile is an image + a link to the matching Instagram post, rendered with the site's own design tokens. *(Amended 2026-07-04; Behold auto-feed superseded, remains an optional later add.)*
 - **Video:** YouTube embeds (channel `@CharliesAnimalSanctuary`). Never self-host video.
 - **Donations:** a single donation URL held in site config (PayPal to start; possibly Zeffy later). No per-animal fund routing.
 
@@ -39,7 +43,7 @@ Top-level nav (keep to these 6): **Home · About · Adopt · Our Family · Intak
 
 Content ownership:
 - **Static (developer-owned, in repo):** Home, About, Intake, Contact.
-- **CMS (owner-editable, no code):** Adopt → `adoptables` collection; Our Family → `residents` collection.
+- **CMS (owner-editable, no code):** Adopt → `adoptables` collection; Our Family → `residents` collection; Home photo strip → `highlights` collection *(amended 2026-07-04)*.
 
 Page contents:
 - **Home:** hero (short silent looped clip with poster fallback, *or* one strong still) + primary CTAs (Adopt / Donate); a featured animal or two (`featured: true`); an embedded "Watch our story" YouTube video; an Instagram gallery strip; a donate call-to-action band; footer.
@@ -243,7 +247,7 @@ White line-art logo (provided) sits on Ebony dark sections. Create a recolored *
 
 ## 7. Integrations
 
-- **Instagram gallery (Behold):** create a free Behold account, connect the (public, ideally Business/Creator) account, create a JSON feed, copy the feed URL → `BEHOLD_FEED_URL`. Fetch at build; render the latest ~9–12 posts in a grid using site tokens; each links to its IG post; include a "Follow on Instagram" button. Auto-refreshes as she posts.
+- **Instagram gallery** *(amended 2026-07-04 — Behold superseded)*: the strip renders the owner-curated `highlights` collection (~6–12 tiles; each links to its Instagram post) plus a "Follow on Instagram" button. She updates it in the same admin where she manages animals. The original Behold JSON-feed plan stays on the shelf as a 10-minute upgrade if auto-updating is ever wanted.
 - **YouTube:** channel `@CharliesAnimalSanctuary`. One embedded "Watch our story" on Home and/or About using `youtube-nocookie.com`, click-to-play, no autoplay-with-sound. Optional: a Shorts strip.
 - **Forms (two, both one-way to owner's inbox):**
   - *Adoption application* — reached from `Apply to adopt {name}` → `/apply?pet={slug}`; the form reads the `pet` query param and pre-fills "which animal are you applying for."
@@ -294,7 +298,7 @@ Low-effort, all free, and mostly already in her Cloudflare account — confirm d
 
 - `OWNER/REPO` — GitHub repo
 - `AUTH_WORKER_URL` — deployed Sveltia auth Cloudflare Worker URL
-- `BEHOLD_FEED_URL` — Behold JSON feed
+- ~~`BEHOLD_FEED_URL`~~ — no longer needed *(amended 2026-07-04: `highlights` collection supersedes Behold)*
 - `YOUTUBE` — channel `@CharliesAnimalSanctuary` + the featured video ID
 - `DONATE_URL` — PayPal link now (Zeffy later if she registers as a charity)
 - `FORM_SERVICE_ENDPOINT` + `OWNER_EMAIL` — form-to-email service endpoint and notification address
@@ -312,7 +316,7 @@ Low-effort, all free, and mostly already in her Cloudflare account — confirm d
 - Respect `prefers-reduced-motion`.
 - No self-hosted video (YouTube only). No self-hosted email/SMTP.
 - No home address on the site — `Peterborough, ON` / service area only.
-- The owner edits **only** the two CMS collections; all other content is static and developer-owned.
+- The owner edits **only** the three CMS collections (`adoptables`, `residents`, `highlights`); all other content is static and developer-owned. Her editing world stays one tool — Sveltia at `/admin` — with nothing new to install or learn. *(Amended 2026-07-04; originally two collections.)*
 - Keep dependencies minimal and output static.
 - All card images: fixed aspect ratio + `object-fit: cover`.
 - Temporary content must look temporary — no placeholder photo or copy passing as final (§9).

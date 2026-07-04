@@ -27,13 +27,17 @@ motion; it reads as untrustworthy when asking for donations.
 ## Locked stack (§2 — do not substitute)
 
 - **Astro** — SSG, content collections, islands only where interactivity is truly needed.
-- **Sveltia CMS** at `/admin` — exactly two collections: `adoptables`, `residents`.
-  GitHub backend + Sveltia auth Cloudflare Worker (wired only after the repo is pushed).
+- **Sveltia CMS** at `/admin` — three collections: `adoptables`, `residents`, and
+  `highlights` (homepage photo strip; lands in phase 4). GitHub backend + Sveltia auth
+  Cloudflare Worker (wired only after the repo is pushed). Her editing world is ONE
+  tool — never add software she'd have to install or learn.
 - **Cloudflare Pages** — git-connected auto-deploy (wired post-push).
 - **Forms** — free form-to-email service, one-way to owner's inbox, `reply-to` = submitter,
   honeypot. No email server, no Resend.
-- **Instagram** — Behold JSON feed rendered with site tokens. **Video** — YouTube embeds
-  (`youtube-nocookie.com`) only; never self-host. **Donations** — one site-wide `DONATE_URL`.
+- **Instagram** — owner-curated `highlights` collection renders the strip (each tile
+  links to its post); Behold superseded 2026-07-04, optional later. **Video** — YouTube
+  embeds (`youtube-nocookie.com`) only; never self-host. **Donations** — one site-wide
+  `DONATE_URL`.
 
 ## Architecture & folder conventions
 
@@ -94,7 +98,8 @@ motion; it reads as untrustworthy when asking for donations.
 
 ## Standing constraints (§12 — non-negotiable)
 
-- The owner edits ONLY the two CMS collections; everything else is static, developer-owned.
+- The owner edits ONLY the three CMS collections (`adoptables`, `residents`,
+  `highlights`); everything else is static, developer-owned.
 - No self-hosted video or email. No home address anywhere — "Peterborough, ON" only.
 - Minimal dependencies; static output.
 - Placeholder discipline (§9): obviously-fake sample animals seed Adopt (one Available, one
@@ -112,6 +117,11 @@ motion; it reads as untrustworthy when asking for donations.
 - This repo will eventually be **public**: real keys/tokens only in gitignored `.env`;
   `Initial Files/` stays untracked (owner's personal photos) — copy needed assets into the
   site tree instead. Anything ever committed is in history forever.
+- **File drops land in `_incoming/`** (gitignored except its README): unsorted photos,
+  docs, and dumps from the owner go there; anything used gets renamed/resized/processed
+  into the site tree (usually via `scripts/generate-assets.ps1`). Originals are never
+  committed; the folder is safe to empty at any time. `Initial Files/` is the frozen
+  original handoff (tracked exception: the brief) — don't add to it.
 - Don't run `astro build` while the dev server is serving — it re-optimizes the shared
   Vite dep cache and the dev server starts dropping scoped styles. Stop dev first (or
   restart it after building).

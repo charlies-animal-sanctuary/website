@@ -137,11 +137,25 @@ Each phase ends at a gate: owner reviews before the next phase starts.
   an Our Family page), photo requests, and quick confirmations. Phase 4 starts when
   the owner gives the go (with or without her items — wiring is placeholder-first).
 
+- **2026-07-04 — Brief formally amended (owner authorized).** An amendments log now
+  sits at the top of the brief; §2/§3/§7/§11/§12 updated for the `highlights`
+  collection (Behold superseded) and the previously approved technical deviations.
+  CLAUDE.md updated to match (three collections; one-tool principle). Why: the brief
+  is the source of truth — adopted changes must live IN it, not only alongside it.
+  Guiding principle recorded per owner: keep her workflow simple, don't infantilize —
+  no hard fences needed, but never a second tool to install or learn.
+- **2026-07-04 — `_incoming/` drop zone created** for unsorted file handoffs:
+  gitignored (README excepted), processed into the site tree on use, safe to empty.
+  `Initial Files/` frozen as the original handoff. Why: the owner will deliver files
+  in bulk without structure; the repo needs a boundary between raw handoffs and
+  committed, optimized assets.
+
 ## Open questions (awaiting owner)
 
 Waiting on the OWNER-CHECKLIST.md items from the sanctuary owner: Web3Forms key,
 PayPal link, YouTube video, story doc, photos (hero/Charlie/pets/highlights), form
-email + domain confirmation. Phase 4 go-ahead pending.
+email + domain confirmation. Phase 4 go-ahead pending — wiring is placeholder-first,
+so it can start before her items arrive if the owner says go.
 
 ## Placeholder tracker (§9)
 
