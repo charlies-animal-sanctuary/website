@@ -39,9 +39,7 @@ export const site = {
   social: {
     instagram: 'https://www.instagram.com/charliesanimalsanctuary/',
     youtube: 'https://www.youtube.com/@CharliesAnimalSanctuary',
-    // From the interview ("Facebook … under CharliesAnimalSanctuary") — URL
-    // needs owner confirmation (tracked in progress.md)
-    facebook: 'https://www.facebook.com/CharliesAnimalSanctuary',
+    facebook: 'https://www.facebook.com/people/Charlies-Animal-Sanctuary/61581016065923/',
   },
 
   copy: {

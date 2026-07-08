@@ -210,13 +210,18 @@ Each phase ends at a gate: owner reviews before the next phase starts.
    Specifically flagged for her explicit OK (reasonable but not literally hers):
    the donate-band line ("…funded by content creation, adoption fees — and people
    like you"), the reply-by-email commitments on Intake, and the apply intro.
-3. **A photo of Katheryn** for the About page (placeholder block still there).
-4. **Confirm the Facebook URL** (facebook.com/CharliesAnimalSanctuary — guessed).
-5. **Instagram post links** for the 6 highlight tiles (currently they link to her
+3. **Instagram post links** for the 6 highlight tiles (currently they link to her
    profile; post links make each tile land on its post). She can also do this
    herself in `/admin` once live.
-6. **The domain** (for phase 5 + Open Graph).
-7. Real PayPal link + real "our story" video, when ready (temp ones live now).
+4. **The domain** (for phase 5 + Open Graph).
+5. Real PayPal link + real "our story" video, when ready (temp ones live now).
+
+Resolved 2026-07-08 (same-day owner replies): real Facebook URL wired
+(facebook.com/people/Charlies-Animal-Sanctuary/61581016065923); Katheryn's About
+photo = the selfie of Charlie resting his muzzle on her head (from the Charlie
+folder — owner pointed it out), imported as a developer-owned copy; Charlie's
+gallery swapped to the other selfie so both get used. The last placeholder
+block on the site is gone.
 
 ## Placeholder / temp tracker (§9)
 

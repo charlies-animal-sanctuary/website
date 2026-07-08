@@ -207,7 +207,7 @@ if (Test-Path $dump) {
     Import-Photo (Join-Path $dump 'Charlie') '20211008_181522.jpg' $resImgDir 'charlie-2.jpg'
     Import-Photo (Join-Path $dump 'Charlie') '20210820_184620.jpg' $resImgDir 'charlie-3.jpg'
     Import-Photo (Join-Path $dump 'Charlie') '20221109_181424.jpg' $resImgDir 'charlie-4.jpg'
-    Import-Photo (Join-Path $dump 'Charlie') '20210921_1347251.jpg' $resImgDir 'charlie-5.jpg'
+    Import-Photo (Join-Path $dump 'Charlie') '20210921_134626.jpg' $resImgDir 'charlie-5.jpg'
 
     # Molson (memorial)
     Import-Photo (Join-Path $dump 'Molson') '20211028_141556.jpg' $resImgDir 'molson-1.jpg'
@@ -235,6 +235,7 @@ if (Test-Path $dump) {
     $aboutDir = Join-Path $root 'src\assets\about'
     New-Item -ItemType Directory -Force -Path $aboutDir | Out-Null
     Import-Photo (Join-Path $dump 'Charlie') '20211008_181502.jpg' $aboutDir 'charlie-portrait.jpg'
+    Import-Photo (Join-Path $dump 'Charlie') '20210921_1347251.jpg' $aboutDir 'katheryn-charlie.jpg'
 
     # Photo-highlights strip seeds (owner curates via /admin from here on)
     Import-Photo (Join-Path $dump 'Ash') '20260322_110449.jpg' $hlImgDir 'ash-midna-cuddle.jpg'

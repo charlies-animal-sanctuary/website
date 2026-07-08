@@ -1,10 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PlaceholderBlock from '../components/PlaceholderBlock.astro';
 import { site } from '../config/site';
-// developer-owned copy — never import from CMS-managed media folders
+// developer-owned copies — never import from CMS-managed media folders
 import charliePortrait from '../assets/about/charlie-portrait.jpg';
+import katherynCharlie from '../assets/about/katheryn-charlie.jpg';
 
 const { about } = site.copy;
 ---
@@ -36,7 +36,15 @@ const { about } = site.copy;
           />
           <figcaption>Charlie — Sir Charles to his friends.</figcaption>
         </figure>
-        <PlaceholderBlock label="A photo of Katheryn — still to come (it's on the checklist)" ratio="4 / 5" />
+        <figure>
+          <Image
+            src={katherynCharlie}
+            alt="Katheryn in a pink cap, smiling, while Charlie rests his muzzle against her head"
+            width={640}
+            class="about-photo"
+          />
+          <figcaption>Katheryn and Charlie.</figcaption>
+        </figure>
       </aside>
     </div>
   </section>
