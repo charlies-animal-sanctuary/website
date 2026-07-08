@@ -48,9 +48,9 @@ motion; it reads as untrustworthy when asking for donations.
 - CMS media is entry-relative: uploads land in an `images/` folder beside each
   collection's markdown (`./images/…` in frontmatter) so Astro's `image()` pipeline
   optimizes them. Global fallback: `src/assets/uploads`.
-- `src/content/adoptables/` + `src/content/residents/` — CMS-owned markdown. The Astro
-  content schema and `public/admin/config.yml` (§4) must stay field-for-field in sync;
-  any field change updates both in the same commit.
+- `src/content/adoptables/` + `src/content/residents/` + `src/content/highlights/` —
+  CMS-owned markdown. The Astro content schema and `public/admin/config.yml` (§4) must
+  stay field-for-field in sync; any field change updates both in the same commit.
 - `src/config/site.ts` — ALL static copy, media references, social links, and §11 config
   values live here (§9). Templates never hard-code copy, URLs, or contact details.
 - `src/components/` — `AnimalCard` owns the §5 status logic; shared layout/nav/footer in

@@ -1,7 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PlaceholderBlock from '../components/PlaceholderBlock.astro';
 import { site } from '../config/site';
+// developer-owned copy — never import from CMS-managed media folders
+import charliePortrait from '../assets/about/charlie-portrait.jpg';
 
 const { about } = site.copy;
 ---
@@ -10,14 +13,31 @@ const { about } = site.copy;
   <section class="section">
     <div class="container about-inner">
       <div class="about-text">
-        <p class="placeholder-chip">Draft copy — the real story comes from the owner</p>
         <h1>{about.title}</h1>
         <p class="about-intro">{about.intro}</p>
-        {about.paragraphs.map((p) => <p>{p}</p>)}
+        {
+          about.sections.map((s) => (
+            <section class="about-section">
+              <h2>{s.heading}</h2>
+              {s.paragraphs.map((p) => (
+                <p>{p}</p>
+              ))}
+            </section>
+          ))
+        }
       </div>
-      <div class="about-media">
-        <PlaceholderBlock label="A photo of the sanctuary / the owner with the animals — TBD" ratio="4 / 5" />
-      </div>
+      <aside class="about-media">
+        <figure>
+          <Image
+            src={charliePortrait}
+            alt="Charlie, a chestnut horse in a bridle, beside a pasture fence"
+            width={640}
+            class="about-photo"
+          />
+          <figcaption>Charlie — Sir Charles to his friends.</figcaption>
+        </figure>
+        <PlaceholderBlock label="A photo of Katheryn — still to come (it's on the checklist)" ratio="4 / 5" />
+      </aside>
     </div>
   </section>
 </BaseLayout>
@@ -38,9 +58,40 @@ const { about } = site.copy;
     font-size: 1.15rem;
   }
 
+  .about-section {
+    margin-top: var(--space-5);
+  }
+
+  .about-media {
+    display: grid;
+    gap: var(--space-4);
+    position: sticky;
+    top: var(--space-4);
+  }
+
+  .about-photo {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    border: var(--border-hairline);
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  figcaption {
+    font-size: 0.9rem;
+    margin-top: var(--space-2);
+  }
+
   @media (max-width: 800px) {
     .about-inner {
       grid-template-columns: 1fr;
+    }
+
+    .about-media {
+      position: static;
     }
   }
 </style>

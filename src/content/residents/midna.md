@@ -1,13 +1,21 @@
 ---
 name: Midna
 species: Cat
-photo: ./images/midna-2.jpg
+photo: ./images/midna-3.jpg
 gallery:
-  - ./images/midna-1.jpg
+  - ./images/midna-4.jpg
+  - ./images/midna-2.jpg
+  - ./images/midna-5.jpg
   - ./images/ash-midna-2.jpg
 story: >-
-  [DRAFT — Midna's real story comes from the owner, in her words] I'm Midna.
-  I'm a permanent resident here, mostly found sunbathing in the window with my
-  legs stretched out as far as they'll go. This draft is standing in until my
-  person writes my real story — including my professional opinion of Ash.
+  I'm Midna — the very first rescue of Charlie's Animal Sanctuary. I was born
+  in a barn, and as a tiny kitten an infection swelled my face and sealed my
+  eyes shut. Nobody was sure I had fully formed eyes under there, or whether
+  I'd ever see. A great many eye drops later: here I am, watching everything.
+  And commenting on it — I'm a talker, and I'll tell you all about my day if
+  you ask. Or if you don't.
+
+
+  I'm smart, I love being held, and I run a small chaos operation with my
+  best friend Ash. We're not siblings, but don't tell us that.
 ---

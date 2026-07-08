@@ -19,8 +19,10 @@ interface Props {
 
 const { name, href, photo, meta, status, slug, adoptedDate } = Astro.props;
 const adopted = status === 'Adopted';
+// timeZone UTC: date-only frontmatter parses as UTC midnight; local-TZ
+// formatting would shift first-of-month dates into the previous month
 const adoptedLabel = adoptedDate
-  ? `Found their home ${adoptedDate.toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })}`
+  ? `Found their home ${adoptedDate.toLocaleDateString('en-CA', { month: 'long', year: 'numeric', timeZone: 'UTC' })}`
   : 'Found their home';
 ---
 

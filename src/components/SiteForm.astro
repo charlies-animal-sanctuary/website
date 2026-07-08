@@ -1,0 +1,89 @@
+---
+import { site } from '../config/site';
+
+/**
+ * Shared form shell: POSTs to Web3Forms (brief §7 as amended — key from .env,
+ * empty key renders a visible "not connected" notice instead of failing
+ * silently). JS enhances submission with an inline success/error state and a
+ * direct-email fallback; without JS the plain POST still works.
+ */
+interface Props {
+  formName: string;
+  subject: string;
+  submitLabel?: string;
+}
+
+const { formName, subject, submitLabel = 'Send' } = Astro.props;
+const wired = Boolean(site.web3formsKey);
+---
+
+{!wired && <p class="placeholder-chip">Form not connected yet — needs the Web3Forms key</p>}
+<form class="form-grid" method="POST" action="https://api.web3forms.com/submit" data-site-form>
+  <input type="hidden" name="access_key" value={site.web3formsKey} />
+  <input type="hidden" name="subject" value={subject} />
+  <input type="hidden" name="from_name" value={site.name + ' website'} />
+  <input type="hidden" name="form_name" value={formName} />
+  <div class="hp-field" aria-hidden="true">
+    <label for={`${formName}-botcheck`}>Leave this box unchecked</label>
+    <input id={`${formName}-botcheck`} type="checkbox" name="botcheck" tabindex="-1" />
+  </div>
+
+  <slot />
+
+  <button class="btn btn--primary" type="submit">{submitLabel}</button>
+  <p class="form-note">{site.copy.formPrivacyNote}</p>
+  {/* live region: always rendered (empty) so screen readers announce updates;
+      styling applies only when non-empty */}
+  <p
+    class="form-status"
+    role="status"
+    tabindex="-1"
+    data-success-text={site.copy.formSuccessNote}
+    data-error-text={site.copy.formErrorNote}
+    data-email={site.email}
+  >
+  </p>
+</form>
+
+<script>
+  for (const form of document.querySelectorAll<HTMLFormElement>('form[data-site-form]')) {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const status = form.querySelector<HTMLElement>('.form-status');
+      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (!status || !button) return form.submit();
+
+      const restoreLabel = button.textContent;
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      status.textContent = '';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        const result = await response.json();
+        if (!response.ok || !result.success) throw new Error('submission failed');
+
+        for (const el of form.querySelectorAll<HTMLInputElement>('input, textarea, select')) {
+          el.disabled = true;
+        }
+        button.hidden = true;
+        status.textContent = status.dataset.successText ?? 'Sent — thank you.';
+        status.focus();
+      } catch {
+        const email = status.dataset.email ?? '';
+        status.append(`${status.dataset.errorText ?? 'That didn’t go through — email us at'} `);
+        const link = document.createElement('a');
+        link.href = `mailto:${email}`;
+        link.textContent = email;
+        status.append(link, '.');
+        button.disabled = false;
+        button.textContent = restoreLabel;
+        status.focus();
+      }
+    });
+  }
+</script>

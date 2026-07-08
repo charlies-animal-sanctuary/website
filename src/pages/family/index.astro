@@ -1,13 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AnimalCard from '../../components/AnimalCard.astro';
 import { site } from '../../config/site';
 
 const { family } = site.copy;
-const residents = (await getCollection('residents')).sort((a, b) =>
-  a.data.name.localeCompare(b.data.name)
-);
+const byName = (a: CollectionEntry<'residents'>, b: CollectionEntry<'residents'>) =>
+  a.data.name.localeCompare(b.data.name);
+
+const all = await getCollection('residents');
+const living = all.filter((e) => !e.data.memorial).sort(byName);
+const remembered = all.filter((e) => e.data.memorial).sort(byName);
 ---
 
 <BaseLayout title={family.title}>
@@ -16,9 +19,9 @@ const residents = (await getCollection('residents')).sort((a, b) =>
       <h1>{family.title}</h1>
       <p class="intro">{family.intro}</p>
       {
-        residents.length > 0 ? (
+        living.length > 0 ? (
           <ul class="animal-grid">
-            {residents.map((e) => (
+            {living.map((e) => (
               <li>
                 <AnimalCard
                   name={e.data.name}
@@ -35,11 +38,38 @@ const residents = (await getCollection('residents')).sort((a, b) =>
       }
     </div>
   </section>
+
+  {
+    remembered.length > 0 && (
+      <section class="section memorial-section">
+        <div class="container">
+          <h2>{family.memorialHeading}</h2>
+          <p>{family.memorialBlurb}</p>
+          <ul class="animal-grid">
+            {remembered.map((e) => (
+              <li>
+                <AnimalCard
+                  name={e.data.name}
+                  href={`/family/${e.id}`}
+                  photo={e.data.photo}
+                  meta={`${e.data.species} · In loving memory`}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
 </BaseLayout>
 
 <style>
   .intro {
     margin-top: var(--space-3);
     font-size: 1.15rem;
+  }
+
+  .memorial-section {
+    border-top: var(--border-hairline);
   }
 </style>

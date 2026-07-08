@@ -186,6 +186,34 @@ a:hover {
   font-size: 0.85rem;
 }
 
+/* live region stays in the DOM (and accessibility tree) even while empty;
+   the box styling only appears once it has a message */
+.form-status {
+  font-weight: 600;
+}
+
+.form-status:not(:empty) {
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-card);
+  padding: var(--space-2) var(--space-3);
+}
+
+.form-grid fieldset {
+  border: var(--border-hairline);
+  border-radius: var(--radius-card);
+  padding: var(--space-3);
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.form-grid legend {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding-inline: var(--space-1);
+}
+
 /* honeypot: visually gone, still in the POST body (spam filter, brief §7) */
 .hp-field {
   position: absolute;

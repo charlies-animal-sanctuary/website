@@ -151,8 +151,8 @@ $jpegCodec = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() |
 $encParams = New-Object System.Drawing.Imaging.EncoderParameters(1)
 $encParams.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter([System.Drawing.Imaging.Encoder]::Quality, [long]85)
 
-function Import-Photo($srcName, $destName) {
-    $img = New-Object System.Drawing.Bitmap((Join-Path $photoSrcDir $srcName))
+function Import-Photo($srcDir, $srcName, $destDir, $destName) {
+    $img = New-Object System.Drawing.Bitmap((Join-Path $srcDir $srcName))
     # apply EXIF orientation (id 274) so pixels match how phones display them
     if ($img.PropertyIdList -contains 274) {
         switch ($img.GetPropertyItem(274).Value[0]) {
@@ -168,15 +168,84 @@ function Import-Photo($srcName, $destName) {
     $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
     $g.DrawImage($img, 0, 0, $w, $h)
     $g.Dispose()
-    $out.Save((Join-Path $resImgDir $destName), $jpegCodec, $encParams)
+    $out.Save((Join-Path $destDir $destName), $jpegCodec, $encParams)
     $out.Dispose(); $img.Dispose()
     Write-Output ("  {0} -> {1} ({2}x{3})" -f $srcName, $destName, $w, $h)
 }
 
-Import-Photo 'Ash1.jpg' 'ash-1.jpg'
-Import-Photo 'Ash2.jpg' 'ash-2.jpg'
-Import-Photo 'Midna1.jpg' 'midna-1.jpg'
-Import-Photo 'Midna2.jpg' 'midna-2.jpg'
-Import-Photo 'AshMidna1.jpg' 'ash-midna-1.jpg'
-Import-Photo 'AshMidna2.jpg' 'ash-midna-2.jpg'
+Import-Photo $photoSrcDir 'Ash1.jpg' $resImgDir 'ash-1.jpg'
+Import-Photo $photoSrcDir 'Ash2.jpg' $resImgDir 'ash-2.jpg'
+Import-Photo $photoSrcDir 'Midna1.jpg' $resImgDir 'midna-1.jpg'
+Import-Photo $photoSrcDir 'Midna2.jpg' $resImgDir 'midna-2.jpg'
+Import-Photo $photoSrcDir 'AshMidna1.jpg' $resImgDir 'ash-midna-1.jpg'
+Import-Photo $photoSrcDir 'AshMidna2.jpg' $resImgDir 'ash-midna-2.jpg'
 Write-Output 'Resident photos imported to src/content/residents/images/'
+
+# ---------------------------------------------------------------------------
+# 2026-07-08 drop (_incoming/File dump): full family roster, hero, highlights.
+# Picks come from the photo-triage pass (progress.md). Skips gracefully if the
+# drop folder has been emptied — committed outputs are the durable copies.
+# ---------------------------------------------------------------------------
+
+$dump = Join-Path $root '_incoming\File dump\Animal Sanctuary Pictures'
+if (Test-Path $dump) {
+    $heroDir = Join-Path $root 'src\assets\hero'
+    $hlImgDir = Join-Path $root 'src\content\highlights\images'
+    New-Item -ItemType Directory -Force -Path $heroDir | Out-Null
+    New-Item -ItemType Directory -Force -Path $hlImgDir | Out-Null
+
+    # Ash & Midna upgrades (main portraits + extra gallery shots)
+    Import-Photo (Join-Path $dump 'Ash') '20260427_105137.jpg' $resImgDir 'ash-3.jpg'
+    Import-Photo (Join-Path $dump 'Ash') '20260310_121940.jpg' $resImgDir 'ash-4.jpg'
+    Import-Photo (Join-Path $dump 'Ash') '20260322_110449.jpg' $resImgDir 'ash-5.jpg'
+    Import-Photo (Join-Path $dump 'Midna') '20251120_113003.jpg' $resImgDir 'midna-3.jpg'
+    Import-Photo (Join-Path $dump 'Midna') '20260323_122523.jpg' $resImgDir 'midna-4.jpg'
+    Import-Photo (Join-Path $dump 'Midna') '20251206_121852.jpg' $resImgDir 'midna-5.jpg'
+
+    # Charlie (memorial — the namesake)
+    Import-Photo (Join-Path $dump 'Charlie') '20211008_181502.jpg' $resImgDir 'charlie-1.jpg'
+    Import-Photo (Join-Path $dump 'Charlie') '20211008_181522.jpg' $resImgDir 'charlie-2.jpg'
+    Import-Photo (Join-Path $dump 'Charlie') '20210820_184620.jpg' $resImgDir 'charlie-3.jpg'
+    Import-Photo (Join-Path $dump 'Charlie') '20221109_181424.jpg' $resImgDir 'charlie-4.jpg'
+    Import-Photo (Join-Path $dump 'Charlie') '20210921_1347251.jpg' $resImgDir 'charlie-5.jpg'
+
+    # Molson (memorial)
+    Import-Photo (Join-Path $dump 'Molson') '20211028_141556.jpg' $resImgDir 'molson-1.jpg'
+    Import-Photo (Join-Path $dump 'Molson') '20201104_150650.jpg' $resImgDir 'molson-2.jpg'
+    Import-Photo (Join-Path $dump 'Molson') '20230411_131516.jpg' $resImgDir 'molson-3.jpg'
+    Import-Photo (Join-Path $dump 'Molson') '20240617_113214.jpg' $resImgDir 'molson-4.jpg'
+
+    # Lily
+    Import-Photo (Join-Path $dump 'Lily') '20260417_153231.jpg' $resImgDir 'lily-1.jpg'
+    Import-Photo (Join-Path $dump 'Lily') '20250704_102118.jpg' $resImgDir 'lily-2.jpg'
+    Import-Photo (Join-Path $dump 'Lily') '20260408_164250.jpg' $resImgDir 'lily-3.jpg'
+    Import-Photo (Join-Path $dump 'Lily') '20260420_080712.jpg' $resImgDir 'lily-4.jpg'
+
+    # Oliver
+    Import-Photo (Join-Path $dump 'Oliver') '20260126_124944.jpg' $resImgDir 'oliver-1.jpg'
+    Import-Photo (Join-Path $dump 'Oliver') '20240117_134449.jpg' $resImgDir 'oliver-2.jpg'
+    Import-Photo (Join-Path $dump 'Oliver') '20250422_164218.jpg' $resImgDir 'oliver-3.jpg'
+    Import-Photo (Join-Path $dump 'Oliver') '20230129_164307.jpg' $resImgDir 'oliver-4.jpg'
+
+    # Homepage hero: Charlie's pasture under autumn trees
+    Import-Photo (Join-Path $dump 'Charlie') '20221021_161920.jpg' $heroDir 'charlie-pasture.jpg'
+
+    # About page portrait: developer-owned copy (static pages must never import
+    # from CMS-managed media folders — an owner edit could break the build)
+    $aboutDir = Join-Path $root 'src\assets\about'
+    New-Item -ItemType Directory -Force -Path $aboutDir | Out-Null
+    Import-Photo (Join-Path $dump 'Charlie') '20211008_181502.jpg' $aboutDir 'charlie-portrait.jpg'
+
+    # Photo-highlights strip seeds (owner curates via /admin from here on)
+    Import-Photo (Join-Path $dump 'Ash') '20260322_110449.jpg' $hlImgDir 'ash-midna-cuddle.jpg'
+    Import-Photo (Join-Path $dump 'Charlie') '20221021_161920.jpg' $hlImgDir 'charlie-autumn.jpg'
+    Import-Photo (Join-Path $dump 'Molson') '20211028_141556.jpg' $hlImgDir 'molson-autumn.jpg'
+    Import-Photo (Join-Path $dump 'Lily') '20260408_164250.jpg' $hlImgDir 'lily-sunroll.jpg'
+    Import-Photo (Join-Path $dump 'Oliver') '20260126_124944.jpg' $hlImgDir 'oliver-portrait.jpg'
+    Import-Photo (Join-Path $dump 'Midna') '20260423_094806.jpg' $hlImgDir 'midna-stretch.jpg'
+
+    Write-Output '2026-07-08 drop imported: residents, hero, highlights'
+}
+else {
+    Write-Output '_incoming drop not found - skipping 2026-07-08 import (outputs already committed)'
+}

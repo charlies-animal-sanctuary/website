@@ -1,59 +1,148 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteForm from '../components/SiteForm.astro';
 import { site } from '../config/site';
 
-const { apply, formPrivacyNote } = site.copy;
-const formWired = !site.formEndpoint.startsWith('#');
+// Fields mirror the owner's real adoption application (Google Form, 2026-07-08)
+// so this page can fully replace it.
+const { apply } = site.copy;
 ---
 
 <BaseLayout title={apply.title}>
   <section class="section">
     <div class="container">
-      <p class="placeholder-chip">Draft copy — final wording comes from the owner</p>
       <h1>{apply.title}</h1>
       <p class="intro">{apply.intro}</p>
-      {!formWired && (
-        <p class="placeholder-chip">Form not wired yet — submissions go nowhere until phase 4</p>
-      )}
-      <form class="form-grid" method="POST" action={site.formEndpoint}>
-        <input type="hidden" name="form_name" value="adoption-application" />
-        <div class="form-field">
-          <label for="ap-pet">Who are you applying for? *</label>
-          <input
-            id="ap-pet"
-            name="pet"
-            type="text"
-            required
-            placeholder="Animal's name"
-          />
-        </div>
-        <div class="form-field">
-          <label for="ap-name">Your name *</label>
-          <input id="ap-name" name="name" type="text" required autocomplete="name" />
-        </div>
-        <div class="form-field">
-          <label for="ap-email">Your email *</label>
-          <input id="ap-email" name="email" type="email" required autocomplete="email" />
-        </div>
-        <div class="form-field">
-          <label for="ap-phone">Phone (optional)</label>
-          <input id="ap-phone" name="phone" type="tel" autocomplete="tel" />
-        </div>
-        <div class="form-field">
-          <label for="ap-home">Tell us about your home *</label>
-          <textarea
-            id="ap-home"
-            name="home"
-            required
-            placeholder="Who lives with you (people and animals), your space, and what drew you to this animal."></textarea>
-        </div>
-        <div class="hp-field" aria-hidden="true">
-          <label for="ap-website">Leave this field empty</label>
-          <input id="ap-website" name="website" type="text" tabindex="-1" autocomplete="off" />
-        </div>
-        <button class="btn btn--primary" type="submit">Send application</button>
-        <p class="form-note">{formPrivacyNote}</p>
-      </form>
+      <SiteForm formName="adoption-application" subject="Adoption application — website" submitLabel="Send application">
+        <fieldset>
+          <legend>About you</legend>
+          <div class="form-field">
+            <label for="ap-name">Full name *</label>
+            <input id="ap-name" name="name" type="text" required autocomplete="name" />
+          </div>
+          <div class="form-field">
+            <label for="ap-email">Email *</label>
+            <input id="ap-email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="form-field">
+            <label for="ap-phone">Phone number *</label>
+            <input id="ap-phone" name="phone" type="tel" required autocomplete="tel" />
+          </div>
+          <div class="form-field">
+            <label for="ap-address">Full address *</label>
+            <input id="ap-address" name="address" type="text" required autocomplete="street-address" />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Your home</legend>
+          <div class="form-field">
+            <label for="ap-ownrent">Do you own or rent your home? *</label>
+            <select id="ap-ownrent" name="own_or_rent" required>
+              <option value="">Choose one…</option>
+              <option>Own</option>
+              <option>Rent</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="ap-landlord-ok">If renting, is your landlord okay with pets?</label>
+            <select id="ap-landlord-ok" name="landlord_ok">
+              <option value="">Choose one…</option>
+              <option>Yes</option>
+              <option>No</option>
+              <option>N/A</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="ap-landlord">Landlord's contact information (if renting)</label>
+            <input id="ap-landlord" name="landlord_contact" type="text" />
+          </div>
+          <div class="form-field">
+            <label for="ap-children">How many children live in your home, and their ages? *</label>
+            <input id="ap-children" name="children" type="text" required placeholder="e.g. none / two kids, 6 and 9" />
+          </div>
+          <div class="form-field">
+            <label for="ap-atmosphere">How would you describe your home atmosphere? *</label>
+            <input id="ap-atmosphere" name="home_atmosphere" type="text" required placeholder="loud / busy / quiet / calm" />
+          </div>
+          <div class="form-field">
+            <label for="ap-allergies">Does anyone in your home have allergies? *</label>
+            <select id="ap-allergies" name="allergies" required>
+              <option value="">Choose one…</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="ap-onboard">Is everyone in your home on board with adopting? *</label>
+            <select id="ap-onboard" name="family_on_board" required>
+              <option value="">Choose one…</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Your animals, past and present</legend>
+          <div class="form-field">
+            <label for="ap-haspets">Do you currently have other pets? *</label>
+            <select id="ap-haspets" name="has_other_pets" required>
+              <option value="">Choose one…</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="ap-currentpets">Tell us about the pets currently in your home</label>
+            <textarea
+              id="ap-currentpets"
+              name="current_pets"
+              placeholder="Breed or species, age, fixed or not, temperament…"></textarea>
+          </div>
+          <div class="form-field">
+            <label for="ap-pastpets">Any previous pets? Tell us about them</label>
+            <textarea
+              id="ap-pastpets"
+              name="previous_pets"
+              placeholder="Breed or species, age, and where they are now."></textarea>
+          </div>
+          <div class="form-field">
+            <label for="ap-vet">Current vet's contact information</label>
+            <input id="ap-vet" name="vet_contact" type="text" />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Life together</legend>
+          <div class="form-field">
+            <label for="ap-pet">Who are you applying for? *</label>
+            <input id="ap-pet" name="pet" type="text" required placeholder="The animal's name" />
+          </div>
+          <div class="form-field">
+            <label for="ap-alone">How long would they be alone on a typical day? *</label>
+            <input id="ap-alone" name="hours_alone" type="text" required />
+          </div>
+          <div class="form-field">
+            <label for="ap-outdoors">Would they be allowed outdoors? If yes, tell us more *</label>
+            <textarea id="ap-outdoors" name="outdoors" required></textarea>
+          </div>
+          <div class="form-field">
+            <label for="ap-personality">Describe your ideal companion's personality *</label>
+            <input
+              id="ap-personality"
+              name="ideal_personality"
+              type="text"
+              required
+              placeholder="playful, relaxed, lap cat, independent…"
+            />
+          </div>
+          <div class="form-field">
+            <label for="ap-anything">Anything else you'd like to share, or questions for us</label>
+            <textarea id="ap-anything" name="anything_else"></textarea>
+          </div>
+        </fieldset>
+      </SiteForm>
     </div>
   </section>
 </BaseLayout>

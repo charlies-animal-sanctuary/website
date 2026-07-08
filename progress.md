@@ -2,28 +2,29 @@
 
 Rules live in [CLAUDE.md](CLAUDE.md); this file is only status, decisions, and open
 questions. Update at every phase gate and every real decision — a stale log is worse
-than none. **Last updated: 2026-07-04.**
+than none. **Last updated: 2026-07-08.**
 
 ## Where we are
 
-- **Current phase:** 3 — Content + CMS — **built, at the phase gate.**
-- **Done (phase 3):** content collections (`src/content.config.ts`, Astro content-layer
-  API, `image()`-optimized photos); Sveltia admin at `/admin` (config.yml in §4c sync,
-  backend placeholders until phase 5); `AnimalCard` with the full §5 status mechanic
-  (verified: Available = apply + feed buttons; Pending = pill, no apply; Adopted =
-  dimmed + banner + "Found their home {Month Year}"); Adopt page (Available grid +
-  dark Happy Tails band + teaser of latest 3 + count link); paginated `/happy-tails`
-  (24/page); detail pages `/adopt/{slug}` + `/family/{slug}` with galleries; Our Family
-  (Ash + Midna, real photos, draft stories); `/apply` with working `?pet=` prefill
-  (verified); §5 empty states; custom 404 (verified). Seeds: 3 obviously-fake sample
-  animals covering all three statuses. Home featured section now CMS-driven with the
-  §5 fallback chain. Header got a wordmark (logo lettering illegible at 64px).
-- **Done (phases 1–2):** scaffold + static pages; gates passed by owner 2026-07-04.
-- **Next:** owner reviews → Phase 4 (Integrations: Behold, YouTube embed, Web3Forms
-  wiring, donate URL). Phase 5 needs the GitHub push decision.
-- **Blocked / awaiting owner:** phase 3 gate review. Later: her content feedback +
-  real images; remaining Our Family pets (only Ash + Midna for now, per owner
-  2026-07-04); config values (§11 table below).
+- **Current phase:** 4 — Integrations + real content — **built, at the phase gate.**
+- **Done (phase 4, 2026-07-08):** owner's file drop ingested from `_incoming/`
+  (interview + config values + adoption-form PDF + 34 photos). Forms live on
+  Web3Forms (key via `.env`, inline success/error with direct-email fallback,
+  Web3Forms `botcheck` honeypot, privacy note); `/apply` now mirrors her real
+  adoption application field-for-field; Intake form gained location/age/health
+  fields from her interview. `highlights` collection built (schema + config.yml +
+  home strip, 6 real tiles seeded). Real hero (Charlie's pasture in autumn).
+  YouTube embed live (temp video). Donate URL live (temp PayPal). Real About page
+  (her welcome + Charlie's story + how the rescue works + the dream + about
+  Katheryn). Our Family: 4 living cats (Ash, Midna, Lily, Oliver) + memorial
+  section "Forever in our hearts" (Charlie the horse, Molson the dog) via new
+  optional `memorial` field. All resident stories written from her interview.
+  Verified in preview: memorial pages, apply prefill, wired key, 18 pages build,
+  contrast gate passes.
+- **Done (phases 1–3):** scaffold; static pages; content + CMS. Gates passed.
+- **Next:** owner reviews phase 4 (especially: her copy, the memorial treatment,
+  the hero) → phase 5 (needs GitHub push) or content fixes first.
+- **Blocked / awaiting owner:** gate review; the short "still needed" list below.
 
 ## Phase log (brief §8)
 
@@ -32,7 +33,7 @@ than none. **Last updated: 2026-07-04.**
 | 1 | Scaffold | Astro project; base layout/nav/footer; tokens; fonts; global styles; logo variants + favicon; git init + .gitignore | **done 2026-07-04 — at gate** |
 | 2 | Static pages | Home (hero still, featured, story video slot, IG strip slot, donate band), About, Intake + surrender form, Contact + form | **done 2026-07-04 — at gate** |
 | 3 | Content + CMS | content schema; Sveltia `config.yml`; `AnimalCard` (§5 logic); Adopt (Available + Happy Tails); detail pages; Our Family; empty states + 404; fake seed animals | **done 2026-07-04 — at gate** |
-| 4 | Integrations | Behold gallery; YouTube embeds; form service + apply prefill; donate URL; form privacy note | not started |
+| 4 | Integrations + real content | Web3Forms wiring; highlights strip; YouTube embed; donate URL; privacy note; owner's stories/photos/config ingested | **done 2026-07-08 — at gate** |
 | 5 | Auth + deploy | **NEEDS REMOTE** — Cloudflare Pages, Sveltia auth worker, domain, analytics, owner end-to-end publish test | not started |
 | 6 | Polish | motion (reduced-motion safe); image sizing/lazyload; WCAG AA audit; Lighthouse; a11y pass; SEO/OG incl. per-animal share images | not started |
 
@@ -150,54 +151,110 @@ Each phase ends at a gate: owner reviews before the next phase starts.
   in bulk without structure; the repo needs a boundary between raw handoffs and
   committed, optimized assets.
 
-## Open questions (awaiting owner)
+- **2026-07-08 — Owner's materials ingested** (`_incoming/File dump/`): interview MD
+  (config values + her voice sample + full interview), her real cat-adoption Google
+  Form (PDF), and 34 photos across 6 pets. Photo triage ran as a 6-agent parallel
+  pass rating every shot for card/gallery/hero fit; picks recorded in
+  `scripts/generate-assets.ps1`. Originals stay in `_incoming/` (safe to empty —
+  processed copies are committed).
+- **2026-07-08 — Copy status changed from [DRAFT] to "hers, pending approval".**
+  All page copy is now synthesized from the owner's own interview words (voice
+  sample as calibration); the [DRAFT] chips came off so she reviews the site as it
+  would ship. §9 discipline continues only where content is still genuinely fake:
+  the 3 sample adoptables (chip intact) and her missing About portrait.
+- **2026-07-08 — Charlie and Molson are memorials.** The interview made clear both
+  have passed. Added optional `memorial` boolean to residents (schema + config.yml,
+  same commit); they render in a separate "Forever in our hearts" section and get
+  "Forever in our hearts" instead of "Permanent resident" on their pages. Stories
+  written in HER voice (they're remembrances); living pets stay in animal-voice
+  first person per §4. Owner to confirm the treatment feels right.
+- **2026-07-08 — Hero = Charlie's pasture in autumn** (triage hero-fit 9/10:
+  landscape, on-palette golds, and it IS the farm-sanctuary dream — plus the
+  namesake's own field). Owner can veto at gate.
+- **2026-07-08 — Web3Forms wired via `PUBLIC_WEB3FORMS_KEY` in `.env`** (gitignored;
+  `.env.example` documents it; Cloudflare Pages env at phase 5). The key is
+  public-by-design (ships in built HTML) but stays out of the public repo source.
+  Forms POST directly to the Web3Forms API; JS enhances with inline success/error +
+  mailto fallback; no-JS plain POST still works. `subject`/`from_name`/`form_name`
+  set per form so her inbox sorts cleanly.
+- **2026-07-08 — `/apply` mirrors her real application** (the Google Form PDF),
+  field-for-field in four fieldsets, generalized from "cat" to any animal. Her form
+  can retire once the site is live.
+- **2026-07-08 — Facebook added to socials** from the interview ("under
+  CharliesAnimalSanctuary") — exact URL needs her confirmation (see below).
 
-Waiting on the OWNER-CHECKLIST.md items from the sanctuary owner: Web3Forms key,
-PayPal link, YouTube video, story doc, photos (hero/Charlie/pets/highlights), form
-email + domain confirmation. Phase 4 go-ahead pending — wiring is placeholder-first,
-so it can start before her items arrive if the owner says go.
+- **2026-07-08 — Adversarial review of phase 4 (20-agent workflow): 14 confirmed
+  findings, all fixed same day.** Highlights: (1) the highlights `link` field was
+  schema-validated as a strict URL while the CMS accepted any string — one malformed
+  paste by the owner would have failed every future build; schema relaxed, homepage
+  guards at render (non-http → profile link). (2) Date-only frontmatter + local-TZ
+  formatting shifted first-of-month dates a month back; all date formatting now pins
+  `timeZone: 'UTC'`. (3) About page imported Charlie's photo from the CMS-managed
+  media folder (owner edit could break the build); it now uses a developer-owned
+  copy in `src/assets/about/`. (4) **Content fidelity — the big one:** synthesis had
+  invented facts beyond the interview, worst being a donation-allocation promise
+  ("every donation goes to…"); also invented: lifelong boarding for Charlie, fosters
+  using Molson's toys, a meet-and-greet step, a best-for-the-animal policy line,
+  "volunteering", the other barn cats' fate, and a founding role implied for Molson.
+  All copy pulled back to exactly what she said. (5) Form status live region was
+  hidden-then-populated (screen readers wouldn't announce) and focus dropped to body
+  on submit; region now always rendered and focused on completion. Lesson recorded:
+  synthesized copy gets a fidelity pass against the source before it's called "hers."
 
-## Placeholder tracker (§9)
+## Still needed from the owner (small list)
 
-Every placeholder asset and copy block gets a line here when created, and is checked
-off when the final replaces it. All copy lives in `src/config/site.ts` → `copy`.
-Format: `- [ ] <where> — <what's fake> — <what the final needs to be>`
+1. **Confirm the memorial treatment** for Charlie and Molson (section name, stories,
+   placement) — sensitive content, her call entirely.
+2. **Approve the copy** — every page now reads in her voice; she should read About,
+   the pet stories, and the intake/adopt/apply intros and correct anything.
+   Specifically flagged for her explicit OK (reasonable but not literally hers):
+   the donate-band line ("…funded by content creation, adoption fees — and people
+   like you"), the reply-by-email commitments on Intake, and the apply intro.
+3. **A photo of Katheryn** for the About page (placeholder block still there).
+4. **Confirm the Facebook URL** (facebook.com/CharliesAnimalSanctuary — guessed).
+5. **Instagram post links** for the 6 highlight tiles (currently they link to her
+   profile; post links make each tile land on its post). She can also do this
+   herself in `/admin` once live.
+6. **The domain** (for phase 5 + Open Graph).
+7. Real PayPal link + real "our story" video, when ready (temp ones live now).
 
-- [x] `site.ts` → `social.instagram` — ~~placeholder~~ — **real URL wired 2026-07-04:**
-  https://www.instagram.com/charliesanimalsanctuary/
-- [ ] `site.ts` → `description` — draft meta description — final wording from owner
-- [ ] `site.ts` → `donateUrl` — `#placeholder-donate-url` — real PayPal link (§11)
-- [ ] `site.ts` → `formEndpoint` — `#placeholder-form-endpoint` — Web3Forms endpoint
-  (phase 4); both forms show a "not wired yet" chip until then
-- [ ] `site.ts` → `youtubeStoryVideoId` — empty — featured video ID (§11); home shows
-  a placeholder panel; embed wired in phase 4
-- [ ] `site.ts` → `copy.home` — hero headline/sub + donate-band copy, all [DRAFT]
-- [ ] `site.ts` → `copy.about` — intro + 3 story paragraphs, all [DRAFT] — her story,
-  in her words
-- [ ] `site.ts` → `copy.intake` — intro + 3 steps, all [DRAFT]
-- [ ] `site.ts` → `copy.contact` — intro, [DRAFT]
-- [ ] Home hero media — striped `PlaceholderBlock` — owner's chosen still (4:3-ish)
-- [x] Home featured section — ~~hardcoded cards~~ — **CMS-driven since 2026-07-04**
-  (shows sample animals until real ones exist; §5 fallback chain in place)
-- [ ] Home Instagram strip — 6 striped sample tiles — live Behold feed in phase 4
-- [ ] About page media — striped `PlaceholderBlock` — a photo of the sanctuary/owner
-- [ ] `src/content/adoptables/` — 3 sample animals (sample-kitten, sample-pup,
-  sample-senior) + striped sample photos — DELETE once real animals are in the CMS
-- [ ] `src/content/residents/ash.md` + `midna.md` — [DRAFT] stories — her words;
-  photos are temp picks she may swap; `arrived` dates unknown
-- [ ] `site.ts` → `copy.adopt.intro`, `copy.family.intro`, `copy.apply.intro` —
-  [DRAFT] — final wording from owner
+## Placeholder / temp tracker (§9)
 
-## Config values (brief §11) — all currently unfilled
+Checked = resolved with the real thing. Remaining opens are below.
 
-| Key | Value | Needed by |
+- [x] `social.instagram` — real URL (2026-07-04)
+- [x] Forms endpoint — **Web3Forms live** via `.env` key (2026-07-08)
+- [x] Home hero — **real photo: Charlie's pasture** (2026-07-08)
+- [x] Home IG strip — **6 real tiles via `highlights` collection** (2026-07-08);
+  tiles link to her profile until per-post links arrive
+- [x] Home featured section — CMS-driven (2026-07-04)
+- [x] All page copy (`site.ts` → `copy`) — **synthesized from her interview**
+  (2026-07-08), pending her read-through at the gate
+- [x] Resident stories — real (Ash, Midna, Lily, Oliver, Charlie†, Molson†),
+  from her interview (2026-07-08)
+- [ ] `donateUrl` — **[TEMP]** her placeholder PayPal (`paypalme/lilycharlestwitch`)
+  — swap for the real donation link before launch
+- [ ] `youtubeStoryVideoId` — **[TEMP]** her placeholder video (`7zB-pkw2B4U`) —
+  swap for the real "our story" video before launch
+- [ ] `social.facebook` — guessed URL — owner to confirm
+- [ ] About page — Katheryn's portrait — striped placeholder block until her photo
+  arrives
+- [ ] `src/content/adoptables/` — 3 obviously-fake sample animals (chip on homepage)
+  — DELETE once real adoptables exist in the CMS
+- [ ] Highlight tile `link` fields — empty (profile fallback) — her IG post links
+- [ ] Resident `arrived` dates — unknown, omitted — optional, she can add in CMS
+
+## Config values (brief §11)
+
+| Key | Value | Status |
 |---|---|---|
-| `OWNER/REPO` | — | phase 5 (config.yml placeholder until then) |
+| `FORM_SERVICE_ENDPOINT` / key | Web3Forms, key in `.env` | **live 2026-07-08** |
+| `OWNER_EMAIL` | CharliesAnimalSanctuary@gmail.com | **live** (forms, contact page) |
+| `DONATE_URL` | paypalme/lilycharlestwitch | **[TEMP]** — real link later |
+| `YOUTUBE` featured video ID | `7zB-pkw2B4U` | **[TEMP]** — real video later |
+| ~~`BEHOLD_FEED_URL`~~ | superseded by `highlights` | closed |
+| `OWNER/REPO` | — | phase 5 |
 | `AUTH_WORKER_URL` | — | phase 5 |
-| `BEHOLD_FEED_URL` | — | phase 4 |
-| `YOUTUBE` featured video ID | — | phase 2 slot, phase 4 wiring |
-| `DONATE_URL` | — | phase 2 (placeholder link until real) |
-| `FORM_SERVICE_ENDPOINT` / `OWNER_EMAIL` | — | phase 4 |
-| `DOMAIN` | — | phase 5; also OG absolute URLs in phase 6 |
+| `DOMAIN` | — | phase 5; OG URLs phase 6 |
 | `ANALYTICS_TOKEN` | — | phase 5 (recommend on) |
 | `TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET` | — | only if honeypot proves insufficient |

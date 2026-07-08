@@ -14,7 +14,7 @@ const d = entry.data;
 const meta = [d.species, d.sex, d.age, d.size].filter(Boolean).join(' · ');
 const bioParagraphs = d.bio.split(/\n{2,}/);
 const adoptedLabel = d.adopted_date
-  ? `Found their home ${d.adopted_date.toLocaleDateString('en-CA', { month: 'long', year: 'numeric' })}`
+  ? `Found their home ${d.adopted_date.toLocaleDateString('en-CA', { month: 'long', year: 'numeric', timeZone: 'UTC' })}`
   : 'Found their home';
 ---
 

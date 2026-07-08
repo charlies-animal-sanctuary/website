@@ -1,25 +1,20 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteForm from '../components/SiteForm.astro';
 import { site } from '../config/site';
 
-const { contact, formPrivacyNote } = site.copy;
-const formWired = !site.formEndpoint.startsWith('#');
+const { contact } = site.copy;
 ---
 
 <BaseLayout title={contact.title}>
   <section class="section">
     <div class="container contact-inner">
       <div>
-        <p class="placeholder-chip">Draft copy — final wording comes from the owner</p>
         <h1>{contact.title}</h1>
         <p class="intro">{contact.intro}</p>
 
         <h2>{contact.formHeading}</h2>
-        {!formWired && (
-          <p class="placeholder-chip">Form not wired yet — submissions go nowhere until phase 4</p>
-        )}
-        <form class="form-grid" method="POST" action={site.formEndpoint}>
-          <input type="hidden" name="form_name" value="contact" />
+        <SiteForm formName="contact" subject="Message from the website" submitLabel="Send">
           <div class="form-field">
             <label for="ct-name">Your name *</label>
             <input id="ct-name" name="name" type="text" required autocomplete="name" />
@@ -32,22 +27,19 @@ const formWired = !site.formEndpoint.startsWith('#');
             <label for="ct-message">Your message *</label>
             <textarea id="ct-message" name="message" required></textarea>
           </div>
-          <div class="hp-field" aria-hidden="true">
-            <label for="ct-website">Leave this field empty</label>
-            <input id="ct-website" name="website" type="text" tabindex="-1" autocomplete="off" />
-          </div>
-          <button class="btn btn--primary" type="submit">Send</button>
-          <p class="form-note">{formPrivacyNote}</p>
-        </form>
+        </SiteForm>
       </div>
 
       <aside class="contact-side">
         <h2>Where we are</h2>
         <p>{site.location} — we'll share exact details when we arrange a visit.</p>
+        <h2>Email</h2>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
         <h2>Find us online</h2>
         <ul class="social-list">
           <li><a href={site.social.instagram}>Instagram</a></li>
           <li><a href={site.social.youtube}>YouTube</a></li>
+          <li><a href={site.social.facebook}>Facebook</a></li>
         </ul>
       </aside>
     </div>

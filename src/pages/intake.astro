@@ -1,17 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteForm from '../components/SiteForm.astro';
 import { site } from '../config/site';
 
-const { intake, formPrivacyNote } = site.copy;
-const formWired = !site.formEndpoint.startsWith('#');
+const { intake } = site.copy;
 ---
 
 <BaseLayout title={intake.title}>
   <section class="section">
     <div class="container">
-      <p class="placeholder-chip">Draft copy — final wording comes from the owner</p>
       <h1>{intake.title}</h1>
       <p class="intro">{intake.intro}</p>
+      <p class="note">{intake.note}</p>
       <ol class="steps">
         {intake.steps.map((step) => <li>{step}</li>)}
       </ol>
@@ -21,11 +21,7 @@ const formWired = !site.formEndpoint.startsWith('#');
   <section class="section form-section">
     <div class="container">
       <h2>{intake.formHeading}</h2>
-      {!formWired && (
-        <p class="placeholder-chip">Form not wired yet — submissions go nowhere until phase 4</p>
-      )}
-      <form class="form-grid" method="POST" action={site.formEndpoint}>
-        <input type="hidden" name="form_name" value="intake-surrender" />
+      <SiteForm formName="intake-surrender" subject="Intake / surrender request — website" submitLabel="Send">
         <div class="form-field">
           <label for="in-name">Your name *</label>
           <input id="in-name" name="name" type="text" required autocomplete="name" />
@@ -48,20 +44,32 @@ const formWired = !site.formEndpoint.startsWith('#');
           </select>
         </div>
         <div class="form-field">
-          <label for="in-details">Tell us about the animal and the situation *</label>
+          <label for="in-location">Where is the animal right now? *</label>
+          <input
+            id="in-location"
+            name="location"
+            type="text"
+            required
+            placeholder="e.g. my home in Peterborough, a barn near Lakefield…"
+          />
+        </div>
+        <div class="form-field">
+          <label for="in-age">Approximate age, if you know it</label>
+          <input id="in-age" name="approximate_age" type="text" placeholder="e.g. kitten, ~2 years, senior" />
+        </div>
+        <div class="form-field">
+          <label for="in-health">Any health concerns you've noticed?</label>
+          <input id="in-health" name="health_concerns" type="text" />
+        </div>
+        <div class="form-field">
+          <label for="in-details">Tell me about the animal and the situation *</label>
           <textarea
             id="in-details"
             name="details"
             required
-            placeholder="Age if known, temperament, health, and why they need a new home — as much as you can share."></textarea>
+            placeholder="Temperament, history, why they need a new home — as much as you can share."></textarea>
         </div>
-        <div class="hp-field" aria-hidden="true">
-          <label for="in-website">Leave this field empty</label>
-          <input id="in-website" name="website" type="text" tabindex="-1" autocomplete="off" />
-        </div>
-        <button class="btn btn--primary" type="submit">Send</button>
-        <p class="form-note">{formPrivacyNote}</p>
-      </form>
+      </SiteForm>
     </div>
   </section>
 </BaseLayout>
@@ -70,6 +78,11 @@ const formWired = !site.formEndpoint.startsWith('#');
   .intro {
     margin-top: var(--space-3);
     font-size: 1.15rem;
+  }
+
+  .note {
+    margin-top: var(--space-3);
+    max-width: 60ch;
   }
 
   .steps {

@@ -1,9 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PlaceholderBlock from '../components/PlaceholderBlock.astro';
 import AnimalCard from '../components/AnimalCard.astro';
 import { site } from '../config/site';
+import heroImage from '../assets/hero/charlie-pasture.jpg';
 
 const { home } = site.copy;
 
@@ -17,13 +18,20 @@ featured = featured.slice(0, 2);
 
 const metaOf = (d: CollectionEntry<'adoptables'>['data']) =>
   [d.species, d.sex, d.age, d.size].filter(Boolean).join(' · ');
+
+const highlights = (await getCollection('highlights')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+// Render guard for the owner-pasted link field (schema is deliberately lenient)
+const tileHref = (link: string | undefined) =>
+  link?.startsWith('http') ? link : site.social.instagram;
 ---
 
 <BaseLayout>
   <section class="section hero">
     <div class="container hero-inner">
       <div class="hero-text">
-        <p class="placeholder-chip">Draft copy — final voice comes from the owner</p>
         <h1>{home.heroHeadline}</h1>
         <p>{home.heroSub}</p>
         <div class="cta-row">
@@ -32,7 +40,13 @@ const metaOf = (d: CollectionEntry<'adoptables'>['data']) =>
         </div>
       </div>
       <div class="hero-media">
-        <PlaceholderBlock label="Hero photo — a strong still, chosen by the owner (v1 ships a still; looped clip is a fast-follow)" ratio="4 / 3" />
+        <Image
+          src={heroImage}
+          alt="Two blanketed horses grazing in a green pasture beneath golden autumn trees"
+          width={1000}
+          class="hero-photo"
+          loading="eager"
+        />
       </div>
     </div>
   </section>
@@ -68,31 +82,36 @@ const metaOf = (d: CollectionEntry<'adoptables'>['data']) =>
   <section class="section">
     <div class="container video-block">
       <h2>{home.videoHeading}</h2>
-      {
-        site.youtubeStoryVideoId ? (
-          <p>Video embed renders here once wired (phase 4).</p>
-        ) : (
-          <PlaceholderBlock
-            label="YouTube embed — needs the featured video ID (§11); wired click-to-play in phase 4"
-            ratio="16 / 9"
-          />
-        )
-      }
+      <div class="video-frame">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${site.youtubeStoryVideoId}`}
+          title={`${home.videoHeading} — ${site.name}`}
+          loading="lazy"
+          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <h2>{home.instagramHeading}</h2>
-      <p class="placeholder-chip">Sample tiles — the live Behold feed arrives in phase 4</p>
-      <ul class="ig-grid">
-        {[1, 2, 3, 4, 5, 6].map((n) => (
-          <li><PlaceholderBlock label={`Instagram post ${n}`} ratio="1 / 1" /></li>
-        ))}
-      </ul>
-      <a class="btn btn--secondary" href={site.social.instagram}>Follow on Instagram</a>
-    </div>
-  </section>
+  {
+    highlights.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <h2>{home.instagramHeading}</h2>
+          <ul class="ig-grid">
+            {highlights.map((h) => (
+              <li>
+                <a href={tileHref(h.data.link)} rel="noopener">
+                  <Image src={h.data.photo} alt={h.data.title} width={480} class="ig-photo" />
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a class="btn btn--secondary" href={site.social.instagram}>Follow on Instagram</a>
+        </div>
+      </section>
+    )
+  }
 
   <section class="section section--dark">
     <div class="container donate-band">
@@ -122,6 +141,13 @@ const metaOf = (d: CollectionEntry<'adoptables'>['data']) =>
     margin-top: var(--space-3);
   }
 
+  .hero-photo {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    border: var(--border-hairline);
+  }
+
   @media (max-width: 800px) {
     .hero-inner {
       grid-template-columns: 1fr;
@@ -143,9 +169,20 @@ const metaOf = (d: CollectionEntry<'adoptables'>['data']) =>
     font-weight: 600;
   }
 
-  .video-block :global(.ph-block) {
+  .video-block .video-frame {
+    aspect-ratio: 16 / 9;
     max-width: 46rem;
     margin-top: var(--space-3);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    border: var(--border-hairline);
+  }
+
+  .video-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
   }
 
   .ig-grid {
@@ -155,6 +192,15 @@ const metaOf = (d: CollectionEntry<'adoptables'>['data']) =>
     list-style: none;
     margin: var(--space-3) 0 var(--space-4);
     padding: 0;
+  }
+
+  .ig-photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radius-card);
+    border: var(--border-hairline);
+    display: block;
   }
 
   .donate-band {

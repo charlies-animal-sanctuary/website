@@ -63,4 +63,20 @@ collections:
       - { name: gallery, label: "More photos", widget: list, required: false, field: { name: image, label: "Photo", widget: image } }
       - { name: story, label: "Their story (first person)", widget: text }
       - { name: arrived, label: "Arrived", widget: datetime, required: false }
+      - { name: memorial, label: "In loving memory", widget: boolean, default: false, required: false, hint: "For family who have passed — shown in their own remembrance section" }
       - { name: featured, label: "Feature on homepage", widget: boolean, default: false, required: false }
+
+  - name: highlights
+    label: "Photo highlights (homepage strip)"
+    label_singular: "Highlight"
+    identifier_field: title
+    folder: "src/content/highlights"
+    media_folder: "images"
+    public_folder: "./images"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: "Caption", widget: string, hint: "A few words — also read aloud by screen readers" }
+      - { name: photo, label: "Photo", widget: image }
+      - { name: link, label: "Instagram post link", widget: string, required: false, hint: "Open the post → Share → Copy link. Leave empty to link to the profile." }
+      - { name: order, label: "Order", widget: number, default: 0, required: false, hint: "Lower numbers show first. Around 6-12 highlights looks best." }
