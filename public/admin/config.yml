@@ -17,7 +17,7 @@ backend:
   name: github
   repo: charlies-animal-sanctuary/website
   branch: main
-  base_url: https://PLACEHOLDER-sveltia-auth.example.com # PLACEHOLDER — fill in at phase 5
+  base_url: https://sveltia-cms-auth.charliesanimalsanctuary.workers.dev
 
 media_folder: "src/assets/uploads" # global fallback; collections override below
 public_folder: "/src/assets/uploads"

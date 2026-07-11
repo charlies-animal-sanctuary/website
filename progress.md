@@ -6,12 +6,15 @@ than none. **Last updated: 2026-07-08.**
 
 ## Where we are
 
-- **Current phase:** 5 — Auth + deploy — **started 2026-07-11.** GitHub org
-  `charlies-animal-sanctuary` created by the owner; repo `website` (public, was
-  empty) is the remote. Pre-push history sweep came back clean (no key, no .env,
-  no personal files — only the brief ever committed from `Initial Files/`).
-  Remaining: Cloudflare Pages connect + env var, Sveltia auth worker + GitHub
-  OAuth app, domain (still unknown), analytics, owner publish test.
+- **Current phase:** 5 — Auth + deploy — **nearly done 2026-07-11.** Repo pushed
+  to `charlies-animal-sanctuary/website` (history sweep clean). Owner completed
+  GOING-LIVE Parts A + B herself: site LIVE at
+  https://charlies-animal-sanctuary.pages.dev (verified: renders, nav, donate),
+  Sveltia auth worker deployed at
+  https://sveltia-cms-auth.charliesanimalsanctuary.workers.dev (responds; root
+  404 is expected — only /auth + /callback exist) with the GitHub OAuth app on
+  the org. `base_url` now wired in config.yml. Remaining: owner's Part C
+  end-to-end publish test, then domain + analytics (still unpicked).
 - **Done (phase 4, 2026-07-08):** owner's file drop ingested from `_incoming/`
   (interview + config values + adoption-form PDF + 34 photos). Forms live on
   Web3Forms (key via `.env`, inline success/error with direct-email fallback,
