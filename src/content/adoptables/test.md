@@ -4,7 +4,7 @@ species: Cat
 sex: Male
 age: '1'
 size: ''
-status: Available
+status: Adopted
 photo: ./images/20260701_121528.jpg
 gallery: []
 bio: Cute
