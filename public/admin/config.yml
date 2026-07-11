@@ -15,7 +15,7 @@
 
 backend:
   name: github
-  repo: OWNER/REPO # PLACEHOLDER — fill in at phase 5
+  repo: charlies-animal-sanctuary/website
   branch: main
   base_url: https://PLACEHOLDER-sveltia-auth.example.com # PLACEHOLDER — fill in at phase 5
 
