@@ -18,17 +18,28 @@ Two rules before starting:
 You'll connect Cloudflare (which hosts the site) to GitHub (where the site's
 files live).
 
+> ⚠️ **Wrong-turn check:** Cloudflare's dashboard pushes "Workers" everywhere,
+> but this site needs a **Pages** project. If you ever see a screen saying
+> **"Create a Worker"** or **"Set up your application — configure your Worker
+> project"**, you're in the wrong flow — click **Back** (don't click Deploy)
+> and use the direct link in step 2 below.
+
 1. Go to **dash.cloudflare.com** and log in to your Cloudflare account.
-2. In the left sidebar, click **Workers & Pages**.
-3. Click **Create** (or "Create application"), then switch to the **Pages** tab.
-4. Click **Connect to Git** (may say "Import an existing Git repository").
-5. It will ask you to sign in to GitHub and authorize Cloudflare. Approve it.
+2. Paste this link into the address bar — it jumps straight to the correct
+   screen (pick the sanctuary account if it asks):
+
+   **`https://dash.cloudflare.com/?to=/:account/pages/new/provider/github`**
+
+   (Fallback if that link misbehaves: left sidebar → **Workers & Pages** →
+   **Create application** → click the **Pages** tab at the top of that screen →
+   **Import an existing Git repository**.)
+3. If it asks you to sign in to GitHub and authorize Cloudflare, approve it.
    When GitHub asks **where** to install: pick the **charlies-animal-sanctuary**
    organization (not your personal account), choose **Only select
-   repositories**, and select **website**.
-6. Back in Cloudflare, select the **website** repository and click
-   **Begin setup**.
-7. Fill in the setup screen:
+   repositories**, and select **website**. (If you've already done this bit,
+   the repository just appears — keep going.)
+4. Select the **website** repository and click **Begin setup**.
+5. Fill in the setup screen:
    - **Project name:** `charlies-animal-sanctuary`
      (this becomes your free web address: `charlies-animal-sanctuary.pages.dev`)
    - **Production branch:** `main`
@@ -36,16 +47,16 @@ files live).
    - **Build command:** make sure it says exactly `npm run build`
      (fix it by hand if the preset filled in anything else — this matters).
    - **Build output directory:** `dist`
-8. Still on that screen, expand **Environment variables** and add TWO:
+6. Still on that screen, expand **Environment variables** and add TWO:
    - Name: `PUBLIC_WEB3FORMS_KEY`
      Value: the long dashed code from your Web3Forms email
      (the one titled something like "Your Access Key").
    - Name: `NODE_VERSION` — Value: `22`
-9. Click **Save and Deploy**. A build log will scroll by for a minute or two
+7. Click **Save and Deploy**. A build log will scroll by for a minute or two
    and end with a green success message.
-10. **The site is now live.** Click the link it shows
-    (`https://charlies-animal-sanctuary.pages.dev`) and have a look around —
-    then send that link to Faraaz.
+8. **The site is now live.** Click the link it shows
+   (`https://charlies-animal-sanctuary.pages.dev`) and have a look around —
+   then send that link to Faraaz.
 
 From now on, every change published from `/admin` goes live automatically in
 about two minutes. No one ever repeats these steps.
@@ -58,6 +69,9 @@ This lets you log into the site's `/admin` page with your GitHub account.
 Three short pieces, in this order.
 
 ### B1. Deploy the login helper (a tiny free Cloudflare service)
+
+> Note: Part A told you to avoid "Worker" screens — but this part genuinely
+> IS a Worker. Worker screens are correct here.
 
 1. Open this page: **github.com/sveltia/sveltia-cms-auth**
 2. In the description there's a **"Deploy to Cloudflare Workers"** button.
