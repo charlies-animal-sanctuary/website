@@ -77,7 +77,14 @@ Three short pieces, in this order.
 2. In the description there's a **"Deploy to Cloudflare Workers"** button.
    Click it.
 3. Follow the prompts (it will connect to your GitHub and your Cloudflare —
-   approve both) and finish the deploy.
+   approve both). The setup screens are all correct on their defaults:
+   - **Git account:** `charlies-animal-sanctuary` is fine. It will create a
+     small helper repository there — tick **Create private Git repository**
+     to keep the org page tidy.
+   - **Project name:** leave as `sveltia-cms-auth`.
+   - **Build command:** leave empty. **Deploy command:** leave `pnpm run deploy`.
+   - **"Builds for non-production branches":** fine as-is either way.
+   Then click **Deploy** and let it finish (a minute or two).
 4. When it's done, Cloudflare shows your new worker with a web address like
    `https://sveltia-cms-auth.SOMETHING.workers.dev`.
    **Copy that address into a note** — you need it twice below.
