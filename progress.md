@@ -34,6 +34,14 @@ than none. **Last updated: 2026-07-08.**
   the hero) → phase 5 (needs GitHub push) or content fixes first.
 - **Blocked / awaiting owner:** gate review; the short "still needed" list below.
 
+**2026-07-11 — Publish-test bug found & fixed (the test doing its job):** the
+owner's first CMS publish committed fine, but the build rejected it — Sveltia
+writes blank optional fields as `''`/`[]`, and the strict schema (`size` enum,
+`adopted_date` date) failed the whole build. All three schemas now route every
+optional field through a `blank` preprocessor (`''`/null → undefined). Her
+commit needed no changes; her photo pipeline worked perfectly (2.5 MB upload →
+56 kB webp). Owner login, publish, auto-deploy: all verified end-to-end.
+
 ## Phase log (brief §8)
 
 | # | Phase | Scope | Status |
