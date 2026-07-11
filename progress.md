@@ -34,6 +34,16 @@ than none. **Last updated: 2026-07-08.**
   the hero) → phase 5 (needs GitHub push) or content fixes first.
 - **Blocked / awaiting owner:** gate review; the short "still needed" list below.
 
+**2026-07-11 — Owner e2e test COMPLETE.** Login → add → publish → live →
+status flip → Happy Tails → delete: all exercised by the owner herself. Two
+real bugs surfaced and fixed (blank-optional schema failure below, and the
+delete step: Sveltia's asset cleanup swept ALL photos in the shared
+`images/` folder, including the three sample animals' — build failed until
+they were restored from git history, commit a107745). Lesson for the owner
+guide (§10, phase 6): when deleting an animal, only remove that animal's own
+photos — or just ask. Deletes are rare by design (mistakes only; adoptions
+become Happy Tails). Phase 5 remaining: domain + optional analytics only.
+
 **2026-07-11 — Publish-test bug found & fixed (the test doing its job):** the
 owner's first CMS publish committed fine, but the build rejected it — Sveltia
 writes blank optional fields as `''`/`[]`, and the strict schema (`size` enum,
