@@ -20,7 +20,10 @@ than none. **Last updated: 2026-07-11.**
   "sample animals" chip mislabeling real animals (now auto-hides), and the
   residents' no-op `featured` toggle (removed; brief §4b amended).
   Remaining before "done": owner review of the polish + the two §11 stragglers
-  (domain, analytics) + real PayPal/video swaps whenever ready.
+  (analytics — optional) + real PayPal/video swaps whenever ready. DOMAIN
+  resolved 2026-07-11: charliesanimalsanctuary.com (zone already on her
+  Cloudflare NS); `site` switched in astro.config — owner adds the two custom
+  domains in the Pages dashboard to activate.
 - **Done (phase 5, 2026-07-11):** repo public on GitHub; owner deployed
   Cloudflare Pages + Sveltia auth worker herself via GOING-LIVE.md; full owner
   e2e publish test passed (add → publish → live → flip to Adopted → Happy
@@ -53,7 +56,8 @@ delete step: Sveltia's asset cleanup swept ALL photos in the shared
 they were restored from git history, commit a107745). Lesson for the owner
 guide (§10, phase 6): when deleting an animal, only remove that animal's own
 photos — or just ask. Deletes are rare by design (mistakes only; adoptions
-become Happy Tails). Phase 5 remaining: domain + optional analytics only.
+become Happy Tails). Phase 5 remaining: optional analytics only (domain
+resolved 2026-07-11 — charliesanimalsanctuary.com).
 
 **2026-07-11 — Publish-test bug found & fixed (the test doing its job):** the
 owner's first CMS publish committed fine, but the build rejected it — Sveltia
@@ -71,7 +75,7 @@ commit needed no changes; her photo pipeline worked perfectly (2.5 MB upload →
 | 2 | Static pages | Home (hero still, featured, story video slot, IG strip slot, donate band), About, Intake + surrender form, Contact + form | **done 2026-07-04 — at gate** |
 | 3 | Content + CMS | content schema; Sveltia `config.yml`; `AnimalCard` (§5 logic); Adopt (Available + Happy Tails); detail pages; Our Family; empty states + 404; fake seed animals | **done 2026-07-04 — at gate** |
 | 4 | Integrations + real content | Web3Forms wiring; highlights strip; YouTube embed; donate URL; privacy note; owner's stories/photos/config ingested | **done 2026-07-08 — at gate** |
-| 5 | Auth + deploy | **NEEDS REMOTE** — Cloudflare Pages, Sveltia auth worker, domain, analytics, owner end-to-end publish test | not started |
+| 5 | Auth + deploy | Cloudflare Pages, Sveltia auth worker, domain, analytics, owner end-to-end publish test | **done 2026-07-11** (analytics optional/pending) |
 | 6 | Polish | motion (reduced-motion safe); image sizing/lazyload; WCAG AA audit; Lighthouse; a11y pass; SEO/OG incl. per-animal share images | **built + reviewed 2026-07-11 — at gate** |
 
 Each phase ends at a gate: owner reviews before the next phase starts.
@@ -250,7 +254,7 @@ Each phase ends at a gate: owner reviews before the next phase starts.
 3. **Instagram post links** for the 6 highlight tiles (currently they link to her
    profile; post links make each tile land on its post). She can also do this
    herself in `/admin` once live.
-4. **The domain** (for phase 5 + Open Graph).
+4. ~~The domain~~ — resolved 2026-07-11: charliesanimalsanctuary.com.
 5. Real PayPal link + real "our story" video, when ready (temp ones live now).
 
 Resolved 2026-07-08 (same-day owner replies): real Facebook URL wired
@@ -297,6 +301,6 @@ Checked = resolved with the real thing. Remaining opens are below.
 | ~~`BEHOLD_FEED_URL`~~ | superseded by `highlights` | closed |
 | `OWNER/REPO` | — | phase 5 |
 | `AUTH_WORKER_URL` | — | phase 5 |
-| `DOMAIN` | — | phase 5; OG URLs phase 6 |
+| `DOMAIN` | charliesanimalsanctuary.com (set 2026-07-11) | wired in astro.config `site` |
 | `ANALYTICS_TOKEN` | — | phase 5 (recommend on) |
 | `TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET` | — | only if honeypot proves insufficient |

@@ -2,7 +2,7 @@
 
 Everything you'll ever do lives at one address:
 
-**charlies-animal-sanctuary.pages.dev/admin** *(sign in with GitHub)*
+**charliesanimalsanctuary.com/admin** *(sign in with GitHub)*
 
 Whatever you publish is live on the website about two minutes later,
 automatically. You can't permanently break anything — every change is saved
