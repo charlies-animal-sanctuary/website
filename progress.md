@@ -107,6 +107,17 @@ script. Local build green. Remaining: live end-to-end test (create + delete a
 throwaway animal in the real admin; expect the delete commit to touch ONLY
 the .md file).
 
+**2026-07-12 — Delete-sweep fix VALIDATED end-to-end (owner-run test):** in a
+fresh admin session, `Delete "test"` and `Delete "test-2"` each touched exactly
+one file (the entry's .md — no photo sweep), and `Create "test-2"` landed its
+upload in the new root-relative `src/assets/animals/` folder. Entry deletion
+can no longer break the build. Cleanup: both test photos pruned. Bonus finding:
+the orphan-media finder had a Windows path bug (URL.pathname percent-encodes
+spaces) making it report "clean" while scanning nothing — fixed with
+fileURLToPath + a scanned-count guard that fails loudly on zero files; the
+fixed scan surfaced and pruned 3 genuinely orphaned photos (superseded
+Ash/Midna shots). Lesson recorded: report-only tools must prove they looked.
+
 ## Phase log (brief §8)
 
 | # | Phase | Scope | Status |
