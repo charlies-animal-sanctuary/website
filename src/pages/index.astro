@@ -14,7 +14,7 @@ const adoptables = await getCollection('adoptables');
 const availableAll = adoptables.filter((e) => e.data.status === 'Available');
 let featured = availableAll.filter((e) => e.data.featured);
 if (featured.length === 0) featured = availableAll;
-featured = featured.slice(0, 2);
+featured = featured.slice(0, 3); // owner 2026-07-12: homepage fits three
 
 const metaOf = (d: CollectionEntry<'adoptables'>['data']) =>
   [d.species, d.sex, d.age, d.size].filter(Boolean).join(' · ');
