@@ -13,7 +13,7 @@ export const site = {
   email: 'CharliesAnimalSanctuary@gmail.com',
 
   description:
-    "Charlie's Animal Sanctuary is a small animal rescue in Peterborough, ON — taking in cats and dogs, giving them vet care and time to heal, and matching them with the right homes.",
+    "Charlie's Animal Sanctuary is a small animal rescue in Peterborough, ON — taking in cats and dogs, providing vet care and time to heal, and matching them with the right homes.",
 
   nav: [
     { label: 'Home', href: '/' },
@@ -46,11 +46,11 @@ export const site = {
     home: {
       heroHeadline: 'Small rescue. Big dream.',
       heroSub:
-        "We take in cats and dogs around Peterborough, give them vet care and time to heal, and match them with the homes they deserve. We're starting small — one person, a few animals at a time — but the dream is a full farm sanctuary where rescues live out their lives in peace.",
+        "We take in cats and dogs around Peterborough, provide vet care and time to heal, and match them with the homes they deserve. We're starting small — one person, a few animals at a time — but the dream is a full farm sanctuary where rescues live out their lives in peace.",
       featuredHeading: 'Looking for a home',
       videoHeading: 'Watch our story',
-      instagramHeading: 'Follow along on Instagram',
-      donateHeading: 'Help us help them',
+      instagramHeading: 'Life at the sanctuary',
+      donateHeading: 'How to help',
       donateSub:
         'The sanctuary runs on one person, funded by content creation, adoption fees — and people like you. Every donation helps.',
     },

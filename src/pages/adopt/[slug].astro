@@ -2,6 +2,7 @@
 import { Image, getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GalleryGrid from '../../components/GalleryGrid.astro';
 import { site } from '../../config/site';
 
 export async function getStaticPaths() {
@@ -83,20 +84,7 @@ const ogPhoto = await getImage({ src: d.photo, width: 1200, format: 'jpeg' });
           }
         </div>
       </div>
-      {
-        d.gallery && d.gallery.length > 0 && (
-          <div class="gallery">
-            <h2>More photos</h2>
-            <ul class="gallery-grid">
-              {d.gallery.map((img, i) => (
-                <li>
-                  <Image src={img} alt={`Photo ${i + 2} of ${d.name}`} width={640} class="gallery-photo" />
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-      }
+      {d.gallery && d.gallery.length > 0 && <GalleryGrid images={d.gallery} name={d.name} />}
     </div>
   </section>
 </BaseLayout>
@@ -164,24 +152,4 @@ const ogPhoto = await getImage({ src: d.photo, width: 1200, format: 'jpeg' });
     margin-top: var(--space-2);
   }
 
-  .gallery {
-    margin-top: var(--space-6);
-  }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-    gap: var(--space-3);
-    list-style: none;
-    margin: var(--space-3) 0 0;
-    padding: 0;
-  }
-
-  .gallery-photo {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: var(--radius-card);
-    border: var(--border-hairline);
-  }
 </style>

@@ -41,6 +41,11 @@ h4 {
   font-weight: 600;
   line-height: 1.15;
   text-wrap: balance;
+  /* Owner feedback 2026-07-11: Fraunces' display cut has a leaning, hooked
+     lowercase f. Pinning a lower optical size + WONK 0 selects the
+     conventional text-style letterforms while keeping the warmth. */
+  font-optical-sizing: none;
+  font-variation-settings: 'opsz' 24, 'SOFT' 0, 'WONK' 0;
 }
 
 h1 {

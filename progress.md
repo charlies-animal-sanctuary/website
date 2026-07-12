@@ -67,6 +67,19 @@ optional field through a `blank` preprocessor (`''`/null → undefined). Her
 commit needed no changes; her photo pipeline worked perfectly (2.5 MB upload →
 56 kB webp). Owner login, publish, auto-deploy: all verified end-to-end.
 
+**2026-07-11 — Owner feedback round 1 (Katheryn), all applied:** hero copy
+"provide vet care" (meta description aligned); "Sample animals" chip removed
+from the homepage (the samples still label themselves); Instagram strip
+heading → "Life at the sanctuary" (tiles are curated uploads until she pastes
+per-post links, so the old heading over-promised); donate band → "How to
+help", its button dropped (the footer's Donate is directly below) and the
+dead space between band and footer tightened; gallery photos on all detail
+pages now open a lightbox (new GalleryGrid component — native dialog, Esc/
+backdrop close, no-JS fallback opens the full photo); headings moved to
+Fraunces Variable pinned at 'opsz' 24 + 'WONK' 0 — the "strange lowercase f"
+was Fraunces' leaning display-cut letterform. About/Adopt pages: approved
+as-is. Custom domain verified live on both apex and www.
+
 ## Phase log (brief §8)
 
 | # | Phase | Scope | Status |

@@ -16,10 +16,6 @@ let featured = availableAll.filter((e) => e.data.featured);
 if (featured.length === 0) featured = availableAll;
 featured = featured.slice(0, 2);
 
-// The "sample animals" chip disappears by itself the moment a real animal
-// (non sample- slug) lands in the featured spots — no dev edit needed.
-const featuredAllSamples = featured.every((e) => e.id.startsWith('sample-'));
-
 const metaOf = (d: CollectionEntry<'adoptables'>['data']) =>
   [d.species, d.sex, d.age, d.size].filter(Boolean).join(' · ');
 
@@ -63,9 +59,6 @@ const tileHref = (link: string | undefined) =>
       <section class="section">
         <div class="container">
           <h2>{home.featuredHeading}</h2>
-          {featuredAllSamples && (
-            <p class="placeholder-chip">Sample animals — real ones replace them via /admin</p>
-          )}
           <ul class="featured-grid">
             {featured.map((e) => (
               <li>
@@ -122,11 +115,11 @@ const tileHref = (link: string | undefined) =>
     )
   }
 
-  <section class="section section--dark">
+  {/* owner 2026-07-11: no button here — the footer's Donate sits right below */}
+  <section class="section section--dark donate-section">
     <div class="container donate-band">
       <h2>{home.donateHeading}</h2>
       <p>{home.donateSub}</p>
-      <a class="btn btn--primary" href={site.donateUrl}>Donate</a>
     </div>
   </section>
 </BaseLayout>
@@ -210,6 +203,11 @@ const tileHref = (link: string | undefined) =>
     border-radius: var(--radius-card);
     border: var(--border-hairline);
     display: block;
+  }
+
+  /* band and footer share the ebony background — trim the dead space between */
+  .donate-section {
+    padding-block: var(--space-5) var(--space-3);
   }
 
   .donate-band {
