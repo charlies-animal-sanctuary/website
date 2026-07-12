@@ -250,3 +250,26 @@ if (Test-Path $dump) {
 else {
     Write-Output '_incoming drop not found - skipping 2026-07-08 import (outputs already committed)'
 }
+
+# ---------------------------------------------------------------------------
+# Open Graph default share image (1200x630, §7): center-cover crop of the
+# committed hero photo. Per-animal pages use the animal's own photo instead.
+# ---------------------------------------------------------------------------
+
+$heroPath = Join-Path $root 'src\assets\hero\charlie-pasture.jpg'
+if (Test-Path $heroPath) {
+    $hero = New-Object System.Drawing.Bitmap($heroPath)
+    $og = New-Object System.Drawing.Bitmap(1200, 630)
+    $g = [System.Drawing.Graphics]::FromImage($og)
+    $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+    $targetRatio = 1200 / 630
+    $srcW = $hero.Width; $srcH = [int]($hero.Width / $targetRatio)
+    if ($srcH -gt $hero.Height) { $srcH = $hero.Height; $srcW = [int]($hero.Height * $targetRatio) }
+    $sx = [int](($hero.Width - $srcW) / 2); $sy = [int](($hero.Height - $srcH) / 2)
+    $dest = New-Object System.Drawing.Rectangle(0, 0, 1200, 630)
+    $g.DrawImage($hero, $dest, $sx, $sy, $srcW, $srcH, [System.Drawing.GraphicsUnit]::Pixel)
+    $g.Dispose()
+    $og.Save((Join-Path $pubDir 'og-default.jpg'), $jpegCodec, $encParams)
+    $og.Dispose(); $hero.Dispose()
+    Write-Output 'public/og-default.jpg written (1200x630)'
+}

@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
@@ -15,14 +15,31 @@ const roleLabel = d.memorial ? 'Forever in our hearts' : 'Permanent resident';
 const arrivedLabel = d.arrived
   ? `Part of the family since ${d.arrived.toLocaleDateString('en-CA', { month: 'long', year: 'numeric', timeZone: 'UTC' })}`
   : undefined;
+
+// §7: sharing this resident's link shows their photo.
+// format jpeg: LinkedIn/WhatsApp link scrapers don't render webp og:images.
+const ogPhoto = await getImage({ src: d.photo, width: 1200, format: 'jpeg' });
 ---
 
-<BaseLayout title={d.name} description={`${d.name} — ${roleLabel.toLowerCase()} at Charlie's Animal Sanctuary`}>
+<BaseLayout
+  title={d.name}
+  description={`${d.name} — ${roleLabel.toLowerCase()} at Charlie's Animal Sanctuary`}
+  ogImage={ogPhoto.src}
+>
   <section class="section">
     <div class="container">
       <a class="back-link" href="/family">← Our family</a>
       <div class="detail-grid">
-        <Image src={d.photo} alt={`Photo of ${d.name}`} width={1000} class="detail-photo" />
+        <Image
+          src={d.photo}
+          alt={`Photo of ${d.name}`}
+          width={1000}
+          widths={[480, 800, 1000]}
+          sizes="(max-width: 800px) 92vw, 40vw"
+          loading="eager"
+          fetchpriority="high"
+          class="detail-photo"
+        />
         <div class="detail-info">
           <h1>{d.name}</h1>
           <p class="meta">{d.species} · {roleLabel}</p>

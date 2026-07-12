@@ -28,7 +28,14 @@ const adoptedLabel = adoptedDate
 
 <article class="animal-card">
   <a class="card-media" href={href} tabindex="-1" aria-hidden="true">
-    <Image src={photo} alt="" width={640} class:list={['card-photo', { dimmed: adopted }]} />
+    <Image
+      src={photo}
+      alt=""
+      width={640}
+      widths={[320, 480, 640]}
+      sizes="(max-width: 580px) 92vw, 320px"
+      class:list={['card-photo', { dimmed: adopted }]}
+    />
     {adopted && <span class="adopted-banner">Adopted</span>}
   </a>
   <div class="card-body">

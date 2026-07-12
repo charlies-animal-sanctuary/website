@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../config/site';
@@ -16,9 +16,13 @@ const bioParagraphs = d.bio.split(/\n{2,}/);
 const adoptedLabel = d.adopted_date
   ? `Found their home ${d.adopted_date.toLocaleDateString('en-CA', { month: 'long', year: 'numeric', timeZone: 'UTC' })}`
   : 'Found their home';
+
+// §7: sharing this animal's link shows THIS animal's photo, not a blank card.
+// format jpeg: LinkedIn/WhatsApp link scrapers don't render webp og:images.
+const ogPhoto = await getImage({ src: d.photo, width: 1200, format: 'jpeg' });
 ---
 
-<BaseLayout title={d.name} description={`${d.name} — ${meta}`}>
+<BaseLayout title={d.name} description={`${d.name} — ${meta}`} ogImage={ogPhoto.src}>
   <section class="section">
     <div class="container">
       <a class="back-link" href="/adopt">← All animals</a>
@@ -28,6 +32,10 @@ const adoptedLabel = d.adopted_date
             src={d.photo}
             alt={`Photo of ${d.name}`}
             width={1000}
+            widths={[480, 800, 1000]}
+            sizes="(max-width: 800px) 92vw, 40vw"
+            loading="eager"
+            fetchpriority="high"
             class:list={['detail-photo', { dimmed: d.status === 'Adopted' }]}
           />
           {d.status === 'Adopted' && <span class="adopted-note pill">Adopted — {adoptedLabel}</span>}

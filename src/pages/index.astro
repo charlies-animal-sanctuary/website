@@ -16,6 +16,10 @@ let featured = availableAll.filter((e) => e.data.featured);
 if (featured.length === 0) featured = availableAll;
 featured = featured.slice(0, 2);
 
+// The "sample animals" chip disappears by itself the moment a real animal
+// (non sample- slug) lands in the featured spots — no dev edit needed.
+const featuredAllSamples = featured.every((e) => e.id.startsWith('sample-'));
+
 const metaOf = (d: CollectionEntry<'adoptables'>['data']) =>
   [d.species, d.sex, d.age, d.size].filter(Boolean).join(' · ');
 
@@ -44,8 +48,11 @@ const tileHref = (link: string | undefined) =>
           src={heroImage}
           alt="Two blanketed horses grazing in a green pasture beneath golden autumn trees"
           width={1000}
+          widths={[480, 800, 1000]}
+          sizes="(max-width: 800px) 92vw, 45vw"
           class="hero-photo"
           loading="eager"
+          fetchpriority="high"
         />
       </div>
     </div>
@@ -56,7 +63,9 @@ const tileHref = (link: string | undefined) =>
       <section class="section">
         <div class="container">
           <h2>{home.featuredHeading}</h2>
-          <p class="placeholder-chip">Sample animals — real ones replace them via /admin</p>
+          {featuredAllSamples && (
+            <p class="placeholder-chip">Sample animals — real ones replace them via /admin</p>
+          )}
           <ul class="featured-grid">
             {featured.map((e) => (
               <li>

@@ -11,10 +11,19 @@ import { site } from '../config/site';
 interface Props {
   title?: string;
   description?: string;
+  /** Path to a share image (e.g. an optimized animal photo); defaults to the site card */
+  ogImage?: string;
 }
 
-const { title, description = site.description } = Astro.props;
+const { title, description = site.description, ogImage } = Astro.props;
 const pageTitle = title ? `${title} — ${site.name}` : site.name;
+
+// Absolute URLs for canonical + social shares (§7). Astro.site is set in
+// astro.config.mjs; per-animal pages pass their own photo as ogImage.
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const ogImageAbs = Astro.site
+  ? new URL(ogImage ?? '/og-default.jpg', Astro.site).href
+  : (ogImage ?? '/og-default.jpg');
 ---
 
 <!doctype html>
@@ -24,8 +33,21 @@ const pageTitle = title ? `${title} — ${site.name}` : site.name;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={ogImageAbs} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbs} />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -34,5 +56,47 @@ const pageTitle = title ? `${title} — ${site.name}` : site.name;
       <slot />
     </main>
     <SiteFooter />
+
+    <script>
+      // §6c: gentle scroll reveals — motion is opt-out by default. Every
+      // section after the first fades up once as it enters the viewport.
+      // Structural rule (no layout measurement): immune to fonts/images/CSS
+      // still loading. Reduced-motion and no-JS visitors see everything
+      // immediately, and a safety net guarantees nothing can stay hidden if
+      // the observer never fires (throttled embeds, odd browsers).
+      const motionOK = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+      if (motionOK && 'IntersectionObserver' in window) {
+        const sections = [...document.querySelectorAll('main .section')].slice(1);
+        let fired = false;
+        const io = new IntersectionObserver(
+          (entries) => {
+            fired = true;
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          // threshold 0 + negative bottom margin (NOT a ratio threshold):
+          // in Chromium, a section taller than ~8x the viewport can never
+          // reach a 12% visible ratio, so it would stay hidden forever —
+          // and focusing a link inside it wouldn't reveal it either.
+          { rootMargin: '0px 0px -12% 0px', threshold: 0 }
+        );
+        for (const el of sections) {
+          el.classList.add('reveal');
+          io.observe(el);
+        }
+        // A healthy observer delivers its initial callback immediately; if
+        // nothing arrived, reveal everything and stand down.
+        setTimeout(() => {
+          if (!fired) {
+            io.disconnect();
+            for (const el of sections) el.classList.add('is-visible');
+          }
+        }, 1500);
+      }
+    </script>
   </body>
 </html>

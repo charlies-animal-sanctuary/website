@@ -63,8 +63,8 @@ collections:
       - { name: gallery, label: "More photos", widget: list, required: false, field: { name: image, label: "Photo", widget: image } }
       - { name: story, label: "Their story (first person)", widget: text }
       - { name: arrived, label: "Arrived", widget: datetime, required: false }
+      # no "featured" for residents — the homepage featured spot is adoptables-only (brief §4b amended 2026-07-11)
       - { name: memorial, label: "In loving memory", widget: boolean, default: false, required: false, hint: "For family who have passed — shown in their own remembrance section" }
-      - { name: featured, label: "Feature on homepage", widget: boolean, default: false, required: false }
 
   - name: highlights
     label: "Photo highlights (homepage strip)"

@@ -49,7 +49,8 @@ const residents = defineCollection({
       arrived: z.preprocess(blank, z.coerce.date().optional()),
       // Family who have passed — shown in the "Forever in our hearts" section
       memorial: z.preprocess(blank, z.boolean().default(false)),
-      featured: z.preprocess(blank, z.boolean().default(false)),
+      // no `featured` here: residents are never in the homepage featured spot
+      // (§3 — that spot is adoptables-only; brief §4b amended 2026-07-11)
     }),
 });
 

@@ -259,6 +259,39 @@ a:hover {
   padding: 0;
 }
 
+/* §6c motion — gentle only, and ONLY for users who haven't opted out.
+   .reveal is added by JS (BaseLayout) to below-fold sections; without JS or
+   with reduced motion, nothing is ever hidden. `screen`-scoped so printing
+   never hides below-fold sections (reduced-motion alone matches print too). */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    translate: 0 16px;
+    transition:
+      opacity 550ms ease-out,
+      translate 550ms ease-out;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  .btn {
+    transition:
+      background-color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  a {
+    transition: color 150ms ease;
+  }
+}
+
 /* §9: placeholder content must be unmistakable — this chip marks it */
 .placeholder-chip {
   display: inline-block;

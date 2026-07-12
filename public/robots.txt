@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Allow: /
+
+Sitemap: https://charlies-animal-sanctuary.pages.dev/sitemap-index.xml

@@ -17,9 +17,14 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 const { page } = Astro.props;
 const { adopt } = site.copy;
+// distinct titles per paginated page — avoids duplicate <title>/og:title
+const pageTitle =
+  page.currentPage > 1
+    ? `${adopt.happyTailsHeading} — page ${page.currentPage}`
+    : adopt.happyTailsHeading;
 ---
 
-<BaseLayout title={adopt.happyTailsHeading}>
+<BaseLayout title={pageTitle}>
   <section class="section">
     <div class="container">
       <h1>{adopt.happyTailsHeading}</h1>

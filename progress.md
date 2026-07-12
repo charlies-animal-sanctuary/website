@@ -2,19 +2,30 @@
 
 Rules live in [CLAUDE.md](CLAUDE.md); this file is only status, decisions, and open
 questions. Update at every phase gate and every real decision — a stale log is worse
-than none. **Last updated: 2026-07-08.**
+than none. **Last updated: 2026-07-11.**
 
 ## Where we are
 
-- **Current phase:** 5 — Auth + deploy — **nearly done 2026-07-11.** Repo pushed
-  to `charlies-animal-sanctuary/website` (history sweep clean). Owner completed
-  GOING-LIVE Parts A + B herself: site LIVE at
-  https://charlies-animal-sanctuary.pages.dev (verified: renders, nav, donate),
-  Sveltia auth worker deployed at
-  https://sveltia-cms-auth.charliesanimalsanctuary.workers.dev (responds; root
-  404 is expected — only /auth + /callback exist) with the GitHub OAuth app on
-  the org. `base_url` now wired in config.yml. Remaining: owner's Part C
-  end-to-end publish test, then domain + analytics (still unpicked).
+- **Current phase:** 6 — Polish — **built + adversarially reviewed 2026-07-11,
+  at the phase gate.** Shipped: §6c motion (scroll reveals + micro-transitions,
+  reduced-motion/no-JS/print safe); SEO/OG (canonical URLs, per-animal JPEG
+  share images, og-default.jpg card, sitemap via @astrojs/sitemap, robots.txt);
+  responsive image srcsets everywhere + eager/high-priority LCP images on hero
+  and detail pages; ADMIN-GUIDE.md (the §10 owner one-pager). A 16-agent review
+  confirmed 9 real findings — all fixed: webp→jpeg og:images (LinkedIn/WhatsApp
+  can't render webp), print-blank reveal sections, a Chromium-only observer
+  trap that would silently hide the memorial section as it grows, duplicate
+  Happy Tails page titles, card srcset overfetch, lazy LCP photos, a guide
+  section describing a Sveltia delete dialog that doesn't exist, the homepage
+  "sample animals" chip mislabeling real animals (now auto-hides), and the
+  residents' no-op `featured` toggle (removed; brief §4b amended).
+  Remaining before "done": owner review of the polish + the two §11 stragglers
+  (domain, analytics) + real PayPal/video swaps whenever ready.
+- **Done (phase 5, 2026-07-11):** repo public on GitHub; owner deployed
+  Cloudflare Pages + Sveltia auth worker herself via GOING-LIVE.md; full owner
+  e2e publish test passed (add → publish → live → flip to Adopted → Happy
+  Tails → delete), surfacing two real bugs fixed same-day (blank-tolerant
+  schemas; delete photo-sweep restore).
 - **Done (phase 4, 2026-07-08):** owner's file drop ingested from `_incoming/`
   (interview + config values + adoption-form PDF + 34 photos). Forms live on
   Web3Forms (key via `.env`, inline success/error with direct-email fallback,
@@ -61,7 +72,7 @@ commit needed no changes; her photo pipeline worked perfectly (2.5 MB upload →
 | 3 | Content + CMS | content schema; Sveltia `config.yml`; `AnimalCard` (§5 logic); Adopt (Available + Happy Tails); detail pages; Our Family; empty states + 404; fake seed animals | **done 2026-07-04 — at gate** |
 | 4 | Integrations + real content | Web3Forms wiring; highlights strip; YouTube embed; donate URL; privacy note; owner's stories/photos/config ingested | **done 2026-07-08 — at gate** |
 | 5 | Auth + deploy | **NEEDS REMOTE** — Cloudflare Pages, Sveltia auth worker, domain, analytics, owner end-to-end publish test | not started |
-| 6 | Polish | motion (reduced-motion safe); image sizing/lazyload; WCAG AA audit; Lighthouse; a11y pass; SEO/OG incl. per-animal share images | not started |
+| 6 | Polish | motion (reduced-motion safe); image sizing/lazyload; WCAG AA audit; Lighthouse; a11y pass; SEO/OG incl. per-animal share images | **built + reviewed 2026-07-11 — at gate** |
 
 Each phase ends at a gate: owner reviews before the next phase starts.
 
