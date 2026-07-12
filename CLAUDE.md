@@ -45,9 +45,11 @@ motion; it reads as untrustworthy when asking for donations.
   (standalone, not in nav), `/happy-tails` (paginated, 24/page), detail routes
   `/adopt/[slug]` + `/family/[slug]`, 404.
   Nav is exactly: Home · About · Adopt · Our Family · Intake · Contact (§3).
-- CMS media is entry-relative: uploads land in an `images/` folder beside each
-  collection's markdown (`./images/…` in frontmatter) so Astro's `image()` pipeline
-  optimizes them. Global fallback: `src/assets/uploads`.
+- CMS media lives in shared root-relative folders — `src/assets/animals`,
+  `src/assets/family`, `src/assets/highlights` (frontmatter: `../../assets/…`) — NEVER
+  entry-relative: Sveltia's entry-delete sweeps everything in an entry-relative media
+  folder (broke the build twice, 2026-07-11/12). Astro's `image()` pipeline still
+  optimizes all uploads. Orphaned photos accumulate by design; sweep manually, rarely.
 - `src/content/adoptables/` + `src/content/residents/` + `src/content/highlights/` —
   CMS-owned markdown. The Astro content schema and `public/admin/config.yml` (§4) must
   stay field-for-field in sync; any field change updates both in the same commit.

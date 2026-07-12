@@ -1,5 +1,5 @@
 ---
 title: Lily claiming a sunbeam
-photo: ./images/lily-sunroll.jpg
+photo: ../../assets/highlights/lily-sunroll.jpg
 order: 4
 ---

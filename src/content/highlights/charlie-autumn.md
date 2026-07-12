@@ -1,5 +1,5 @@
 ---
 title: Charlie's pasture in autumn
-photo: ./images/charlie-autumn.jpg
+photo: ../../assets/highlights/charlie-autumn.jpg
 order: 2
 ---

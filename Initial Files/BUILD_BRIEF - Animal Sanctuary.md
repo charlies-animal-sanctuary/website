@@ -4,6 +4,7 @@
 
 > **Amendments log** — owner-approved changes since the original brief (full reasoning in `progress.md`'s decision log):
 > - **2026-07-04 (technical):** Astro current major (v7, content-layer API); no Cloudflare adapter (pure SSG). CMS images stored entry-relative under `src/content/` so Astro optimizes every upload (supersedes §4c's `public/` paths). Fonts self-hosted via Fontsource. Text links on light backgrounds use Coffee Bean — olive text on cream measures 4.22:1, below AA. `/apply` page built in phase 3.
+> - **2026-07-12 (media storage):** CMS uploads moved from entry-relative `images/` folders to shared root-relative `src/assets/{animals,family,highlights}` folders — Sveltia's entry-delete sweeps entry-relative media wholesale (two build-breaking incidents). Supersedes the 2026-07-04 entry-relative note below; optimization pipeline unchanged.
 > - **2026-07-04 (Instagram):** Behold superseded — the homepage Instagram strip is an owner-curated third CMS collection, `highlights` (image + link to the matching post). §2, §3, §7, §11, §12 amended below. Guiding principle: the owner's entire editing world stays one tool (Sveltia at `/admin`) — nothing new to install or learn; simplicity over hard constraints.
 > - **2026-07-11 (§4b):** residents' `featured` field removed — no template ever consumed it, so it was a silent no-op toggle in the CMS. The homepage featured spot is adoptables-only per §3.
 

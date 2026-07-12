@@ -5,12 +5,12 @@ sex: Male
 age: 12 weeks
 size: ''
 status: Available
-photo: ./images/20260701_121528.jpg
+photo: ../../assets/animals/20260701_121528.jpg
 gallery:
-  - ./images/20260627_122405.jpg
-  - ./images/20260629_203731.jpg
-  - ./images/20260711_203519.jpg
-  - ./images/20260622_093234(1).jpg
+  - ../../assets/animals/20260627_122405.jpg
+  - ../../assets/animals/20260629_203731.jpg
+  - ../../assets/animals/20260711_203519.jpg
+  - ../../assets/animals/20260622_093234(1).jpg
 bio: |-
   I'm Ghost. I was the smallest of my siblings, but I've always been determined to keep up with them — and now you'll usually find me right in the middle of whatever game they're inventing. When I'm not racing around the house, I'm looking for a warm lap to curl up in. I'm a quiet little guy, but I'll politely meow to say hello when you come by, just in case you forgot to notice me. (It happens.)
 

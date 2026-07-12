@@ -1,5 +1,5 @@
 ---
 title: Midna's morning stretch
-photo: ./images/midna-stretch.jpg
+photo: ../../assets/highlights/midna-stretch.jpg
 order: 6
 ---

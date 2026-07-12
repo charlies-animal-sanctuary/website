@@ -1,11 +1,11 @@
 ---
 name: Oliver
 species: Cat
-photo: ./images/oliver-1.jpg
+photo: ../../assets/family/oliver-1.jpg
 gallery:
-  - ./images/oliver-2.jpg
-  - ./images/oliver-3.jpg
-  - ./images/oliver-4.jpg
+  - ../../assets/family/oliver-2.jpg
+  - ../../assets/family/oliver-3.jpg
+  - ../../assets/family/oliver-4.jpg
 story: >-
   I'm Oliver, and this is my house. The cats know it, the humans know it, and
   now you know it too. I was found in a field at four weeks old, small enough

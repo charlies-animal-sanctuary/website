@@ -89,52 +89,8 @@ foreach ($spec in @(@{ n = 'favicon.png'; s = 48 }, @{ n = 'apple-touch-icon.png
 $paw.Dispose(); $ebony.Dispose(); $mark.Dispose(); $src.Dispose()
 Write-Output 'Assets written: src/assets/logo/logo-white.png, logo-ebony.png; public/favicon.png, apple-touch-icon.png'
 
-# ---------------------------------------------------------------------------
-# §9 sample photos: unmistakably-fake striped stand-ins for the seed
-# adoptables (real CMS uploads replace them). Cream bg + camel stripes +
-# label, 800x1000 (the site's 4:5 card ratio).
-# ---------------------------------------------------------------------------
-
-$adoptImgDir = Join-Path $root 'src\content\adoptables\images'
-New-Item -ItemType Directory -Force -Path $adoptImgDir | Out-Null
-
-function New-SamplePhoto($path, $title) {
-    $w = 800; $h = 1000
-    $bmp = New-Object System.Drawing.Bitmap($w, $h, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
-    $g = [System.Drawing.Graphics]::FromImage($bmp)
-    $g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
-    $g.Clear([System.Drawing.Color]::FromArgb(255, 237, 224, 212))   # Almond Cream token
-
-    $stripePen = New-Object System.Drawing.Pen([System.Drawing.Color]::FromArgb(70, 166, 138, 100), 26)  # Camel token @ ~27%
-    for ($x = -$h; $x -lt $w + $h; $x += 64) {
-        $g.DrawLine($stripePen, $x, 0, ($x + $h), $h)
-    }
-    $stripePen.Dispose()
-
-    $borderPen = New-Object System.Drawing.Pen([System.Drawing.Color]::FromArgb(255, 166, 138, 100), 6)
-    $borderPen.DashStyle = [System.Drawing.Drawing2D.DashStyle]::Dash
-    $g.DrawRectangle($borderPen, 12, 12, ($w - 24), ($h - 24))
-    $borderPen.Dispose()
-
-    $ebonyBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(255, 65, 72, 51))
-    $fmt = New-Object System.Drawing.StringFormat
-    $fmt.Alignment = [System.Drawing.StringAlignment]::Center
-    $fmt.LineAlignment = [System.Drawing.StringAlignment]::Center
-    $fontBig = New-Object System.Drawing.Font('Segoe UI', 44, [System.Drawing.FontStyle]::Bold)
-    $fontSmall = New-Object System.Drawing.Font('Segoe UI', 22)
-    $g.DrawString($title, $fontBig, $ebonyBrush, (New-Object System.Drawing.RectangleF(40, 340, ($w - 80), 200)), $fmt)
-    $g.DrawString("Sample photo -- real animals`nget real photos via /admin", $fontSmall, $ebonyBrush, (New-Object System.Drawing.RectangleF(40, 540, ($w - 80), 160)), $fmt)
-    $fontBig.Dispose(); $fontSmall.Dispose(); $ebonyBrush.Dispose(); $fmt.Dispose()
-
-    $g.Dispose()
-    $bmp.Save($path, [System.Drawing.Imaging.ImageFormat]::Png)
-    $bmp.Dispose()
-}
-
-New-SamplePhoto (Join-Path $adoptImgDir 'sample-photo-1.png') 'SAMPLE KITTEN'
-New-SamplePhoto (Join-Path $adoptImgDir 'sample-photo-2.png') 'SAMPLE PUP'
-New-SamplePhoto (Join-Path $adoptImgDir 'sample-photo-3.png') 'SAMPLE SENIOR'
-Write-Output 'Sample adoptable photos written to src/content/adoptables/images/'
+# (Sample-photo generation removed 2026-07-12: the §9 sample animals are
+# permanently retired — real animals live in the CMS now.)
 
 # ---------------------------------------------------------------------------
 # Resident photo import: copy the owner's temp photos (Ash, Midna) into the
@@ -142,7 +98,7 @@ Write-Output 'Sample adoptable photos written to src/content/adoptables/images/'
 # JPEG q85 — keeps the public repo lean vs 4000px phone originals.
 # ---------------------------------------------------------------------------
 
-$resImgDir = Join-Path $root 'src\content\residents\images'
+$resImgDir = Join-Path $root 'src\assets\family'
 New-Item -ItemType Directory -Force -Path $resImgDir | Out-Null
 $photoSrcDir = Join-Path $root 'Initial Files\Temporary Photos'
 
@@ -190,7 +146,7 @@ Write-Output 'Resident photos imported to src/content/residents/images/'
 $dump = Join-Path $root '_incoming\File dump\Animal Sanctuary Pictures'
 if (Test-Path $dump) {
     $heroDir = Join-Path $root 'src\assets\hero'
-    $hlImgDir = Join-Path $root 'src\content\highlights\images'
+    $hlImgDir = Join-Path $root 'src\assets\highlights'
     New-Item -ItemType Directory -Force -Path $heroDir | Out-Null
     New-Item -ItemType Directory -Force -Path $hlImgDir | Out-Null
 

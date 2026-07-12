@@ -94,6 +94,19 @@ swap; contrast/weights unchanged). ADMIN-GUIDE delete section hardened to
 moving CMS media out of entry-relative folders so Sveltia deletes stop
 sweeping siblings — needs a careful migration, proposed to owner.
 
+**2026-07-12 — Media migration (delete-sweep fix), owner-approved.** CMS media
+moved from entry-relative `images/` folders to shared root-relative folders:
+`/src/assets/{animals,family,highlights}` (public_folder `../../assets/…` so
+Astro's `image()` keeps optimizing). Verified against Sveltia's SOURCE, not
+assumption: deletes only attach assets when the folder is entry-relative, and
+`entryRelative = !mediaFolder.startsWith('/')` — the leading slash in
+media_folder is THE load-bearing character (a first draft without it would
+have changed nothing). 45 images moved, 14 entries' paths rewritten, config +
+CLAUDE.md + brief amended, sample-photo generation retired from the asset
+script. Local build green. Remaining: live end-to-end test (create + delete a
+throwaway animal in the real admin; expect the delete commit to touch ONLY
+the .md file).
+
 ## Phase log (brief §8)
 
 | # | Phase | Scope | Status |

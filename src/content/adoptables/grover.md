@@ -5,12 +5,12 @@ sex: Male
 age: 12 weeks
 size: ''
 status: Available
-photo: ./images/20260620_165422(1).jpg
+photo: ../../assets/animals/20260620_165422(1).jpg
 gallery:
-  - ./images/20260617_105503.jpg
-  - ./images/20260701_121353.jpg
-  - ./images/20260617_105437.jpg
-  - ./images/20260706_203630.jpg
+  - ../../assets/animals/20260617_105503.jpg
+  - ../../assets/animals/20260701_121353.jpg
+  - ../../assets/animals/20260617_105437.jpg
+  - ../../assets/animals/20260706_203630.jpg
 bio: |-
   I'm Grover. I'm a fluffy little guy with a big personality and an even bigger heart. My long black coat makes me look like I belong on a movie set, and when I start bouncing around and playing, my humans say I look like a tiny muppet who has come to life. I choose to take that as a compliment.
 

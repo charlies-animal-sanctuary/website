@@ -1,11 +1,11 @@
 ---
 name: Ash
 species: Cat
-photo: ./images/ash-3.jpg
+photo: ../../assets/family/ash-3.jpg
 gallery:
-  - ./images/ash-4.jpg
-  - ./images/ash-1.jpg
-  - ./images/ash-5.jpg
+  - ../../assets/family/ash-4.jpg
+  - ../../assets/family/ash-1.jpg
+  - ../../assets/family/ash-5.jpg
 story: >-
   I'm Ash. I was born in a barn, very sick and very unsure about the world —
   and now I live the pampered life, which I feel I've earned. I'm extremely

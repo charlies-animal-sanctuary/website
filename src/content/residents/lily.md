@@ -1,11 +1,11 @@
 ---
 name: Lily
 species: Cat
-photo: ./images/lily-1.jpg
+photo: ../../assets/family/lily-1.jpg
 gallery:
-  - ./images/lily-2.jpg
-  - ./images/lily-3.jpg
-  - ./images/lily-4.jpg
+  - ../../assets/family/lily-2.jpg
+  - ../../assets/family/lily-3.jpg
+  - ../../assets/family/lily-4.jpg
 story: >-
   I'm Lily. I was a barn cat — the last one left, without a home. The
   official plan was to foster me until a home turned up. The plan lasted

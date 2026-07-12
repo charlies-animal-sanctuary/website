@@ -1,12 +1,12 @@
 ---
 name: Midna
 species: Cat
-photo: ./images/midna-3.jpg
+photo: ../../assets/family/midna-3.jpg
 gallery:
-  - ./images/midna-4.jpg
-  - ./images/midna-2.jpg
-  - ./images/midna-5.jpg
-  - ./images/ash-midna-2.jpg
+  - ../../assets/family/midna-4.jpg
+  - ../../assets/family/midna-2.jpg
+  - ../../assets/family/midna-5.jpg
+  - ../../assets/family/ash-midna-2.jpg
 story: >-
   I'm Midna — the very first rescue of Charlie's Animal Sanctuary. I was born
   in a barn, and as a tiny kitten an infection swelled my face and sealed my

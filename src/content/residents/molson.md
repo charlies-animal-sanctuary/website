@@ -1,11 +1,11 @@
 ---
 name: Molson
 species: Dog
-photo: ./images/molson-1.jpg
+photo: ../../assets/family/molson-1.jpg
 gallery:
-  - ./images/molson-2.jpg
-  - ./images/molson-3.jpg
-  - ./images/molson-4.jpg
+  - ../../assets/family/molson-2.jpg
+  - ../../assets/family/molson-3.jpg
+  - ../../assets/family/molson-4.jpg
 memorial: true
 story: >-
   Molson was the best dog in the world. He came to me at about a year and a

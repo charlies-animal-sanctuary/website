@@ -1,12 +1,12 @@
 ---
 name: Charlie
 species: Horse
-photo: ./images/charlie-1.jpg
+photo: ../../assets/family/charlie-1.jpg
 gallery:
-  - ./images/charlie-2.jpg
-  - ./images/charlie-3.jpg
-  - ./images/charlie-4.jpg
-  - ./images/charlie-5.jpg
+  - ../../assets/family/charlie-2.jpg
+  - ../../assets/family/charlie-3.jpg
+  - ../../assets/family/charlie-4.jpg
+  - ../../assets/family/charlie-5.jpg
 memorial: true
 story: >-
   Charlie was my first horse, and my heart horse — thirteen years together.

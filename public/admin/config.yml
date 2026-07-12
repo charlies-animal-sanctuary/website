@@ -8,10 +8,13 @@
 # Until then, Sveltia's "Work with Local Repository" option (Chromium
 # browsers) can open this admin against the local clone for a preview.
 #
-# Media note (approved deviation from §4c's public/ paths): each collection
-# stores uploads entry-relative (an images/ folder beside the markdown), so
-# Astro's image pipeline optimizes every upload at build time. Verify the
-# upload → frontmatter path end-to-end during the phase 5 publish test.
+# Media note (amended 2026-07-12): uploads live in shared root-relative
+# folders under src/assets/ — NOT entry-relative — because Sveltia's
+# entry-delete sweeps every file in an entry-relative media folder (broke the
+# build twice: 2026-07-11 and 2026-07-12). Root-relative folders are never
+# swept by deletes; Astro's image pipeline still optimizes every upload via
+# the ../../assets/... paths written into frontmatter. Do NOT change these
+# back to entry-relative ("images" / "./images").
 
 backend:
   name: github
@@ -28,8 +31,8 @@ collections:
     label_singular: "Animal"
     identifier_field: name
     folder: "src/content/adoptables"
-    media_folder: "images"
-    public_folder: "./images"
+    media_folder: "/src/assets/animals" # leading slash = NOT entry-relative (Sveltia: entryRelative = !startsWith("/"))
+    public_folder: "../../assets/animals"
     create: true
     slug: "{{slug}}"
     fields:
@@ -52,8 +55,8 @@ collections:
     label_singular: "Resident"
     identifier_field: name
     folder: "src/content/residents"
-    media_folder: "images"
-    public_folder: "./images"
+    media_folder: "/src/assets/family" # leading slash required — see note above
+    public_folder: "../../assets/family"
     create: true
     slug: "{{slug}}"
     fields:
@@ -71,8 +74,8 @@ collections:
     label_singular: "Highlight"
     identifier_field: title
     folder: "src/content/highlights"
-    media_folder: "images"
-    public_folder: "./images"
+    media_folder: "/src/assets/highlights" # leading slash required — see note above
+    public_folder: "../../assets/highlights"
     create: true
     slug: "{{slug}}"
     fields:
