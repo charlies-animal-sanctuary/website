@@ -132,6 +132,12 @@ The notification loop closes that hole for every future cause, known or not.
 Related lesson stands: refresh long-open admin tabs (ADMIN-GUIDE), and prune
 orphans only right after confirming no in-flight entries reference them.
 
+**2026-07-12 — Analytics live (owner self-served, zero code).** She enabled
+Cloudflare Web Analytics with automatic setup; the beacon is edge-injected on
+the live domain (verified in page HTML). Cookieless — the no-consent-banner
+story holds. Nothing site-side to maintain. Remaining owner items now just:
+real PayPal link, real story video, Instagram post links on tiles.
+
 ## Phase log (brief §8)
 
 | # | Phase | Scope | Status |
