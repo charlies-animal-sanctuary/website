@@ -11,5 +11,5 @@ bio: Test
 temperament: []
 adoption_fee: ''
 adopted_date: ''
-featured: false
+featured: true
 ---
