@@ -55,16 +55,19 @@ memory"** switch moves someone to the "Forever in our hearts" section.
 
 ## Deleting — the one careful thing
 
-Deleting is ONLY for something you yourself just created by mistake (like a
-test entry). One thing to know: confirming a delete removes the entry **and
-its photos** in one go — there's no picking and choosing — and if a photo
-happens to be shared with another entry, the site can break until it's
-repaired.
+**Please don't use the Delete button at all — message Faraaz instead.**
 
-So the rule is simple: **unless it's a fresh mistake of your own, message
-Faraaz instead of deleting.** A cleanup takes him seconds, everything is
-saved in history, and remember — adopted animals are never deleted at all;
-they're your Happy Tails wall.
+Here's the honest reason, learned the hard way (twice now): when the admin
+deletes an entry, it also deletes **every photo stored in that collection's
+photo folder — including other animals' photos**. There's no picking and
+choosing. Both times it swept the whole folder and the site quietly stopped
+publishing updates until the photos were restored from history.
+
+Nothing is ever truly lost (every photo lives on in history, and a restore
+takes minutes) — but in between, your changes stop appearing with no error.
+So: for ANY delete, even a fresh typo of your own, message Faraaz. And
+remember, adopted animals are never deleted at all; they're your Happy
+Tails wall.
 
 ## If something looks wrong
 

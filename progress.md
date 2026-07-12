@@ -80,6 +80,20 @@ Fraunces Variable pinned at 'opsz' 24 + 'WONK' 0 — the "strange lowercase f"
 was Fraunces' leaning display-cut letterform. About/Adopt pages: approved
 as-is. Custom domain verified live on both apex and www.
 
+**2026-07-12 — First real animals + second delete-sweep + feedback round 2.**
+Owner published Ghost and Grover (first real adoptables) and deleted the three
+samples herself — the CMS delete swept the ENTIRE shared images folder again
+(including Ghost's and Grover's photos), silently breaking every deploy after.
+Restored all referenced photos from the Create commits; samples stay deleted.
+Feedback fixes: lightbox now centers (the global `* { margin: 0 }` reset was
+overriding the UA's `<dialog>` `margin: auto`); heading font swapped Fraunces →
+Lora (owner twice flagged Fraunces' hooked lowercase f — it's an intrinsic
+letterform of that typeface, not removable by any axis; brief §6b allows the
+swap; contrast/weights unchanged). ADMIN-GUIDE delete section hardened to
+"never delete — message Faraaz," with the honest why. OPEN ITEM: consider
+moving CMS media out of entry-relative folders so Sveltia deletes stop
+sweeping siblings — needs a careful migration, proposed to owner.
+
 ## Phase log (brief §8)
 
 | # | Phase | Scope | Status |

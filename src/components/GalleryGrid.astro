@@ -71,6 +71,9 @@ const items = await Promise.all(
   }
 
   .lightbox {
+    /* the global `* { margin: 0 }` reset kills the UA's dialog centering —
+       restore it (owner feedback 2026-07-12: lightbox opened top-left) */
+    margin: auto;
     border: 0;
     border-radius: var(--radius-card);
     padding: var(--space-2);

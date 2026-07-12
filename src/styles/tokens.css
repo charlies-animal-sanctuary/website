@@ -34,7 +34,9 @@
   --accent: var(--color-camel);
 
   /* type */
-  --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  /* Lora replaced Fraunces 2026-07-12 (owner: Fraunces' hooked lowercase f is
+     a fixed design quirk of that typeface — no axis or feature removes it) */
+  --font-display: 'Lora Variable', Georgia, 'Times New Roman', serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* shape (§6d) */
