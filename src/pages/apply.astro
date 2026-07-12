@@ -1,11 +1,20 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteForm from '../components/SiteForm.astro';
 import { site } from '../config/site';
 
-// Fields mirror the owner's real adoption application (Google Form, 2026-07-08)
-// so this page can fully replace it.
+// Fields mirror the owner's real cat + dog adoption applications (Google
+// Forms, 2026-07-08 / 2026-07-12) merged into one form: shared questions once,
+// species-specific sections shown by the selector below (auto-set when the
+// visitor arrives from an animal's Apply button).
 const { apply } = site.copy;
+
+// slug → name/species, so /apply?pet={slug} prefills BOTH fields
+const adoptables = await getCollection('adoptables');
+const petMap = Object.fromEntries(
+  adoptables.map((e) => [e.id, { name: e.data.name, species: e.data.species }])
+);
 ---
 
 <BaseLayout title={apply.title}>
@@ -14,6 +23,23 @@ const { apply } = site.copy;
       <h1>{apply.title}</h1>
       <p class="intro">{apply.intro}</p>
       <SiteForm formName="adoption-application" subject="Adoption application — website" submitLabel="Send application">
+        <fieldset>
+          <legend>Who are you applying for?</legend>
+          <div class="form-field">
+            <label for="ap-pet">The animal's name *</label>
+            <input id="ap-pet" name="pet" type="text" required />
+          </div>
+          <div class="form-field">
+            <label for="ap-species">Cat or dog? *</label>
+            <select id="ap-species" name="species" required>
+              <option value="">Choose one…</option>
+              <option>Cat</option>
+              <option>Dog</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </fieldset>
+
         <fieldset>
           <legend>About you</legend>
           <div class="form-field">
@@ -113,19 +139,60 @@ const { apply } = site.copy;
           </div>
         </fieldset>
 
+        {/* Species sections: JS shows the matching one and enforces its required
+            fields (data-req). Without JS both stay visible and optional. */}
+        <fieldset data-species="Cat">
+          <legend>Life with your cat</legend>
+          <div class="form-field">
+            <label for="ap-outdoors">Would they be allowed outdoors? If yes, tell us more *</label>
+            <textarea id="ap-outdoors" name="outdoors" data-req></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset data-species="Dog">
+          <legend>Life with your dog</legend>
+          <div class="form-field">
+            <label for="ap-yard">Do you have a fenced yard? *</label>
+            <select id="ap-yard" name="fenced_yard" data-req>
+              <option value="">Choose one…</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="ap-daycare">Would they be going to doggy daycare? *</label>
+            <select id="ap-daycare" name="doggy_daycare" data-req>
+              <option value="">Choose one…</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="ap-crate">Will they be crate trained? *</label>
+            <select id="ap-crate" name="crate_trained" data-req>
+              <option value="">Choose one…</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="ap-training">
+              Do you plan on enrolling in formal training classes? If not, tell us about your
+              experience training dogs
+            </label>
+            <textarea id="ap-training" name="training_plan"></textarea>
+          </div>
+          <div class="form-field">
+            <label for="ap-exercise">Realistically, how much time per day do you have to exercise them? *</label>
+            <input id="ap-exercise" name="daily_exercise" type="text" data-req />
+          </div>
+        </fieldset>
+
         <fieldset>
           <legend>Life together</legend>
           <div class="form-field">
-            <label for="ap-pet">Who are you applying for? *</label>
-            <input id="ap-pet" name="pet" type="text" required placeholder="The animal's name" />
-          </div>
-          <div class="form-field">
             <label for="ap-alone">How long would they be alone on a typical day? *</label>
             <input id="ap-alone" name="hours_alone" type="text" required />
-          </div>
-          <div class="form-field">
-            <label for="ap-outdoors">Would they be allowed outdoors? If yes, tell us more *</label>
-            <textarea id="ap-outdoors" name="outdoors" required></textarea>
           </div>
           <div class="form-field">
             <label for="ap-personality">Describe your ideal companion's personality *</label>
@@ -134,7 +201,7 @@ const { apply } = site.copy;
               name="ideal_personality"
               type="text"
               required
-              placeholder="playful, relaxed, lap cat, independent…"
+              placeholder="playful, relaxed, active, independent, lap cat…"
             />
           </div>
           <div class="form-field">
@@ -151,12 +218,36 @@ const { apply } = site.copy;
   .intro {
     margin-block: var(--space-3) var(--space-4);
     font-size: 1.15rem;
+    max-width: 60ch;
   }
 </style>
 
-<script>
-  // §5: /apply?pet={slug} pre-fills which animal the application is for
+<script is:inline define:vars={{ petMap }}>
+  // §5 prefill: /apply?pet={slug} fills the name AND selects the species,
+  // so visitors arriving from an animal's Apply button never think about it.
+  const speciesSelect = document.getElementById('ap-species');
+  const petInput = document.getElementById('ap-pet');
+  const sections = [...document.querySelectorAll('fieldset[data-species]')];
+
+  const applySpecies = () => {
+    for (const s of sections) {
+      const active = s.dataset.species === speciesSelect.value;
+      s.hidden = !active;
+      s.disabled = !active;
+      for (const el of s.querySelectorAll('[data-req]')) el.required = active;
+    }
+  };
+  speciesSelect.addEventListener('change', applySpecies);
+
   const pet = new URLSearchParams(window.location.search).get('pet');
-  const input = document.getElementById('ap-pet') as HTMLInputElement | null;
-  if (pet && input && !input.value) input.value = pet;
+  if (pet) {
+    const known = petMap[pet];
+    if (known) {
+      if (!petInput.value) petInput.value = known.name;
+      speciesSelect.value = known.species;
+    } else if (!petInput.value) {
+      petInput.value = pet;
+    }
+  }
+  applySpecies();
 </script>

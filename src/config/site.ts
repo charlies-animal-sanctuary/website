@@ -134,8 +134,9 @@ export const site = {
 
     apply: {
       title: 'Adoption application',
+      // her words, from the dog application's intro (generalized to all animals)
       intro:
-        'Fill this out and it lands straight in my inbox. By the time an animal is ready for adoption I know them well, and the goal is always the right match — so the more you share, the better.',
+        'Please try to answer as honestly as possible — we try really hard to ensure a good fit, so everyone is happy. Every animal is unique in their needs, so this is not a test, just a starting point for open conversation.',
     },
 
     // §10 form privacy note — shown under every form
