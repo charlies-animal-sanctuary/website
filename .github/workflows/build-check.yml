@@ -1,0 +1,23 @@
+# Runs the same build Cloudflare runs, on every push. When a publish from the
+# CMS breaks the build, GitHub emails the commit author within minutes —
+# publish failures are never silent again. (Added 2026-07-12 after the third
+# silent-failure incident; see progress.md.)
+name: Build check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    name: Site builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build

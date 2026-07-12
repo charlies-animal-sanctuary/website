@@ -118,6 +118,20 @@ fileURLToPath + a scanned-count guard that fails loudly on zero files; the
 fixed scan surfaced and pruned 3 genuinely orphaned photos (superseded
 Ash/Midna shots). Lesson recorded: report-only tools must prove they looked.
 
+**2026-07-12 — Third silent publish failure; root cause + the systemic fix.**
+Owner's three test animals didn't appear: test-1 referenced a photo that had
+been pruned as an orphan after the previous test round — her admin session's
+cached media library still listed the deleted file, and Sveltia saves asset
+references without checking existence. Build failed (ImageNotFound), site
+froze silently. Immediate fix: file restored from history. Systemic fix (the
+real one): `.github/workflows/build-check.yml` now runs the site build on
+every push — when a publish breaks the build, GitHub emails the commit author
+(the owner) within minutes. The pattern across all three incidents was never
+one bug: it was "the CMS accepts what the build rejects, and nobody is told."
+The notification loop closes that hole for every future cause, known or not.
+Related lesson stands: refresh long-open admin tabs (ADMIN-GUIDE), and prune
+orphans only right after confirming no in-flight entries reference them.
+
 ## Phase log (brief §8)
 
 | # | Phase | Scope | Status |
