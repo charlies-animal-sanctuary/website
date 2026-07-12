@@ -24,6 +24,12 @@ in history and can be brought back.
    apply button.
 
 Tick **"Feature on homepage"** for the one or two animals you most want seen.
+The homepage spot fits **two** — if more than two are ticked, the first two by
+name (A→Z) win, so untick the others rather than adding a third.
+
+One habit worth keeping: if the admin tab has been open a long while, **refresh
+it before working** — a freshly loaded admin always has the site's latest
+settings.
 
 ## When someone applies
 
