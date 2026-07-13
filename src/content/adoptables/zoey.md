@@ -21,6 +21,6 @@ bio: |-
   If you're looking for a sweet, easy-going little shadow who believes every single person deserves unconditional love, I'd be more than happy to be your new best friend.
 temperament: []
 adoption_fee: ''
-adopted_date: ''
+adopted_date: 2025-11-13T15:26
 featured: false
 ---
