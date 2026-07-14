@@ -1,5 +1,5 @@
 ---
-name: Ghost
+name: Gus Gus (Ghost)
 species: Cat
 sex: Male
 age: 12 weeks
