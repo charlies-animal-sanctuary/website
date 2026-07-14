@@ -20,5 +20,5 @@ bio: |-
 temperament: []
 adoption_fee: ''
 adopted_date: 2026-07-14T13:59
-featured: true
+featured: false
 ---
