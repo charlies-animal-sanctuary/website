@@ -4,7 +4,7 @@ species: Cat
 sex: Male
 age: 12 weeks
 size: ''
-status: Available
+status: Adopted
 photo: ../../assets/animals/20260701_121528.jpg
 gallery:
   - ../../assets/animals/20260627_122405.jpg
@@ -18,7 +18,7 @@ bio: |-
 
   If you're looking for a kitten who's equal parts playful companion and professional lap warmer, I think we'd get along just fine. I would love to be adopted with my brother Grover if possible!
 temperament: []
-adoption_fee: $225 adoption fee - includes neuter and microchip
-adopted_date: ''
+adoption_fee: ''
+adopted_date: 2026-07-14T13:59
 featured: true
 ---
