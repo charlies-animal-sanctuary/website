@@ -4,7 +4,7 @@ species: Cat
 sex: Male
 age: 12 weeks
 size: ''
-status: Available
+status: Adopted
 photo: ../../assets/animals/20260617_154354.jpg
 gallery:
   - ../../assets/animals/20260627_215129.jpg
