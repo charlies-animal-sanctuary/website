@@ -4,7 +4,7 @@ species: Cat
 sex: Male
 age: 12 weeks
 size: ''
-status: Available
+status: Adopted
 photo: ../../assets/animals/20260620_165422(1).jpg
 gallery:
   - ../../assets/animals/20260617_105503.jpg
@@ -20,7 +20,7 @@ bio: |-
 
   If you're looking for a kitten who brings a little silliness, a lot of love, and the world's fluffiest cuddle sessions, I think we'd make a pretty great team. I would love to be adopted with my brother Ghost if possible.
 temperament: []
-adoption_fee: $225 adoption fee - includes neuter and microchip
-adopted_date: ''
+adoption_fee: ''
+adopted_date: 2026-07-14T09:42
 featured: true
 ---
