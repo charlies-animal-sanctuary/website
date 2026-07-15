@@ -7,6 +7,7 @@
 > - **2026-07-12 (media storage):** CMS uploads moved from entry-relative `images/` folders to shared root-relative `src/assets/{animals,family,highlights}` folders — Sveltia's entry-delete sweeps entry-relative media wholesale (two build-breaking incidents). Supersedes the 2026-07-04 entry-relative note below; optimization pipeline unchanged.
 > - **2026-07-04 (Instagram):** Behold superseded — the homepage Instagram strip is an owner-curated third CMS collection, `highlights` (image + link to the matching post). §2, §3, §7, §11, §12 amended below. Guiding principle: the owner's entire editing world stays one tool (Sveltia at `/admin`) — nothing new to install or learn; simplicity over hard constraints.
 > - **2026-07-11 (§4b):** residents' `featured` field removed — no template ever consumed it, so it was a silent no-op toggle in the CMS. The homepage featured spot is adoptables-only per §3.
+> - **2026-07-12 (§5, owner feedback):** adopted photos are no longer dimmed — semi-transparency over the dark Happy Tails band read as washed-out/broken. Photos stay full colour; the "Adopted" banner and "Found their home {Month Year}" line carry the status. Happy Tails is a celebration wall, not an archive.
 
 ---
 
@@ -196,7 +197,7 @@ Everything on a card is template-driven from the record. The **status field alon
 
 - **Available** → shown in the "Available now" grid. Primary button: `Apply to adopt {name}` → `/apply?pet={slug}`. Secondary button: `Can't adopt? Help feed {name}` → the donation URL. (The donation link is the single site-wide URL; `{name}` is copy only, not per-animal fund routing.)
 - **Pending** → stays in the Available grid with an "Adoption pending" pill; hide the apply button.
-- **Adopted** → removed from the Available grid; added to the **Happy Tails** section (a separate section or page), sorted by `adopted_date` descending. Card photo is dimmed with an "Adopted" banner; no apply button. Optional line: "Found their home {Month Year}".
+- **Adopted** → removed from the Available grid; added to the **Happy Tails** section (a separate section or page), sorted by `adopted_date` descending. Card photo stays full colour with an "Adopted" banner *(amended 2026-07-12 — dimming dropped per owner feedback)*; no apply button. Optional line: "Found their home {Month Year}".
 
 **Handling accumulation:** Happy Tails will grow indefinitely — that's a feature (social proof), not a problem. Paginate or lazy-load it (e.g. 24 per page or infinite scroll with lazy images) so it never slows the page. The Available grid stays short and current. The split is automatic from `status`; the owner does nothing extra.
 

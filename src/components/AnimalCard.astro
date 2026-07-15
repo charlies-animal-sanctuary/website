@@ -34,7 +34,7 @@ const adoptedLabel = adoptedDate
       width={640}
       widths={[320, 480, 640]}
       sizes="(max-width: 580px) 92vw, 320px"
-      class:list={['card-photo', { dimmed: adopted }]}
+      class="card-photo"
     />
     {adopted && <span class="adopted-banner">Adopted</span>}
   </a>
@@ -101,10 +101,8 @@ const adoptedLabel = adoptedDate
     display: block;
   }
 
-  .card-photo.dimmed {
-    filter: grayscale(35%) opacity(0.75);
-  }
-
+  /* Adopted photos stay full colour (owner 2026-07-12: dimming read as
+     washed-out on the dark Happy Tails band) — the banner carries the status */
   .adopted-banner {
     position: absolute;
     inset-inline: 0;

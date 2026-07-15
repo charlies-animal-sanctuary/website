@@ -91,8 +91,9 @@ motion; it reads as untrustworthy when asking for donations.
   - Available → "Available now" grid; `Apply to adopt {name}` → `/apply?pet={slug}`;
     secondary `Can't adopt? Help feed {name}` → `DONATE_URL` (copy only, no fund routing).
   - Pending → stays in grid, "Adoption pending" pill, apply button hidden.
-  - Adopted → leaves grid, joins **Happy Tails** (sorted `adopted_date` desc), dimmed photo +
-    "Adopted" banner, no apply. Happy Tails grows forever by design — paginate/lazy-load.
+  - Adopted → leaves grid, joins **Happy Tails** (sorted `adopted_date` desc), full-colour
+    photo + "Adopted" banner (dimming dropped 2026-07-12, owner feedback), no apply.
+    Happy Tails grows forever by design — paginate/lazy-load.
 - Owner's entire recurring job: add an animal, flip a status. Adoptions become Happy Tails,
   **never deletions** (deleting is only for genuine mistakes).
 - The `{slug}` is the shared key: card link, detail route, and `/apply?pet={slug}` prefill.

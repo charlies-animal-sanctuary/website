@@ -138,6 +138,14 @@ the live domain (verified in page HTML). Cookieless — the no-consent-banner
 story holds. Nothing site-side to maintain. Remaining owner items now just:
 real PayPal link, real story video, Instagram post links on tiles.
 
+**2026-07-12 — Adopted-photo dimming removed (owner feedback).** The §5
+"dimmed photo" treatment (grayscale + transparency) read as washed-out over
+the dark Happy Tails band. Photos now stay full colour; the "Adopted" banner
++ "Found their home" line carry the status. Brief §5 + amendments log +
+CLAUDE.md updated in the same commit. Verified: build green, zero `dimmed`
+rules in shipped CSS (no adopted animals exist right now, so the visual
+change shows with the next real adoption).
+
 ## Phase log (brief §8)
 
 | # | Phase | Scope | Status |

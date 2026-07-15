@@ -37,7 +37,7 @@ const ogPhoto = await getImage({ src: d.photo, width: 1200, format: 'jpeg' });
             sizes="(max-width: 800px) 92vw, 40vw"
             loading="eager"
             fetchpriority="high"
-            class:list={['detail-photo', { dimmed: d.status === 'Adopted' }]}
+            class="detail-photo"
           />
           {d.status === 'Adopted' && <span class="adopted-note pill">Adopted — {adoptedLabel}</span>}
         </div>
@@ -120,10 +120,6 @@ const ogPhoto = await getImage({ src: d.photo, width: 1200, format: 'jpeg' });
     height: auto;
     border-radius: var(--radius-card);
     border: var(--border-hairline);
-  }
-
-  .detail-photo.dimmed {
-    filter: grayscale(35%) opacity(0.8);
   }
 
   .detail-info {
