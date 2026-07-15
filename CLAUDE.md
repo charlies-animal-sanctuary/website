@@ -128,3 +128,8 @@ motion; it reads as untrustworthy when asking for donations.
 - Don't run `astro build` while the dev server is serving — it re-optimizes the shared
   Vite dep cache and the dev server starts dropping scoped styles. Stop dev first (or
   restart it after building).
+- **Never silence `git push` output** (no `| Out-Null`), and after every push confirm
+  `git status -sb` shows no `[ahead]`. The owner commits via the CMS at any hour, so
+  pushes get rejected routinely — a swallowed rejection once shipped a false "fix is
+  live" report (2026-07-14). "Deployed" claims require verifying the change on the
+  live site, not a green CI run that might be someone else's commit.
