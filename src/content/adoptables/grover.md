@@ -1,5 +1,5 @@
 ---
-name: Grover
+name: Jasper (Grover)
 species: Cat
 sex: Male
 age: 12 weeks
