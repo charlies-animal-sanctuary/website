@@ -5,8 +5,9 @@ sex: Female
 age: 8 weeks
 size: ''
 status: Available
-photo: ../../assets/animals/Screenshot_20260804_091653_Gallery.jpg
-gallery: []
+photo: ../../assets/animals/20260810_131238.jpg
+gallery:
+  - ../../assets/animals/Screenshot_20260804_091653_Gallery.jpg
 bio: |-
   Full Bio coming soon! 
 
