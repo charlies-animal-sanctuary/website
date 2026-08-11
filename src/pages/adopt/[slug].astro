@@ -14,6 +14,8 @@ const { entry } = Astro.props;
 const d = entry.data;
 const meta = [d.species, d.sex, d.age, d.size].filter(Boolean).join(' · ');
 const bioParagraphs = d.bio.split(/\n{2,}/);
+// pronoun for the Coming-soon note, from the animal's own sex field
+const pronoun = d.sex === 'Male' ? 'him' : d.sex === 'Female' ? 'her' : 'them';
 const adoptedLabel = d.adopted_date
   ? `Found their home ${d.adopted_date.toLocaleDateString('en-CA', { month: 'long', year: 'numeric', timeZone: 'UTC' })}`
   : 'Found their home';
@@ -45,6 +47,7 @@ const ogPhoto = await getImage({ src: d.photo, width: 1200, format: 'jpeg' });
           <h1>{d.name}</h1>
           <p class="meta">{meta}</p>
           {d.status === 'Pending' && <p><span class="pill">Adoption pending</span></p>}
+          {d.status === 'Coming soon' && <p><span class="pill">Coming soon</span></p>}
           {
             d.temperament && d.temperament.length > 0 && (
               <ul class="tag-row">
@@ -73,6 +76,20 @@ const ogPhoto = await getImage({ src: d.photo, width: 1200, format: 'jpeg' });
               <div class="cta-row">
                 <a class="btn btn--secondary" href={site.donateUrl}>Help feed {d.name}</a>
               </div>
+            )
+          }
+          {
+            d.status === 'Coming soon' && (
+              <>
+                <p>
+                  {d.name} isn't quite ready for adoption yet — we're getting {pronoun} healthy
+                  and happy first. <a href={site.social.instagram}>Follow along on Instagram</a> for
+                  updates.
+                </p>
+                <div class="cta-row">
+                  <a class="btn btn--secondary" href={site.donateUrl}>Help feed {d.name}</a>
+                </div>
+              </>
             )
           }
           {

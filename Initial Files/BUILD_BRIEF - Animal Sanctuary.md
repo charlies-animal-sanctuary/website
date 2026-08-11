@@ -8,6 +8,7 @@
 > - **2026-07-04 (Instagram):** Behold superseded — the homepage Instagram strip is an owner-curated third CMS collection, `highlights` (image + link to the matching post). §2, §3, §7, §11, §12 amended below. Guiding principle: the owner's entire editing world stays one tool (Sveltia at `/admin`) — nothing new to install or learn; simplicity over hard constraints.
 > - **2026-07-11 (§4b):** residents' `featured` field removed — no template ever consumed it, so it was a silent no-op toggle in the CMS. The homepage featured spot is adoptables-only per §3.
 > - **2026-07-12 (§5, owner feedback):** adopted photos are no longer dimmed — semi-transparency over the dark Happy Tails band read as washed-out/broken. Photos stay full colour; the "Adopted" banner and "Found their home {Month Year}" line carry the status. Happy Tails is a celebration wall, not an archive.
+> - **2026-08-11 (§4a/§5, owner request):** fourth status **"Coming soon"** — in the rescue but not adoptable yet (recovering, too young). Shows in the Adopt grid (after Available, before Pending) with a "Coming soon" pill, no apply button, donate button kept; detail page adds a sex-correct "we're getting her/him/them healthy first" note. Flips to Available when ready.
 
 ---
 
@@ -74,7 +75,7 @@ Two files must stay in sync: the **Sveltia config** (owner's editing UI) and the
 | sex | select (Male/Female/Unknown) | yes | |
 | age | string | yes | free text, e.g. "12 weeks", "2 years" |
 | size | select (Small/Medium/Large) | no | |
-| status | select (Available/Pending/Adopted) | yes | drives all rendering; default Available |
+| status | select (Coming soon/Available/Pending/Adopted) | yes | drives all rendering; default Available *(Coming soon added 2026-08-11)* |
 | photo | image | yes | main card photo |
 | gallery | list of images | no | optional extra photos |
 | bio | long text | yes | **written in first person** ("I'm a…") |
@@ -196,6 +197,7 @@ export const collections = { adoptables, residents };
 Everything on a card is template-driven from the record. The **status field alone** decides the card's appearance. The owner never touches layout.
 
 - **Available** → shown in the "Available now" grid. Primary button: `Apply to adopt {name}` → `/apply?pet={slug}`. Secondary button: `Can't adopt? Help feed {name}` → the donation URL. (The donation link is the single site-wide URL; `{name}` is copy only, not per-animal fund routing.)
+- **Coming soon** *(added 2026-08-11)* → in the grid after Available with a "Coming soon" pill; no apply button, donate button kept; detail page notes they're not ready yet (sex-correct pronoun) and points to Instagram for updates.
 - **Pending** → stays in the Available grid with an "Adoption pending" pill; hide the apply button.
 - **Adopted** → removed from the Available grid; added to the **Happy Tails** section (a separate section or page), sorted by `adopted_date` descending. Card photo stays full colour with an "Adopted" banner *(amended 2026-07-12 — dimming dropped per owner feedback)*; no apply button. Optional line: "Found their home {Month Year}".
 

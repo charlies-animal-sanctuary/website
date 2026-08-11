@@ -26,7 +26,10 @@ const adoptables = defineCollection({
       sex: z.enum(['Male', 'Female', 'Unknown']),
       age: z.string(),
       size: z.preprocess(blank, z.enum(['Small', 'Medium', 'Large']).optional()),
-      status: z.preprocess(blank, z.enum(['Available', 'Pending', 'Adopted']).default('Available')),
+      status: z.preprocess(
+        blank,
+        z.enum(['Coming soon', 'Available', 'Pending', 'Adopted']).default('Available')
+      ),
       photo: image(),
       gallery: z.preprocess(blank, z.array(image()).optional()),
       bio: z.string(),

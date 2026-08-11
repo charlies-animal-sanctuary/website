@@ -38,6 +38,10 @@ sanctuary Gmail inbox. Replying to the email replies straight to the person.
 
 ## The status field is the whole system
 
+- **Coming soon** — for animals who aren't ready to be adopted *yet*
+  (recovering, too young, still settling). They show in the Adopt grid with a
+  "Coming soon" pill so people can fall for them early, but there's no apply
+  button — just the donate one. Flip to Available when they're ready.
 - **Available** — in the Adopt grid, with an "Apply to adopt" button.
 - **Pending** — stays in the grid with an "Adoption pending" pill; the apply
   button hides itself.

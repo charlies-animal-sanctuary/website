@@ -12,7 +12,7 @@ interface Props {
   href: string;
   photo: ImageMetadata;
   meta?: string;
-  status?: 'Available' | 'Pending' | 'Adopted';
+  status?: 'Coming soon' | 'Available' | 'Pending' | 'Adopted';
   slug?: string;
   adoptedDate?: Date;
 }
@@ -42,6 +42,7 @@ const adoptedLabel = adoptedDate
     <h3><a href={href}>{name}</a></h3>
     {meta && <p class="card-meta">{meta}</p>}
     {status === 'Pending' && <p><span class="pill">Adoption pending</span></p>}
+    {status === 'Coming soon' && <p><span class="pill">Coming soon</span></p>}
     {adopted && <p class="card-meta">{adoptedLabel}</p>}
     {
       status === 'Available' && slug && (
@@ -56,7 +57,7 @@ const adoptedLabel = adoptedDate
       )
     }
     {
-      status === 'Pending' && (
+      (status === 'Pending' || status === 'Coming soon') && (
         <div class="card-actions">
           <a class="btn btn--secondary btn--small" href={site.donateUrl}>
             Help feed {name}

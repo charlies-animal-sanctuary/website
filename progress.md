@@ -146,6 +146,16 @@ CLAUDE.md updated in the same commit. Verified: build green, zero `dimmed`
 rules in shipped CSS (no adopted animals exist right now, so the visual
 change shows with the next real adoption).
 
+**2026-08-11 — Fourth status "Coming soon" (owner request, name her pick).**
+For animals in the rescue but not adoptable yet (first case: Nakken, recovering
+mom of the current puppies). Grid position after Available; "Coming soon" pill;
+apply hidden; donate kept; detail page adds a sex-correct not-ready note
+(she/he/they from the sex field) linking to Instagram. Schema + config.yml
+synced same commit; ADMIN-GUIDE + brief §4a/§5 amended. Verified locally with
+a throwaway Female test entry (pill, ordering, "her" pronoun, no apply) —
+entry deleted before commit. Owner must refresh the admin tab to see the new
+dropdown option.
+
 ## Phase log (brief §8)
 
 | # | Phase | Scope | Status |

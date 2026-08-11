@@ -90,6 +90,8 @@ motion; it reads as untrustworthy when asking for donations.
 - **`status` alone drives all rendering** (§5):
   - Available → "Available now" grid; `Apply to adopt {name}` → `/apply?pet={slug}`;
     secondary `Can't adopt? Help feed {name}` → `DONATE_URL` (copy only, no fund routing).
+  - Coming soon → stays in grid (after Available), "Coming soon" pill, apply hidden,
+    donate kept; detail page adds a sex-correct not-ready-yet note (added 2026-08-11).
   - Pending → stays in grid, "Adoption pending" pill, apply button hidden.
   - Adopted → leaves grid, joins **Happy Tails** (sorted `adopted_date` desc), full-colour
     photo + "Adopted" banner (dimming dropped 2026-07-12, owner feedback), no apply.

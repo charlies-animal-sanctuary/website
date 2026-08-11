@@ -13,9 +13,11 @@ const all = await getCollection('adoptables');
 const byName = (a: CollectionEntry<'adoptables'>, b: CollectionEntry<'adoptables'>) =>
   a.data.name.localeCompare(b.data.name);
 
-// §5: Available and Pending share the grid; Adopted moves to Happy Tails
+// §5: Available, Coming soon, and Pending share the grid (actionable first,
+// upcoming next, spoken-for last); Adopted moves to Happy Tails
 const current = [
   ...all.filter((e) => e.data.status === 'Available').sort(byName),
+  ...all.filter((e) => e.data.status === 'Coming soon').sort(byName),
   ...all.filter((e) => e.data.status === 'Pending').sort(byName),
 ];
 

@@ -41,7 +41,7 @@ collections:
       - { name: sex, label: "Sex", widget: select, options: ["Male", "Female", "Unknown"] }
       - { name: age, label: "Age", widget: string, hint: "e.g. 12 weeks, 2 years" }
       - { name: size, label: "Size", widget: select, options: ["Small", "Medium", "Large"], required: false }
-      - { name: status, label: "Status", widget: select, options: ["Available", "Pending", "Adopted"], default: "Available" }
+      - { name: status, label: "Status", widget: select, options: ["Coming soon", "Available", "Pending", "Adopted"], default: "Available", hint: "Coming soon = shown on the site but not adoptable yet (recovering, too young, etc.)" }
       - { name: photo, label: "Main photo", widget: image }
       - { name: gallery, label: "More photos", widget: list, required: false, field: { name: image, label: "Photo", widget: image } }
       - { name: bio, label: "Bio (write in first person)", widget: text, hint: "Write as the animal: 'I'm a...'" }
