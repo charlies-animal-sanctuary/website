@@ -18,6 +18,8 @@ bio: |-
 
   My body needs a little time to catch up with everything I've been through. I was nursing nine puppies while there wasn't always enough food to go around, so I'm currently focused on resting, eating well, and getting healthy and strong again. I'm not quite ready for adoption yet, but I'm open to a foster-to-adopt home with someone who understands that I need a little time to recover.
 
+  Unfortunately, we also discovered that I have pyometra, a serious and potentially life-threatening infection that means I need a complicated emergency surgery. It's another big hurdle after everything I've already been through, but my rescue is determined to get me the care I need and give me the chance to finally be healthy.
+
   I've spent so much of my young life taking care of everyone else. Now I'm hoping someone will give me the chance to be cared for, too. I think I'm ready for a soft bed, a full bowl, a quiet home, and a person who will show me that being someone's dog can be pretty wonderful.
 temperament: []
 adoption_fee: $650 - includes spay and full vetting
