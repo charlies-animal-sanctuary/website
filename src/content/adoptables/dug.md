@@ -5,9 +5,9 @@ sex: Male
 age: 8 weeks
 size: ''
 status: Available
-photo: ../../assets/animals/20260811_173943.jpg
+photo: ../../assets/animals/20260810_131430.jpg
 gallery:
-  - ../../assets/animals/20260810_131430.jpg
+  - ../../assets/animals/20260811_173943.jpg
   - ../../assets/animals/20260810_130851.jpg
   - ../../assets/animals/Screenshot_20260809_163537_Gallery.jpg
 bio: |-
