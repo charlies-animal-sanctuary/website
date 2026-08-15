@@ -4,7 +4,7 @@ species: Dog
 sex: Female
 age: 8 weeks
 size: ''
-status: Pending
+status: Adopted
 photo: ../../assets/animals/20260809_174403.jpg
 gallery:
   - ../../assets/animals/20260808_130015.jpg
@@ -20,6 +20,6 @@ bio: |-
   I'm also great with dogs, kids, and cats, so I'm ready to make friends with just about everyone I meet. If you're looking for a happy little adventurer who can keep up with the fun and then happily curl up beside you afterward, I think we might be a perfect match.
 temperament: []
 adoption_fee: $650 - includes spay once she is old enough
-adopted_date: ''
-featured: true
+adopted_date: 2026-08-15T11:00
+featured: false
 ---
