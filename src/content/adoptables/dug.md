@@ -5,10 +5,11 @@ sex: Male
 age: 8 weeks
 size: ''
 status: Available
-photo: ../../assets/animals/20260810_131430.jpg
+photo: ../../assets/animals/IMG-20260815-WA0005(1).jpg
 gallery:
   - ../../assets/animals/20260811_173943.jpg
   - ../../assets/animals/20260810_130851.jpg
+  - ../../assets/animals/20260810_131430.jpg
   - ../../assets/animals/Screenshot_20260809_163537_Gallery.jpg
 bio: |-
   I'm Dug. I'm an eight-week-old Northern mix from Manitoba, and I'm one of the bigger pups in my group. I have long legs, big puppy feet, and absolutely no idea what to do with any of them when I'm trying to climb into a lap.
