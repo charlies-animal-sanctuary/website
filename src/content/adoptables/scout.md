@@ -4,7 +4,7 @@ species: Dog
 sex: Male
 age: 8 weeks
 size: ''
-status: Pending
+status: Adopted
 photo: ../../assets/animals/20260809_105804.jpg
 gallery:
   - ../../assets/animals/20260809_142321.jpg
@@ -19,6 +19,6 @@ bio: |-
   I'm already off to a great start with my first vaccines and deworming done, and I'm ready to keep learning about this whole life thing. If you're looking for a sweet, social little guy who can keep up with you and then happily snuggle up afterward, I think we could be pretty great friends.
 temperament: []
 adoption_fee: $650 - includes neuter once he is old enough
-adopted_date: ''
-featured: true
+adopted_date: 2026-08-21T15:35
+featured: false
 ---
