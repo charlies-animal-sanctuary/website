@@ -1,5 +1,5 @@
 ---
-name: Slider
+name: Sadie (Slider)
 species: Dog
 sex: Female
 age: 8 weeks
