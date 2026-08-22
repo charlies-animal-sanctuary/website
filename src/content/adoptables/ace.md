@@ -4,7 +4,7 @@ species: Dog
 sex: Female
 age: 8 weeks
 size: ''
-status: Available
+status: Adopted
 photo: ../../assets/animals/20260810_131323.jpg
 gallery:
   - ../../assets/animals/20260810_131009.jpg
@@ -20,6 +20,6 @@ bio: |-
   If you're looking for a sweet, playful puppy who brings a little less chaos and a whole lot of love, I think I might be your girl.
 temperament: []
 adoption_fee: $650 - includes spay once she's old enough
-adopted_date: ''
+adopted_date: 2026-08-22T13:46
 featured: true
 ---
