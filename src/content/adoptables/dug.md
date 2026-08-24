@@ -2,7 +2,7 @@
 name: Dug
 species: Dog
 sex: Male
-age: 8 weeks
+age: 10 weeks
 size: ''
 status: Pending
 photo: ../../assets/animals/IMG-20260815-WA0005(1).jpg
