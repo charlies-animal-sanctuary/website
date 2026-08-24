@@ -2,7 +2,7 @@
 name: Homer
 species: Dog
 sex: Male
-age: 8 weeks
+age: 10 weeks
 size: ''
 status: Available
 photo: ../../assets/animals/20260810_131253.jpg
