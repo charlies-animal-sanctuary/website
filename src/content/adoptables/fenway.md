@@ -2,7 +2,7 @@
 name: Fenway
 species: Dog
 sex: Female
-age: 8 weeks
+age: 10 weeks
 size: ''
 status: Available
 photo: ../../assets/animals/20260809_173646.jpg
