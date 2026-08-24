@@ -2,7 +2,7 @@
 name: Rally
 species: Dog
 sex: Female
-age: 8 weeks
+age: 10 weeks
 size: ''
 status: Pending
 photo: ../../assets/animals/20260810_131243.jpg
