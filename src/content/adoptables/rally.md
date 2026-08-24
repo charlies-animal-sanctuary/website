@@ -4,7 +4,7 @@ species: Dog
 sex: Female
 age: 10 weeks
 size: ''
-status: Pending
+status: Adopted
 photo: ../../assets/animals/20260810_131243.jpg
 gallery:
   - ../../assets/animals/Screenshot_20260809_163550_Gallery.jpg
@@ -19,6 +19,6 @@ bio: |-
   I've already had my first vaccines and deworming done, and I'm ready to find my people. If you're looking for a gentle, affectionate little girl who would happily spend her days playing, cuddling, and making you feel very loved, I think I might be your girl.
 temperament: []
 adoption_fee: $650 - includes spay once she's old enough
-adopted_date: ''
-featured: true
+adopted_date: 2026-08-24T16:40
+featured: false
 ---
