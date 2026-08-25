@@ -5,8 +5,9 @@ sex: Male
 age: 10 weeks
 size: ''
 status: Available
-photo: ../../assets/animals/20260810_131253.jpg
+photo: ../../assets/animals/20260825_113900.jpg
 gallery:
+  - ../../assets/animals/20260810_131253.jpg
   - ../../assets/animals/20260810_131249.jpg
   - ../../assets/animals/Messenger_creation_11980821-5150-4825-8FB7-38EE1B069216.jpeg
   - ../../assets/animals/Screenshot_20260809_163544_Gallery.jpg
