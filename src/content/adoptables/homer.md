@@ -4,7 +4,7 @@ species: Dog
 sex: Male
 age: 10 weeks
 size: ''
-status: Available
+status: Pending
 photo: ../../assets/animals/20260825_113900.jpg
 gallery:
   - ../../assets/animals/20260810_131253.jpg
