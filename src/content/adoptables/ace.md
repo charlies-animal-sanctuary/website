@@ -1,5 +1,5 @@
 ---
-name: Ace
+name: Millie (Ace)
 species: Dog
 sex: Female
 age: 8 weeks
