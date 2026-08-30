@@ -1,10 +1,10 @@
 ---
-name: Homer
+name: Bear (Homer)
 species: Dog
 sex: Male
 age: 10 weeks
 size: ''
-status: Pending
+status: Adopted
 photo: ../../assets/animals/20260825_113900.jpg
 gallery:
   - ../../assets/animals/20260810_131253.jpg
@@ -21,6 +21,6 @@ bio: |-
   I've already had my first vaccines and deworming done, and I'm ready for the next chapter. If you're looking for a sweet little guy with a happy personality, a curly tail, and a talent for making people smile, I think we might be a pretty good match.
 temperament: []
 adoption_fee: $650 - includes neuter once he's old enough
-adopted_date: ''
-featured: true
+adopted_date: 2026-08-30T11:12
+featured: false
 ---
