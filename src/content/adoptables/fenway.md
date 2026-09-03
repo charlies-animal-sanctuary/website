@@ -2,9 +2,9 @@
 name: Fenway
 species: Dog
 sex: Female
-age: 10 weeks
+age: 12 weeks
 size: ''
-status: Available
+status: Adopted
 photo: ../../assets/animals/20260825_113739.jpg
 gallery:
   - ../../assets/animals/20260809_104451.jpg
@@ -21,6 +21,6 @@ bio: |-
   If you're looking for a playful puppy who will keep you on your toes, fill your house with laughter, and then happily come over for some cuddles when she's finally worn herself out, I think we could have a lot of fun together.
 temperament: []
 adoption_fee: $650 - includes spay once she is old enough
-adopted_date: ''
-featured: true
+adopted_date: 2026-09-03T12:16
+featured: false
 ---
