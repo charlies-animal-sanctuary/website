@@ -1,5 +1,5 @@
 ---
-name: Fenway
+name: Riley (Fenway)
 species: Dog
 sex: Female
 age: 12 weeks
