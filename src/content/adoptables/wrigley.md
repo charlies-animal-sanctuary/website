@@ -2,7 +2,7 @@
 name: Wrigley
 species: Dog
 sex: Female
-age: 10 weeks
+age: 12 weeks
 size: ''
 status: Available
 photo: ../../assets/animals/20260825_113815.jpg
