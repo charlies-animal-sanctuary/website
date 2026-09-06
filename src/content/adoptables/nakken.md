@@ -7,9 +7,9 @@ size: ''
 status: Coming soon
 photo: ../../assets/animals/20260905_135150.jpg
 gallery:
-  - ../../assets/animals/20260809_110045.jpg
   - ../../assets/animals/20260905_134938.jpg
   - ../../assets/animals/20260905_133203.jpg
+  - ../../assets/animals/20260809_110045.jpg
 bio: |-
   I'm Nakken. I'm about two to three years old, a Northern mix (Sheperd/Collie/Husky?), and until recently, my entire world revolved around my nine puppies. I raised all nine of them, did my very best to take care of them, and now that they're growing up, I'm ready to discover what it's like to have a life of my own.
 
