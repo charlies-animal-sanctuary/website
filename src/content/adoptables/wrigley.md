@@ -4,7 +4,7 @@ species: Dog
 sex: Female
 age: 12 weeks
 size: ''
-status: Available
+status: Pending
 photo: ../../assets/animals/20260825_113815.jpg
 gallery:
   - ../../assets/animals/20260809_104444(1).jpg
@@ -23,5 +23,5 @@ bio: |-
 temperament: []
 adoption_fee: $650 - includes spay once she is old enough
 adopted_date: ''
-featured: true
+featured: false
 ---
