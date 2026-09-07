@@ -4,7 +4,7 @@ species: Dog
 sex: Male
 age: 12 weeks
 size: ''
-status: Available
+status: Adopted
 photo: ../../assets/animals/IMG-20260815-WA0005(1).jpg
 gallery:
   - ../../assets/animals/20260811_173943.jpg
@@ -21,6 +21,6 @@ bio: |-
   I've already had my first vaccines and deworming, and I'm ready to keep growing into those long legs of mine. If you're looking for a big-hearted puppy who thinks he's a tiny lap dog, I think I could be exactly what you're looking for.
 temperament: []
 adoption_fee: $650 - includes neuter once he's old enough
-adopted_date: ''
-featured: true
+adopted_date: 2026-09-07T12:33
+featured: false
 ---
