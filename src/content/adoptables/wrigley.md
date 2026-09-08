@@ -4,7 +4,7 @@ species: Dog
 sex: Female
 age: 12 weeks
 size: ''
-status: Pending
+status: Available
 photo: ../../assets/animals/20260825_113815.jpg
 gallery:
   - ../../assets/animals/20260809_104444(1).jpg
