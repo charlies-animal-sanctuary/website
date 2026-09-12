@@ -4,7 +4,7 @@ species: Dog
 sex: Female
 age: 12 weeks
 size: ''
-status: Pending
+status: Adopted
 photo: ../../assets/animals/20260907_132304.jpg
 gallery:
   - ../../assets/animals/20260825_113815.jpg
@@ -24,6 +24,6 @@ bio: |-
   If you're looking for a sweet, affectionate puppy who can keep up with the fun but also knows how to appreciate a good cuddle and some downtime, I think we might be a pretty great match.
 temperament: []
 adoption_fee: $650 - includes spay once she is old enough
-adopted_date: ''
+adopted_date: 2026-09-12T17:41:00
 featured: false
 ---
