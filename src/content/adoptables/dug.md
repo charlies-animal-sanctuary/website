@@ -1,5 +1,5 @@
 ---
-name: Dug
+name: Knox (Dug)
 species: Dog
 sex: Male
 age: 12 weeks
