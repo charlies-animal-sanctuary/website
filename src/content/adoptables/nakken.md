@@ -4,7 +4,7 @@ species: Dog
 sex: Female
 age: 2-3 years
 size: ''
-status: Available
+status: Pending
 photo: ../../assets/animals/20260905_135150.jpg
 gallery:
   - ../../assets/animals/20260905_134938.jpg
