@@ -4,7 +4,7 @@ species: Dog
 sex: Female
 age: 2-3 years
 size: ''
-status: Pending
+status: Adopted
 photo: ../../assets/animals/20260905_135150.jpg
 gallery:
   - ../../assets/animals/20260905_134938.jpg
@@ -32,6 +32,6 @@ bio: |-
   After spending so much of my life being a mom, I think it's about time I got to be someone's spoiled girl instead.
 temperament: []
 adoption_fee: $650 - includes spay and full vetting
-adopted_date: ''
+adopted_date: 2026-09-27T08:52:00
 featured: true
 ---
