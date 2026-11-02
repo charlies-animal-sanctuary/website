@@ -11,7 +11,7 @@ gallery:
   - ../../assets/animals/Messenger_creation_B3EC72AD-2D2A-4AB1-86DC-E63CF2E626EF.jpeg
   - ../../assets/animals/Messenger_creation_DBA1F31A-E581-4877-9F9A-5FAC971B9F8A.jpeg
 bio: |-
-  I'm Romeo. I'm an eight-week-old puppy who travelled all the way from Nunavut to find my forever family. Nobody is quite sure what breeds I'm made of, but the best guess is Lab/Terrier with maybe a little Husky mixed in. Whatever the combination, I'm expected to grow into a medium-sized dog, and I think I've turned out pretty cute.
+  Hi! I'm Romeo. I'm an eight-week-old puppy who travelled all the way from Nunavut to find my forever family. Nobody is quite sure what breeds I'm made of, but the best guess is Lab/Terrier with maybe a little Husky mixed in. Whatever the combination, I'm expected to grow into a medium-sized dog, and I think I've turned out pretty cute.
 
   I have beautiful blue eyes that tend to get me a lot of attention, and I've already figured out how to use them to my advantage. One look at my little face and suddenly everyone wants to pick me up and cuddle me. It's a pretty good arrangement, if you ask me.
 
