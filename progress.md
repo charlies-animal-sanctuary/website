@@ -344,7 +344,8 @@ Each phase ends at a gate: owner reviews before the next phase starts.
    profile; post links make each tile land on its post). She can also do this
    herself in `/admin` once live.
 4. ~~The domain~~ — resolved 2026-07-11: charliesanimalsanctuary.com.
-5. Real PayPal link + real "our story" video, when ready (temp ones live now).
+5. ~~Real PayPal link + real "our story" video~~ — resolved 2026-11-13: both live.
+   **No temporary values remain anywhere on the site.**
 
 Resolved 2026-07-08 (same-day owner replies): real Facebook URL wired
 (facebook.com/people/Charlies-Animal-Sanctuary/61581016065923); Katheryn's About
@@ -367,15 +368,14 @@ Checked = resolved with the real thing. Remaining opens are below.
   (2026-07-08), pending her read-through at the gate
 - [x] Resident stories — real (Ash, Midna, Lily, Oliver, Charlie†, Molson†),
   from her interview (2026-07-08)
-- [ ] `donateUrl` — **[TEMP]** her placeholder PayPal (`paypalme/lilycharlestwitch`)
-  — swap for the real donation link before launch
-- [ ] `youtubeStoryVideoId` — **[TEMP]** her placeholder video (`7zB-pkw2B4U`) —
-  swap for the real "our story" video before launch
-- [ ] `social.facebook` — guessed URL — owner to confirm
-- [ ] About page — Katheryn's portrait — striped placeholder block until her photo
-  arrives
-- [ ] `src/content/adoptables/` — 3 obviously-fake sample animals (chip on homepage)
-  — DELETE once real adoptables exist in the CMS
+- [x] `donateUrl` — **real PayPal.Me** `paypal.me/charliesanimal` (2026-11-13;
+  handle verified to resolve — account-holder name still worth one human click)
+- [x] `youtubeStoryVideoId` — **real story video** `jLaSdu3M5bg`, "Small Rescue, Big
+  Dream | Welcome to Charlie's Animal Sanctuary", verified on her own channel
+  (2026-11-13)
+- [x] `social.facebook` — real URL from owner (2026-07-08)
+- [x] About page — Katheryn's portrait — the Charlie selfie (2026-07-08)
+- [x] Sample animals — deleted; roster is all real animals (2026-07-12)
 - [ ] Highlight tile `link` fields — empty (profile fallback) — her IG post links
 - [ ] Resident `arrived` dates — unknown, omitted — optional, she can add in CMS
 
@@ -385,8 +385,8 @@ Checked = resolved with the real thing. Remaining opens are below.
 |---|---|---|
 | `FORM_SERVICE_ENDPOINT` / key | Web3Forms, key in `.env` | **live 2026-07-08** |
 | `OWNER_EMAIL` | CharliesAnimalSanctuary@gmail.com | **live** (forms, contact page) |
-| `DONATE_URL` | paypalme/lilycharlestwitch | **[TEMP]** — real link later |
-| `YOUTUBE` featured video ID | `7zB-pkw2B4U` | **[TEMP]** — real video later |
+| `DONATE_URL` | paypal.me/charliesanimal | **live 2026-11-13** (real) |
+| `YOUTUBE` featured video ID | `jLaSdu3M5bg` | **live 2026-11-13** (real story video) |
 | ~~`BEHOLD_FEED_URL`~~ | superseded by `highlights` | closed |
 | `OWNER/REPO` | — | phase 5 |
 | `AUTH_WORKER_URL` | — | phase 5 |

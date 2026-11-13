@@ -4,8 +4,8 @@
  * file only — never hunt through templates.
  *
  * Copy status: written from the owner's own words (interview + her welcome
- * paragraph, 2026-07-08) — pending her review at the phase 4 gate.
- * Remaining temporaries are marked [TEMP] and tracked in progress.md.
+ * paragraph, 2026-07-08) and reviewed by her. No temporary values remain —
+ * the real donation link and story video landed 2026-11-13.
  */
 export const site = {
   name: "Charlie's Animal Sanctuary",
@@ -24,17 +24,16 @@ export const site = {
     { label: 'Contact', href: '/contact' },
   ],
 
-  // [TEMP] owner-provided placeholder PayPal link — replace with the real
-  // donation link before launch (tracked in progress.md)
-  donateUrl: 'https://www.paypal.com/paypalme/lilycharlestwitch',
+  // The sanctuary's real PayPal.Me link (owner-provided 2026-11-13)
+  donateUrl: 'https://paypal.me/charliesanimal',
 
   // Web3Forms access key (from .env locally; Cloudflare Pages env at phase 5).
   // Empty key ⇒ forms render with a "not wired" notice.
   web3formsKey: import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '',
 
-  // [TEMP] owner-provided placeholder video — replace with the real "our
-  // story" video before launch (tracked in progress.md)
-  youtubeStoryVideoId: '7zB-pkw2B4U',
+  // "Small Rescue, Big Dream | Welcome to Charlie's Animal Sanctuary" — the
+  // real story video on her channel (owner-provided 2026-11-13)
+  youtubeStoryVideoId: 'jLaSdu3M5bg',
 
   social: {
     instagram: 'https://www.instagram.com/charliesanimalsanctuary/',
