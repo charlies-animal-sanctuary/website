@@ -4,7 +4,7 @@ species: Dog
 sex: Male
 age: 8 Weeks
 size: ''
-status: Pending
+status: Adopted
 photo: ../../assets/animals/20261102_105839.jpg
 gallery:
   - ../../assets/animals/20261102_105847.jpg
@@ -26,6 +26,6 @@ bio: |-
   I'm ready to find a family who will help me grow, teach me all about the world, and give me plenty of love along the way. I promise to return the favour with lots of puppy kisses and cuddles!
 temperament: []
 adoption_fee: $650 - includes neuter and microchip once old enough
-adopted_date: ''
-featured: true
+adopted_date: 2026-11-08T17:57:00
+featured: false
 ---
