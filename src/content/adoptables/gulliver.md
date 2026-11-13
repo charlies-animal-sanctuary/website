@@ -28,6 +28,6 @@ bio: |-
   I'm ready to find a family who will help me learn, grow, and explore everything this big world has to offer. I've got a lot of adventures ahead of me, and I'd love to share them with you!
 temperament: []
 adoption_fee: $650 - includes neuter and microchip once old enough
-adopted_date: ''
+adopted_date: 2026-11-08T17:57:00
 featured: true
 ---
