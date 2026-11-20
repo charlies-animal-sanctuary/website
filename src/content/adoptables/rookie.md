@@ -1,5 +1,5 @@
 ---
-name: Rookie
+name: Barracuda (Rookie)
 species: Dog
 sex: Male
 age: 8 weeks
